@@ -17,29 +17,33 @@ bool is_number(char *str) {
     return true;
 }
 
+bool is_negative(char *str) {
+  return str[0] == '-';
+}
+
 int main(int argc, char *argv[]) {
-  char *num1 = argv[1];
-  char *num2 = argv[2];
+
   if (argc != 3) {
     printf("Usage: ./a.out num1 num2\n");
     return 0;
   }
+  char *num1 = argv[1];
+  char *num2 = argv[2];
   if (!is_number(num1) || !is_number(num2)) {
     printf("%s and/or %s is not a number!\n", num1, num2);
+    return 0;
+  }
+  else if (is_negative(num1) || is_negative(num2)) {
+    printf("Both numbers must be positive!\n");
     return 0;
   }
 
   int tälj = atoi(num1);
   int nämn = atoi(num2);
 
-  tälj = abs(tälj);
-  nämn = abs(nämn);
-
   if (tälj == 0 || nämn == 0) {
-    printf("Both numbers must be non-zero!\n");
-    return 0;
+    printf("Can't use zeros!\n");
   }
-
   while (tälj != nämn) {
     if (tälj < nämn) {
       nämn = nämn - tälj; 
