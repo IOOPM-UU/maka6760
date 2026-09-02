@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "utils.h"
+#include <string.h>
+#include <ctype.h>
 
 int ask_question_int(char *question) {
     int result = 0;
