@@ -13,7 +13,7 @@ int main(void) {
     int guesses = 0;
     bool won = false; 
 
-    while (guesses < 15) {
+    while (guesses <= 15) {
         int guess = ask_question_int("Gissa ett tal: ");
         guesses++;
 
