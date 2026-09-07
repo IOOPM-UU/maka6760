@@ -5,8 +5,7 @@
 int main(void) {
     int T = rand() % 1024;
 
-    char name[255];
-    ask_question_string("Skriv in ditt namn: ", name, 255);
+    char *name = ask_question_string("Skriv in ditt namn: ");
 
     printf("Du %s, jag tänker på ett tal ... kan du gissa vilket?\n", name);
 
