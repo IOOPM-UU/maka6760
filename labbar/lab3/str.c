@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include "utils.h"
 
 int string_length(char *str)
 {
@@ -16,17 +17,6 @@ int string_length(char *str)
             end = true;
     }
     return count;
-}
-
-void print(char *str) {
-    for (int i = 0; str[i] != '\0'; i++) {
-        putchar(str[i]);
-    }
-}
-
-void println(char *str) {
-    print(str);
-    putchar('\n');
 }
 
 int main(int argc, char *argv[])
