@@ -143,7 +143,7 @@ void remove_item_from_db(item_t *db, int *db_siz)
     list_db(db, *db_siz);
 
     int choice = ask_question_int("Vilken vara vill du ta bort? (ange nummer)");
-    int index = choice - 1; // konvertera från 1-baserat till 0-baserat
+    int index = choice - 1;
 
     if (index < 0 || index >= *db_siz)
     {
