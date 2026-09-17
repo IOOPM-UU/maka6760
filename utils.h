@@ -1,6 +1,8 @@
 #ifndef __UTILS_H__
 #define __UTILS_H__
 #include <stdbool.h>
+#include <string.h>
+#include <stddef.h>
 
 extern char *strdup(const char *);
 

@@ -1,6 +1,5 @@
-#ifndef __HASH_TABLE_H__
-#define __HASH_TABLE_H__
 #pragma once
+#include <stdbool.h>
 
 typedef struct entry entry_t;
 /**
@@ -34,13 +33,13 @@ void ioopm_hash_table_insert(ioopm_hash_table_t *ht, char *key, int value);
 /// @brief lookup value for key in hash table ht
 /// @param ht hash table operated upon
 /// @param key key to lookup
-/// @return the value mapped to by key (FIXME: what if the key does not exist?)
-int ioopm_hash_table_lookup(ioopm_hash_table_t *ht, char *key);
+/// @param result if lookup succeeds, write resulting value to memory location
+///               result points to.
+/// @return true, if lookup succeeds (FIXME: what if the key does not exist?)
+bool ioopm_hash_table_lookup(ioopm_hash_table_t *ht, char *key, int *result);
 
 /// @brief remove any mapping from key to a value
 /// @param ht hash table operated upon
 /// @param key key to remove
 /// @return the value mapped to by key (FIXME: what if the key does not exist?)
 int ioopm_hash_table_remove(ioopm_hash_table_t *ht, char *key);
-
-#endif
