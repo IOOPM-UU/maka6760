@@ -2,6 +2,7 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
 #include "/home/lillmacke/IOPM/inluppar/inlupp1/hash_table.h"
 
 #define No_Buckets 17
@@ -15,6 +16,7 @@ struct entry
 
 struct hash_table
 {
+  int size;
   entry_t buckets[No_Buckets];
 };
 
@@ -77,7 +79,6 @@ static entry_t *find_previous_entry(ioopm_hash_table_t *ht, char *key)
   entry_t *current = previous->next;
   while (current != NULL && strcmp(current->key, key) != 0)
   {
-    previous = current;
     current = current->next;
   }
   return previous;
@@ -95,6 +96,7 @@ void ioopm_hash_table_insert(ioopm_hash_table_t *ht, char *key, int value)
   else
   {
     previous->next = entry_create(key, value, NULL);
+    ht->size++;
   }
 }
 
@@ -131,7 +133,30 @@ int ioopm_hash_table_remove(ioopm_hash_table_t *ht, char *key)
     entry_t *next_pointer = current->next;
     previous->next = next_pointer;
     entry_destroy(current);
-
+    ht->size--;
     return result;
   }
+}
+
+bool ioopm_hash_table_has_key(ioopm_hash_table_t *ht, char *key)
+{
+  int trash;
+  bool result = ioopm_hash_table_lookup(ht, key, &trash);
+  return result;
+}
+
+bool ioopm_hash_table_is_empty(ioopm_hash_table_t *ht)
+{
+  if (ht->size == 0)
+  {
+    return true;
+  } else 
+  {
+    return false;
+  }
+}
+
+int ioopm_hash_table_size(ioopm_hash_table_t *ht)
+{ 
+  return ht->size;
 }

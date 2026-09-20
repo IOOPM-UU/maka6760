@@ -28,6 +28,7 @@ void ioopm_hash_table_destroy(ioopm_hash_table_t *ht);
 /// @param ht hash table operated upon
 /// @param key key to insert
 /// @param value value to insert
+/// NOTE: -1 is not an accepted value. 
 void ioopm_hash_table_insert(ioopm_hash_table_t *ht, char *key, int value);
 
 /// @brief lookup value for key in hash table ht
@@ -44,3 +45,19 @@ bool ioopm_hash_table_lookup(ioopm_hash_table_t *ht, char *key, int *result);
 /// @return the value mapped to by key or -1 if the key doesn't exist.
 /// NOTE: Because of this, -1 can NOT be stored as a value in the table. 
 int ioopm_hash_table_remove(ioopm_hash_table_t *ht, char *key);
+
+/// @brief (AI) check if a mapping for key exists in hash table ht
+/// @param ht hash table operated upon
+/// @param key key to check for 
+/// @return true if ht contains mapping for key, false otherwise
+bool ioopm_hash_table_has_key(ioopm_hash_table_t *ht, char *key);
+
+/// @brief (AI) check if hash table ht contains any mappings at all
+/// @param ht hash table operated upon
+/// @return true if ht contains no mappings, false otherwise
+bool ioopm_hash_table_is_empty(ioopm_hash_table_t *ht);
+
+/// @brief  (AI) count the number of mappings currently stored in the hash table
+/// @param ht hash table operated upon
+/// @return the number of key => value mappings in ht
+int ioopm_hash_table_size(ioopm_hash_table_t *ht);
