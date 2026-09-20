@@ -3,20 +3,19 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "/home/lillmacke/IOPM/inluppar/inlupp1/hash_table.h"
-#include "/home/lillmacke/IOPM/utils.h"
+
+#define No_Buckets 17
 
 struct entry
 {
-  char *key;    // holds the key
-  int value;    // holds the value
+  char *key;     // holds the key
+  int value;     // holds the value
   entry_t *next; // points to the next entry (possibly NULL)
 };
 
 struct hash_table
 {
-  //DODGE: hard-coding number of buckets as 17.
-  // NOTE: addressing this dodge is optional
-  entry_t buckets[17];
+  entry_t buckets[No_Buckets];
 };
 
 static size_t string_knr_hash(const char *str)
@@ -24,7 +23,7 @@ static size_t string_knr_hash(const char *str)
   size_t result = 0;
   while (*str != '\0')
   {
-    result = result * 31 + ((unsigned char) *str);
+    result = result * 31 + ((unsigned char)*str);
     str++;
   }
   return result;
@@ -47,14 +46,14 @@ static entry_t *entry_destroy(entry_t *entry)
 
 ioopm_hash_table_t *ioopm_hash_table_create()
 {
-  //Allocate zeroed out space for a ioopm_hash_table_t = 17 pointers to entry_t's
+  // Allocate zeroed out space for a ioopm_hash_table_t = No_Buckets pointers to entry_t's
   return calloc(1, sizeof(ioopm_hash_table_t));
 }
 
 void ioopm_hash_table_destroy(ioopm_hash_table_t *ht)
 {
-  //TODO: Stub
-  for (int i = 0; i < 17; i++)
+  // TODO: Stub
+  for (int i = 0; i < No_Buckets; i++)
   {
     entry_t *current = ht->buckets[i].next;
 
@@ -63,16 +62,15 @@ void ioopm_hash_table_destroy(ioopm_hash_table_t *ht)
       entry_t *next = current->next;
       entry_destroy(current);
       current = next;
-
     }
   }
   free(ht);
 }
 
-entry_t *find_previous_entry(ioopm_hash_table_t *ht, char *key)
+static entry_t *find_previous_entry(ioopm_hash_table_t *ht, char *key)
 {
   // find bucket
-  size_t bucket = string_knr_hash(key) % 17;
+  size_t bucket = string_knr_hash(key) % No_Buckets;
 
   // look for an entry with the key we want
   entry_t *previous = &ht->buckets[bucket];
@@ -120,20 +118,20 @@ bool ioopm_hash_table_lookup(ioopm_hash_table_t *ht, char *key, int *result)
 int ioopm_hash_table_remove(ioopm_hash_table_t *ht, char *key)
 {
   entry_t *previous = find_previous_entry(ht, key);
-  entry_t *current = previous->next; 
+  entry_t *current = previous->next;
 
   if (current == NULL)
   {
     printf("%s does not exist\n", key);
-    return -1; 
+    return -1;
   }
   else
   {
-    int result = current->value; 
+    int result = current->value;
     entry_t *next_pointer = current->next;
     previous->next = next_pointer;
-    entry_destroy(current); 
-    
+    entry_destroy(current);
+
     return result;
   }
 }

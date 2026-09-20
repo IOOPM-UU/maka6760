@@ -41,5 +41,6 @@ bool ioopm_hash_table_lookup(ioopm_hash_table_t *ht, char *key, int *result);
 /// @brief remove any mapping from key to a value
 /// @param ht hash table operated upon
 /// @param key key to remove
-/// @return the value mapped to by key (FIXME: what if the key does not exist?)
+/// @return the value mapped to by key or -1 if the key doesn't exist.
+/// NOTE: Because of this, -1 can NOT be stored as a value in the table. 
 int ioopm_hash_table_remove(ioopm_hash_table_t *ht, char *key);
