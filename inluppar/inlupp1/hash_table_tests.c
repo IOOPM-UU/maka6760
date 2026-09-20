@@ -1,5 +1,4 @@
 #include <CUnit/Basic.h>
-#include "/home/lillmacke/IOPM/utils.h"
 #include "/home/lillmacke/IOPM/inluppar/inlupp1/hash_table.h"
 
 int init_suite(void)
@@ -175,6 +174,71 @@ void test_insert_existing_key_twice()
 	ioopm_hash_table_destroy(ht);
 }
 
+//All 4 remove tests are made with AI.
+void test_remove_existing_single()
+{
+  ioopm_hash_table_t *ht = ioopm_hash_table_create();
+  int result = 0;
+
+  ioopm_hash_table_insert(ht, "abc", 123);
+  CU_ASSERT_TRUE(ioopm_hash_table_lookup(ht, "abc", &result));
+
+  int removed_value = ioopm_hash_table_remove(ht, "abc");
+  CU_ASSERT_EQUAL(removed_value, 123);
+
+  CU_ASSERT_FALSE(ioopm_hash_table_lookup(ht, "abc", &result));
+
+  ioopm_hash_table_destroy(ht);
+}
+
+void test_remove_middle_of_list()
+{
+  ioopm_hash_table_t *ht = ioopm_hash_table_create();
+  int result = 0;
+
+  ioopm_hash_table_insert(ht, "abc", 1);
+  ioopm_hash_table_insert(ht, "def", 2);
+  ioopm_hash_table_insert(ht, "ghi", 3);
+
+  int removed_value = ioopm_hash_table_remove(ht, "def");
+  CU_ASSERT_EQUAL(removed_value, 2);
+
+  CU_ASSERT_FALSE(ioopm_hash_table_lookup(ht, "def", &result));
+
+  CU_ASSERT_TRUE(ioopm_hash_table_lookup(ht, "abc", &result));
+  CU_ASSERT_EQUAL(result, 1);
+  CU_ASSERT_TRUE(ioopm_hash_table_lookup(ht, "ghi", &result));
+  CU_ASSERT_EQUAL(result, 3);
+
+  ioopm_hash_table_destroy(ht);
+}
+
+void test_remove_nonexistent_empty_table()
+{
+  ioopm_hash_table_t *ht = ioopm_hash_table_create();
+  int result = 0;
+
+  ioopm_hash_table_remove(ht, "abc");
+
+  CU_ASSERT_FALSE(ioopm_hash_table_lookup(ht, "abc", &result));
+
+  ioopm_hash_table_destroy(ht);
+}
+
+void test_remove_nonexistent_nonempty_table()
+{
+  ioopm_hash_table_t *ht = ioopm_hash_table_create();
+  int result = 0;
+
+  ioopm_hash_table_insert(ht, "abc", 1);
+
+  ioopm_hash_table_remove(ht, "xyz");
+
+  CU_ASSERT_TRUE(ioopm_hash_table_lookup(ht, "abc", &result));
+  CU_ASSERT_EQUAL(result, 1);
+
+  ioopm_hash_table_destroy(ht);
+}
 int main()
 	{
 		// First we try to set up CUnit, and exit if we fail
@@ -204,6 +268,10 @@ int main()
     		CU_add_test(my_test_suite, "insert on same key update value", test_insert_same_key_update_value) == NULL ||
     		CU_add_test(my_test_suite, "insert on same key, then on new key", test_insert_same_key_then_new_key) == NULL ||
     		CU_add_test(my_test_suite, "insert existing key twice", test_insert_existing_key_twice) == NULL ||
+			CU_add_test(my_test_suite, "remove existing single", test_remove_existing_single) == NULL ||
+			CU_add_test(my_test_suite, "remove in middle of list", test_remove_middle_of_list) == NULL ||
+			CU_add_test(my_test_suite, "remove non-existent entry from empty table", test_remove_nonexistent_empty_table) == NULL ||
+			CU_add_test(my_test_suite, "remove non-existent from non-empty table", test_remove_existing_single) == NULL ||
 			0)
 		{
 			// If adding any of the tests fails, we tear down CUnit and exit
