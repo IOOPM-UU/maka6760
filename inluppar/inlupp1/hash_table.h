@@ -1,7 +1,6 @@
 #pragma once
 #include <stdbool.h>
 
-typedef struct entry entry_t;
 /**
 * @file hash_table.h
 * @author Markus Karlsson & Vilgot Lenninger
@@ -13,7 +12,7 @@ typedef struct entry entry_t;
 * or by an at symbol @@.
 *
 */
-
+typedef struct entry entry_t;
 typedef struct hash_table ioopm_hash_table_t;
 
 /// @brief Create a new hash table

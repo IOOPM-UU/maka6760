@@ -1,5 +1,6 @@
 #include <CUnit/Basic.h>
 #include "/home/lillmacke/IOPM/inluppar/inlupp1/hash_table.h"
+#include "hash_table_iterator.h"
 
 int init_suite(void)
 {
@@ -240,7 +241,7 @@ void test_remove_nonexistent_nonempty_table()
 	ioopm_hash_table_destroy(ht);
 }
 
-// the following has_key tests are made AI-generated
+// Every test from this line on is AI-generated
 
 // 1. Tom tabell, nyckeln finns inte
 void test_has_key_empty_table()
@@ -312,8 +313,6 @@ void test_has_key_after_partial_remove()
 
 	ioopm_hash_table_destroy(ht);
 }
-
-// size tests are AI-generated
 
 // Storlek på en tom tabell
 void test_size_empty_table()
@@ -390,6 +389,178 @@ void test_size_after_removing_more_than_exists()
   ioopm_hash_table_destroy(ht);
 }
 
+// 1. Iterera över en TOM hashtabell
+void test_iterator_empty_table()
+{
+  ioopm_hash_table_t *ht = ioopm_hash_table_create();
+
+  ioopm_hash_table_iterator_t *it = ioopm_hash_table_iterator_create(ht);
+
+  CU_ASSERT_TRUE(ioopm_hash_table_iterator_at_end(it));
+
+  ioopm_hash_table_iterator_destroy(it);
+  ioopm_hash_table_destroy(ht);
+}
+
+// 2. Iterera över en tabell med EN entry
+void test_iterator_single_entry()
+{
+  ioopm_hash_table_t *ht = ioopm_hash_table_create();
+  ioopm_hash_table_insert(ht, "abc", 42);
+
+  ioopm_hash_table_iterator_t *it = ioopm_hash_table_iterator_create(ht);
+
+  // iteratorn ska INTE vara vid slutet direkt, eftersom det finns en entry
+  CU_ASSERT_FALSE(ioopm_hash_table_iterator_at_end(it));
+
+  // rätt nyckel och värde ska returneras
+  CU_ASSERT_STRING_EQUAL(ioopm_hash_table_iterator_current_key(it), "abc");
+  CU_ASSERT_EQUAL(ioopm_hash_table_iterator_current_value(it), 42);
+
+  // efter att ha avancerat en gång ska iteratorn nu vara vid slutet
+  ioopm_hash_table_iterator_advance(it);
+  CU_ASSERT_TRUE(ioopm_hash_table_iterator_at_end(it));
+
+  ioopm_hash_table_iterator_destroy(it);
+  ioopm_hash_table_destroy(ht);
+}
+
+// 3. Iterera över flera entries -- räkna antalet besök (ordning ej garanterad)
+void test_iterator_several_entries()
+{
+  char *keys[3] = {"abc", "qwe", "asd"};
+  int values[3] = {0, 1, 2};
+
+  ioopm_hash_table_t *ht = ioopm_hash_table_create();
+  for (int i = 0; i != 3; ++i)
+  {
+    ioopm_hash_table_insert(ht, keys[i], values[i]);
+  }
+
+  int iteration_count = 0;
+
+  ioopm_hash_table_iterator_t *it = ioopm_hash_table_iterator_create(ht);
+  while (!ioopm_hash_table_iterator_at_end(it))
+  {
+    iteration_count++;
+    ioopm_hash_table_iterator_advance(it);
+  }
+
+  ioopm_hash_table_iterator_destroy(it);
+  ioopm_hash_table_destroy(ht);
+
+  CU_ASSERT_EQUAL(iteration_count, 3);
+}
+
+// 4. Se till att VARJE insatt nyckel-värde-par besöks EXAKT en gång,
+//    och att current_value stämmer med rätt nyckel under iterationen
+void test_iterator_visits_each_pair_exactly_once()
+{
+  char *keys[3] = {"abc", "qwe", "asd"};
+  int values[3] = {0, 1, 2};
+
+  ioopm_hash_table_t *ht = ioopm_hash_table_create();
+  for (int i = 0; i != 3; ++i)
+  {
+    ioopm_hash_table_insert(ht, keys[i], values[i]);
+  }
+
+  int seen_abc = 0;
+  int seen_qwe = 0;
+  int seen_asd = 0;
+
+  ioopm_hash_table_iterator_t *it = ioopm_hash_table_iterator_create(ht);
+  while (!ioopm_hash_table_iterator_at_end(it))
+  {
+    char *current_key = ioopm_hash_table_iterator_current_key(it);
+    int current_value = ioopm_hash_table_iterator_current_value(it);
+
+    if (strcmp(current_key, "abc") == 0)
+    {
+      seen_abc++;
+      CU_ASSERT_EQUAL(current_value, 0);
+    }
+    else if (strcmp(current_key, "qwe") == 0)
+    {
+      seen_qwe++;
+      CU_ASSERT_EQUAL(current_value, 1);
+    }
+    else if (strcmp(current_key, "asd") == 0)
+    {
+      seen_asd++;
+      CU_ASSERT_EQUAL(current_value, 2);
+    }
+    else
+    {
+      // en okänd nyckel dök upp -- något är fel
+      CU_FAIL("Iterator visited an unexpected key");
+    }
+
+    ioopm_hash_table_iterator_advance(it);
+  }
+
+  ioopm_hash_table_iterator_destroy(it);
+  ioopm_hash_table_destroy(ht);
+
+  // varje nyckel ska ha besökts EXAKT en gång -- inte 0, inte 2+
+  CU_ASSERT_EQUAL(seen_abc, 1);
+  CU_ASSERT_EQUAL(seen_qwe, 1);
+  CU_ASSERT_EQUAL(seen_asd, 1);
+}
+
+// 5. Iterera över entries som GARANTERAT hamnar i SAMMA bucket,
+//    oavsett vilken hashfunktion som används
+void test_iterator_multiple_entries_same_bucket()
+{
+  // Vi kan inte lita på att specifika nycklar hamnar i samma bucket
+  // eftersom det beror på hashfunktionens implementation. Ett sätt att
+  // GARANTERA flera entries i samma bucket, oavsett hashfunktion, är att
+  // sätta in fler nycklar än det finns buckets (17 st, enligt DODGE-kommentaren
+  // i hash_table.c) -- då måste, enligt lådprincipen (pigeonhole principle),
+  // minst en bucket innehålla mer än en entry.
+
+  ioopm_hash_table_t *ht = ioopm_hash_table_create();
+
+  char *keys[20];
+  char buf[20][8];
+  for (int i = 0; i < 20; ++i)
+  {
+    snprintf(buf[i], sizeof(buf[i]), "key%d", i);
+    keys[i] = buf[i];
+    ioopm_hash_table_insert(ht, keys[i], i);
+  }
+
+  int seen[20] = {0};
+  int iteration_count = 0;
+
+  ioopm_hash_table_iterator_t *it = ioopm_hash_table_iterator_create(ht);
+  while (!ioopm_hash_table_iterator_at_end(it))
+  {
+    char *current_key = ioopm_hash_table_iterator_current_key(it);
+
+    for (int i = 0; i < 20; ++i)
+    {
+      if (strcmp(current_key, keys[i]) == 0)
+      {
+        seen[i]++;
+        break;
+      }
+    }
+
+    iteration_count++;
+    ioopm_hash_table_iterator_advance(it);
+  }
+
+  ioopm_hash_table_iterator_destroy(it);
+  ioopm_hash_table_destroy(ht);
+
+  CU_ASSERT_EQUAL(iteration_count, 20);
+  for (int i = 0; i < 20; ++i)
+  {
+    CU_ASSERT_EQUAL(seen[i], 1); // varje nyckel besökt exakt en gång
+  }
+}
+
 int main()
 {
 	// First we try to set up CUnit, and exit if we fail
@@ -433,6 +604,11 @@ int main()
 		CU_add_test(my_test_suite, "size of larger table", test_size_larger_table) == NULL ||
 		CU_add_test(my_test_suite, "size after remove", test_size_after_remove) == NULL ||
 		CU_add_test(my_test_suite, "size after removing more than exists", test_size_after_removing_more_than_exists) == NULL ||
+		CU_add_test(my_test_suite, "iterator over empty table", test_iterator_empty_table) == NULL ||
+    	CU_add_test(my_test_suite, "iterator over single entry", test_iterator_single_entry) == NULL ||
+    	CU_add_test(my_test_suite, "iterator over several entries", test_iterator_several_entries) == NULL ||
+    	CU_add_test(my_test_suite, "iterator visits each pair exactly once", test_iterator_visits_each_pair_exactly_once) == NULL ||
+    	CU_add_test(my_test_suite, "iterator over multiple entries in same bucket", test_iterator_multiple_entries_same_bucket) == NULL ||
 		0)
 	{
 		// If adding any of the tests fails, we tear down CUnit and exit
