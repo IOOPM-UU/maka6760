@@ -1,5 +1,6 @@
 #pragma once
 #include <stdbool.h>
+#include <stddef.h>
 
 /**
 * @file hash_table.h
@@ -36,27 +37,27 @@ void ioopm_hash_table_insert(ioopm_hash_table_t *ht, char *key, int value);
 /// @param result if lookup succeeds, write resulting value to memory location
 ///               result points to.
 /// @return true, if lookup succeeds (FIXME: what if the key does not exist?)
-bool ioopm_hash_table_lookup(ioopm_hash_table_t *ht, char *key, int *result);
+bool ioopm_hash_table_lookup(ioopm_hash_table_t *ht, const char *key, int *result);
 
 /// @brief remove any mapping from key to a value
 /// @param ht hash table operated upon
 /// @param key key to remove
 /// @return the value mapped to by key or -1 if the key doesn't exist.
 /// NOTE: Because of this, -1 can NOT be stored as a value in the table. 
-int ioopm_hash_table_remove(ioopm_hash_table_t *ht, char *key);
+int ioopm_hash_table_remove(ioopm_hash_table_t *ht, const char *key);
 
 /// @brief (AI) check if a mapping for key exists in hash table ht
 /// @param ht hash table operated upon
 /// @param key key to check for 
 /// @return true if ht contains mapping for key, false otherwise
-bool ioopm_hash_table_has_key(ioopm_hash_table_t *ht, char *key);
+bool ioopm_hash_table_has_key(ioopm_hash_table_t *ht, const char *key);
 
 /// @brief (AI) check if hash table ht contains any mappings at all
 /// @param ht hash table operated upon
 /// @return true if ht contains no mappings, false otherwise
-bool ioopm_hash_table_is_empty(ioopm_hash_table_t *ht);
+bool ioopm_hash_table_is_empty(const ioopm_hash_table_t *ht);
 
 /// @brief  (AI) count the number of mappings currently stored in the hash table
 /// @param ht hash table operated upon
-/// @return the number of key => value mappings in ht
-int ioopm_hash_table_size(ioopm_hash_table_t *ht);
+/// @return the number of key => value mappings in ht, as a size_t (never negative)
+size_t ioopm_hash_table_size(const ioopm_hash_table_t *ht);

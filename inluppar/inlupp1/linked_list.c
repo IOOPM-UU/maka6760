@@ -18,7 +18,7 @@ struct list
     link_t *first;
     link_t *last;
 };
-
+ 
 struct list_iterator
 {
     ioopm_list_t *list;
@@ -26,7 +26,7 @@ struct list_iterator
     link_t *current;
 };
 
-static link_t *traverse_to_link(ioopm_list_t *list, int steps)
+static link_t *traverse_to_link(const ioopm_list_t *list, int steps)
 {
     link_t *link = list->first;
     for (int i = 0; i < steps; i++)
@@ -49,9 +49,9 @@ static void only_one_link(ioopm_list_t *list, link_t *new_link)
     list->last = new_link;
 }
 
-static bool valid_index(ioopm_list_t *list, int index)
+static bool valid_index(const ioopm_list_t *list, size_t index)
 {
-    if (index >= 0 && index < ioopm_list_size(list))
+    if (index < ioopm_list_size(list))
     {
         return true;
     }
@@ -113,19 +113,19 @@ void ioopm_list_prepend(ioopm_list_t *list, int value)
     }
 }
 
-int ioopm_list_head(ioopm_list_t *list)
+int ioopm_list_head(const ioopm_list_t *list)
 {
     return list->first->value;
 }
 
-int ioopm_list_last(ioopm_list_t *list)
+int ioopm_list_last(const ioopm_list_t *list)
 {
     return list->last->value;
 }
 
-bool ioopm_list_insert(ioopm_list_t *list, int index, int value)
+bool ioopm_list_insert(ioopm_list_t *list, size_t index, int value)
 {
-    if (index < 0 || index > ioopm_list_size(list))
+    if (index > ioopm_list_size(list))
     {
         return false;
     }
@@ -152,7 +152,7 @@ bool ioopm_list_insert(ioopm_list_t *list, int index, int value)
     return true;
 }
 
-bool ioopm_list_remove(ioopm_list_t *list, int index, int *result)
+bool ioopm_list_remove(ioopm_list_t *list, size_t index, int *result)
 {
     if (!valid_index(list, index))
     {
@@ -200,7 +200,7 @@ bool ioopm_list_remove(ioopm_list_t *list, int index, int *result)
     }
 }
 
-bool ioopm_list_get(ioopm_list_t *list, int index, int *result)
+bool ioopm_list_get(const ioopm_list_t *list, size_t index, int *result)
 {
     if (!valid_index(list, index))
     {
@@ -212,10 +212,10 @@ bool ioopm_list_get(ioopm_list_t *list, int index, int *result)
     return true;
 }
 
-int ioopm_list_size(ioopm_list_t *list)
+size_t ioopm_list_size(const ioopm_list_t *list)
 {
     link_t *current = list->first;
-    int counter = 1;
+    size_t counter = 1;
     if (ioopm_list_is_empty(list))
     {
         return 0;
@@ -230,7 +230,7 @@ int ioopm_list_size(ioopm_list_t *list)
     return counter;
 }
 
-bool ioopm_list_is_empty(ioopm_list_t *list)
+bool ioopm_list_is_empty(const ioopm_list_t *list)
 {
     if (list->first == NULL)
     {
@@ -256,7 +256,7 @@ void ioopm_list_iterator_destroy(ioopm_list_iterator_t *iter)
     free(iter);
 }
 
-bool ioopm_list_iterator_at_end(ioopm_list_iterator_t *iter)
+bool ioopm_list_iterator_at_end(const ioopm_list_iterator_t *iter)
 {
     if (iter->current == NULL)
     {
@@ -274,7 +274,7 @@ void ioopm_list_iterator_advance(ioopm_list_iterator_t *iter)
     iter->current = iter->current->next;
 }
 
-int ioopm_list_iterator_current(ioopm_list_iterator_t *iter)
+int ioopm_list_iterator_current(const ioopm_list_iterator_t *iter)
 {
     return iter->current->value;
 }
