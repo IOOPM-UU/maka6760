@@ -211,7 +211,6 @@ ioopm_hash_table_iterator_t *ioopm_hash_table_iterator_create(ioopm_hash_table_t
 
 void ioopm_hash_table_iterator_destroy(ioopm_hash_table_iterator_t *it)
 {
-    // TODO: STUB
     free(it);
 }
 
