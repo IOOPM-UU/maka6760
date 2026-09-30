@@ -7,19 +7,34 @@
 
 #define Delimiters "+-#@()[]{}.,:;!? \t\n\r"
 
+static size_t string_hash(elem_t key)
+{
+	size_t result = 0;
+	for (char *str = key.s; *str != '\0'; str++)
+	{
+		result = result * 31 + (unsigned char)*str;
+	}
+	return result;
+}
+
+static bool string_eq(elem_t a, elem_t b)
+{
+	return strcmp(a.s, b.s) == 0;
+}
+
 /// @brief Process a single word, updating its frequency
 /// @param word the word to process
 /// @param ht a hash table containing the frequencies of the words found so far
 void process_word(char *word, ioopm_hash_table_t *ht)
 {
-  int freq = 0;
+  elem_t freq = int_elem(0);
   
-  if (ioopm_hash_table_lookup(ht, word, &freq))
+  if (ioopm_hash_table_lookup(ht, string_elem(word), &freq))
   {
-    ioopm_hash_table_insert(ht, word , freq + 1);
+    ioopm_hash_table_insert(ht, string_elem(word) , int_elem(freq.i + 1));
   } else 
   {
-  ioopm_hash_table_insert(ht, strdup(word), 1);
+  ioopm_hash_table_insert(ht, string_elem(strdup(word)), int_elem(1));
   }
 }
 
@@ -29,24 +44,24 @@ void process_word(char *word, ioopm_hash_table_t *ht)
 void process_file(char *filename, ioopm_hash_table_t *ht)
 {
   FILE *f = fopen(filename, "r");
-  while (true)
+  if (f == NULL)
   {
-    char *buf = NULL;
-    size_t len = 0;
-    getline(&buf, &len, f);
-    if (feof(f))
-    {
-      free(buf);
-      break;
-    }
+    fprintf(stderr, "Could not open file: %s\n", filename);
+    return;
+  }
+
+  char *buf = NULL;
+  size_t len = 0;
+  while (getline(&buf, &len, f) != -1)
+  {
     for (char *word = strtok(buf, Delimiters);
          word && *word;
          word = strtok(NULL, Delimiters))
     {
       process_word(word, ht);
     }
-    free(buf);
   }
+  free(buf);
   fclose(f);
 }
 
@@ -94,7 +109,7 @@ int main(int argc, char *argv[])
     return 1;
   }
 
-  ioopm_hash_table_t *ht = ioopm_hash_table_create();
+  ioopm_hash_table_t *ht = ioopm_hash_table_create(string_hash, string_eq);
 
   for (int i = 1; i < argc; ++i)
   {
@@ -108,8 +123,8 @@ int main(int argc, char *argv[])
     int count = 0;
   while(!ioopm_hash_table_iterator_at_end(it))
   {
-    char *word = ioopm_hash_table_iterator_current_key(it);
-    int freq = ioopm_hash_table_iterator_current_value(it);
+    char *word = ioopm_hash_table_iterator_current_key(it).s;
+    int freq = ioopm_hash_table_iterator_current_value(it).i;
     freq_words[count].word = word;
     freq_words[count].freq = freq;
     count++;
@@ -127,7 +142,7 @@ int main(int argc, char *argv[])
   ioopm_hash_table_iterator_t *it_clean = ioopm_hash_table_iterator_create(ht);
   while(!ioopm_hash_table_iterator_at_end(it_clean))
   {
-    char *word = ioopm_hash_table_iterator_current_key(it_clean);
+    char *word = ioopm_hash_table_iterator_current_key(it_clean).s;
     free(word);
     ioopm_hash_table_iterator_advance(it_clean);
   }

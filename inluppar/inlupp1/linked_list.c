@@ -6,10 +6,11 @@
 #include <assert.h>
 #include "linked_list.h"
 #include "list_iterator.h"
+#include "common.h"
 
 struct link
 {
-    int value;
+    elem_t value;
     link_t *next;
 };
 
@@ -17,6 +18,7 @@ struct list
 {
     link_t *first;
     link_t *last;
+    size_t size;
 };
  
 struct list_iterator
@@ -36,7 +38,7 @@ static link_t *traverse_to_link(const ioopm_list_t *list, int steps)
     return link;
 }
 
-static link_t *create_new_link(int value)
+static link_t *create_new_link(elem_t value)
 {
     link_t *new_link = calloc(1, sizeof(link_t));
     new_link->value = value;
@@ -82,10 +84,11 @@ void ioopm_list_destroy(ioopm_list_t *list)
     free(list);
 }
 
-void ioopm_list_append(ioopm_list_t *list, int value)
+void ioopm_list_append(ioopm_list_t *list, elem_t value)
 {
     link_t *new_link = create_new_link(value);
     new_link->next = NULL;
+    list->size++;
 
     if (list->first == NULL)
     {
@@ -98,10 +101,11 @@ void ioopm_list_append(ioopm_list_t *list, int value)
     }
 }
 
-void ioopm_list_prepend(ioopm_list_t *list, int value)
+void ioopm_list_prepend(ioopm_list_t *list, elem_t value)
 {
     link_t *new_link = create_new_link(value);
     new_link->next = list->first;
+    list->size++;
 
     if (list->first == NULL)
     {
@@ -113,17 +117,17 @@ void ioopm_list_prepend(ioopm_list_t *list, int value)
     }
 }
 
-int ioopm_list_head(const ioopm_list_t *list)
+elem_t ioopm_list_head(const ioopm_list_t *list)
 {
     return list->first->value;
 }
 
-int ioopm_list_last(const ioopm_list_t *list)
+elem_t ioopm_list_last(const ioopm_list_t *list)
 {
     return list->last->value;
 }
 
-bool ioopm_list_insert(ioopm_list_t *list, size_t index, int value)
+bool ioopm_list_insert(ioopm_list_t *list, size_t index, elem_t value)
 {
     if (index > ioopm_list_size(list))
     {
@@ -148,11 +152,12 @@ bool ioopm_list_insert(ioopm_list_t *list, size_t index, int value)
         link_t *new_link = create_new_link(value);
         before->next = new_link;
         new_link->next = after;
+        list->size++;
     }
     return true;
 }
 
-bool ioopm_list_remove(ioopm_list_t *list, size_t index, int *result)
+bool ioopm_list_remove(ioopm_list_t *list, size_t index, elem_t *result)
 {
     if (!valid_index(list, index))
     {
@@ -167,6 +172,7 @@ bool ioopm_list_remove(ioopm_list_t *list, size_t index, int *result)
         *result = current->value;
         free(current);
         list->first = first;
+        list->size--;
         return true;
     }
     else if (index == 0 && ioopm_list_size(list) == 1)
@@ -175,6 +181,7 @@ bool ioopm_list_remove(ioopm_list_t *list, size_t index, int *result)
         free(current);
         list->first = NULL;
         list->last = NULL;
+        list->size--;
         return true;
     }
     else
@@ -189,6 +196,7 @@ bool ioopm_list_remove(ioopm_list_t *list, size_t index, int *result)
             free(current);
             list->last = previous;
             previous->next = NULL;
+            list->size--;
             return true;
         }
 
@@ -196,11 +204,12 @@ bool ioopm_list_remove(ioopm_list_t *list, size_t index, int *result)
         *result = current->value;
         free(current);
         previous->next = next;
+        list->size--;
         return true;
     }
 }
 
-bool ioopm_list_get(const ioopm_list_t *list, size_t index, int *result)
+bool ioopm_list_get(const ioopm_list_t *list, size_t index, elem_t *result)
 {
     if (!valid_index(list, index))
     {
@@ -214,20 +223,7 @@ bool ioopm_list_get(const ioopm_list_t *list, size_t index, int *result)
 
 size_t ioopm_list_size(const ioopm_list_t *list)
 {
-    link_t *current = list->first;
-    size_t counter = 1;
-    if (ioopm_list_is_empty(list))
-    {
-        return 0;
-    }
-
-    while (current->next != NULL)
-    {
-        counter++;
-        current = current->next;
-    }
-
-    return counter;
+    return list->size;
 }
 
 bool ioopm_list_is_empty(const ioopm_list_t *list)
@@ -274,15 +270,15 @@ void ioopm_list_iterator_advance(ioopm_list_iterator_t *iter)
     iter->current = iter->current->next;
 }
 
-int ioopm_list_iterator_current(const ioopm_list_iterator_t *iter)
+elem_t ioopm_list_iterator_current(const ioopm_list_iterator_t *iter)
 {
     return iter->current->value;
 }
 
-int ioopm_list_iterator_remove(ioopm_list_iterator_t *iter)
+elem_t ioopm_list_iterator_remove(ioopm_list_iterator_t *iter)
 {
     link_t *removed = iter->current;
-    int result = removed->value;
+    elem_t result = removed->value;
     link_t *next = removed->next;
 
     if (iter->previous == NULL)
@@ -300,14 +296,16 @@ int ioopm_list_iterator_remove(ioopm_list_iterator_t *iter)
     }
 
     free(removed);
+    iter->list->size--;
     iter->current = next;
     return result;
 }
 
-void ioopm_list_iterator_insert(ioopm_list_iterator_t *iter, int element)
+void ioopm_list_iterator_insert(ioopm_list_iterator_t *iter, elem_t element)
 {
     link_t *new_link = create_new_link(element);
     new_link->next = iter->current;
+    iter->list->size++;
 
     if (iter->previous == NULL)
     {

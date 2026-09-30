@@ -9,11 +9,11 @@ all: freq_count hash_table_tests linked_list_test
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-hash_table.o: hash_table.c hash_table.h hash_table_iterator.h
-freq_count.o: freq_count.c hash_table.h hash_table_iterator.h
-hash_table_tests.o: hash_table_tests.c hash_table.h hash_table_iterator.h
-linked_list.o: linked_list.c linked_list.h
-linked_list_test.o: linked_list_test.c linked_list.h
+hash_table.o: hash_table.c hash_table.h hash_table_iterator.h common.h
+freq_count.o: freq_count.c hash_table.h hash_table_iterator.h common.h
+hash_table_tests.o: hash_table_tests.c hash_table.h hash_table_iterator.h common.h
+linked_list.o: linked_list.c linked_list.h common.h
+linked_list_test.o: linked_list_test.c linked_list.h common.h
 
 freq_count: freq_count.o hash_table.o
 	$(CC) $(CFLAGS) $^ -o $@

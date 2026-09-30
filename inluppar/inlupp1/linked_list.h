@@ -1,6 +1,21 @@
 #pragma once
 #include <stdbool.h>
 #include <stddef.h>
+#include "common.h"
+
+/**
+* @file linked_list.h
+* @author Markus Karlsson & Vilgot Lenninger
+* @date 28 Sep 2026
+* @brief Simple singly linked list of elem_t values
+*
+* Elements are stored as elem_t (see common.h), so the list can hold ints,
+* unsigned ints, bools, floats, strings or arbitrary pointers. The caller is
+* responsible for knowing which field of the union an element was stored in.
+*
+* The list does not copy what elements point to. Any memory that elements
+* point to is owned by the caller and is never freed by the list.
+*/
 
 typedef struct link link_t; 
 typedef struct list ioopm_list_t; /// Meta: struct definition goes in C file
@@ -16,22 +31,22 @@ void ioopm_list_destroy(ioopm_list_t *list);
 /// @brief Insert at the end of a linked list in O(1) time
 /// @param list the linked list that will be appended
 /// @param value the value to be appended
-void ioopm_list_append(ioopm_list_t *list, int value);
+void ioopm_list_append(ioopm_list_t *list, elem_t value);
 
 /// @brief Insert at the front of a linked list in O(1) time
 /// @param list the linked list that will be prepended to
 /// @param value the value to be prepended
-void ioopm_list_prepend(ioopm_list_t *list, int value);
+void ioopm_list_prepend(ioopm_list_t *list, elem_t value);
 
 /// @brief Return the first element of a linked list in O(1) time
 /// @pre the list is non-empty
 /// @param list the linked list to take the head of
-int ioopm_list_head(const ioopm_list_t *list);
+elem_t ioopm_list_head(const ioopm_list_t *list);
 
 /// @brief Return the last element of a linked list in O(1) time
 /// @pre the list is non-empty
 /// @param list the linked list to take the last element of
-int ioopm_list_last(const ioopm_list_t *list);
+elem_t ioopm_list_last(const ioopm_list_t *list);
 
 /// @brief Insert an element into a linked list in O(n) time.
 /// The valid values of index are [0,n] for a list of n elements,
@@ -42,7 +57,7 @@ int ioopm_list_last(const ioopm_list_t *list);
 ///              (a negative argument wraps to a very large value and is rejected as out of range)
 /// @param value the value to be inserted
 /// @return true if index was valid and the value was inserted, false otherwise
-bool ioopm_list_insert(ioopm_list_t *list, size_t index, int value);
+bool ioopm_list_insert(ioopm_list_t *list, size_t index, elem_t value);
 
 /// @brief Remove an element from a linked list in O(n) time.
 /// The valid values of index are [0,n-1] for a list of n elements,
@@ -50,9 +65,9 @@ bool ioopm_list_insert(ioopm_list_t *list, size_t index, int value);
 /// @param list the linked list
 /// @param index the position in the list, valid range [0,n-1]. Unsigned, so it can never be negative
 ///              (a negative argument wraps to a very large value and is rejected as out of range)
-/// @param result where the removed value is written, if the index was valid
+/// @param result where the removed value is written, if the index was valid. Left untouched otherwise
 /// @return true if index was valid and result was written, false otherwise
-bool ioopm_list_remove(ioopm_list_t *list, size_t index, int *result);
+bool ioopm_list_remove(ioopm_list_t *list, size_t index, elem_t *result);
 
 /// @brief Retrieve an element from a linked list in O(n) time.
 /// The valid values of index are [0,n-1] for a list of n elements,
@@ -60,9 +75,9 @@ bool ioopm_list_remove(ioopm_list_t *list, size_t index, int *result);
 /// @param list the linked list
 /// @param index the position in the list, valid range [0,n-1]. Unsigned, so it can never be negative
 ///              (a negative argument wraps to a very large value and is rejected as out of range)
-/// @param result where the retrieved value is written, if index was valid
-/// @return true if index vas valid and result was written, false otherwise
-bool ioopm_list_get(const ioopm_list_t *list, size_t index, int *result);
+/// @param result where the retrieved value is written, if index was valid. Left untouched otherwise
+/// @return true if index was valid and result was written, false otherwise
+bool ioopm_list_get(const ioopm_list_t *list, size_t index, elem_t *result);
 
 /// @brief Lookup the number of elements in the linked list in O(1) time
 /// @param list the linked list

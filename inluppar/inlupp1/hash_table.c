@@ -10,8 +10,8 @@
 
 struct entry
 {
-    char *key;     // holds the key
-    int value;     // holds the value
+    elem_t key;     // holds the key
+    elem_t value;     // holds the value
     entry_t *next; // points to the next entry (possibly NULL)
 };
 
@@ -19,6 +19,8 @@ struct hash_table
 {
     size_t size;
     entry_t buckets[No_Buckets];
+    ioopm_hash_function *hash_fn;
+    ioopm_eq_function *key_eq_fn;
 };
 
 struct hash_table_iterator
@@ -28,18 +30,7 @@ struct hash_table_iterator
   entry_t *current_entry;
 };
 
-static size_t string_knr_hash(const char *str)
-{
-    size_t result = 0;
-    while (*str != '\0')
-    {
-        result = result * 31 + ((unsigned char)*str);
-        str++;
-    }
-    return result;
-}
-
-static entry_t *entry_create(char *key, int value, entry_t *next)
+static entry_t *entry_create(elem_t key, elem_t value, entry_t *next)
 {
     entry_t *new_entry = malloc(sizeof(entry_t));
     new_entry->key = key;
@@ -81,16 +72,30 @@ static void skip_sentinel_nodes(ioopm_hash_table_iterator_t *it)
   }
 }
 
-
-ioopm_hash_table_t *ioopm_hash_table_create()
+static entry_t *find_previous_entry(ioopm_hash_table_t *ht, const elem_t key)
 {
-    // Allocate zeroed out space for a ioopm_hash_table_t = No_Buckets pointers to entry_t's
-    return calloc(1, sizeof(ioopm_hash_table_t));
+    size_t bucket = ht->hash_fn(key) % No_Buckets;
+    entry_t *previous = &ht->buckets[bucket];
+    entry_t *current = previous->next;
+    while (current != NULL && !ht->key_eq_fn(current->key, key))
+    {   
+        previous = current;
+        current = current->next;
+    }
+    return previous;
+}
+
+ioopm_hash_table_t *ioopm_hash_table_create(ioopm_hash_function *hash_fn, ioopm_eq_function *key_eq_fn)
+{
+    ioopm_hash_table_t *ht = calloc(1, sizeof(ioopm_hash_table_t));
+    ht->hash_fn = hash_fn;
+    ht->key_eq_fn = key_eq_fn;
+    ht->size = 0;
+    return ht;
 }
 
 void ioopm_hash_table_destroy(ioopm_hash_table_t *ht)
 {
-    // TODO: Stub
     for (size_t i = 0; i < No_Buckets; i++)
     {
         entry_t *current = ht->buckets[i].next;
@@ -105,22 +110,7 @@ void ioopm_hash_table_destroy(ioopm_hash_table_t *ht)
     free(ht);
 }
 
-static entry_t *find_previous_entry(ioopm_hash_table_t *ht, const char *key)
-{
-    // find bucket
-    size_t bucket = string_knr_hash(key) % No_Buckets;
-
-    // look for an entry with the key we want
-    entry_t *previous = &ht->buckets[bucket];
-    entry_t *current = previous->next;
-    while (current != NULL && strcmp(current->key, key) != 0)
-    {   
-        previous = current;
-        current = current->next;
-    }
-    return previous;
-}
-void ioopm_hash_table_insert(ioopm_hash_table_t *ht, char *key, int value)
+void ioopm_hash_table_insert(ioopm_hash_table_t *ht, elem_t key, elem_t value)
 {
     // find previous entry, or the last entry if the key does not exist
     entry_t *previous = find_previous_entry(ht, key);
@@ -137,7 +127,7 @@ void ioopm_hash_table_insert(ioopm_hash_table_t *ht, char *key, int value)
     }
 }
 
-bool ioopm_hash_table_lookup(ioopm_hash_table_t *ht, const char *key, int *result)
+bool ioopm_hash_table_lookup(ioopm_hash_table_t *ht, const elem_t key, elem_t *result)
 {
     // look for an entry with the key we want
     entry_t *previous = find_previous_entry(ht, key);
@@ -154,30 +144,29 @@ bool ioopm_hash_table_lookup(ioopm_hash_table_t *ht, const char *key, int *resul
     }
 }
 
-int ioopm_hash_table_remove(ioopm_hash_table_t *ht, const char *key)
+bool ioopm_hash_table_remove(ioopm_hash_table_t *ht, const elem_t key, elem_t *result)
 {
     entry_t *previous = find_previous_entry(ht, key);
     entry_t *current = previous->next;
 
     if (current == NULL)
     {
-        printf("%s does not exist\n", key);
-        return -1;
+        return false;
     }
     else
     {
-        int result = current->value;
+        *result = current->value;
         entry_t *next_pointer = current->next;
         previous->next = next_pointer;
         entry_destroy(current);
         ht->size--;
-        return result;
+        return true;
     }
 }
 
-bool ioopm_hash_table_has_key(ioopm_hash_table_t *ht, const char *key)
+bool ioopm_hash_table_has_key(ioopm_hash_table_t *ht, const elem_t key)
 {
-    int trash;
+    elem_t trash;
     bool result = ioopm_hash_table_lookup(ht, key, &trash);
     return result;
 }
@@ -231,13 +220,13 @@ void ioopm_hash_table_iterator_advance(ioopm_hash_table_iterator_t *it)
     skip_sentinel_nodes(it);
 }
 
-char *ioopm_hash_table_iterator_current_key(const ioopm_hash_table_iterator_t *it)
+elem_t ioopm_hash_table_iterator_current_key(const ioopm_hash_table_iterator_t *it)
 {
     return it->current_entry->key;
 
 }
 
-int ioopm_hash_table_iterator_current_value(const ioopm_hash_table_iterator_t *it)
+elem_t ioopm_hash_table_iterator_current_value(const ioopm_hash_table_iterator_t *it)
 {
     return it->current_entry->value;
 
