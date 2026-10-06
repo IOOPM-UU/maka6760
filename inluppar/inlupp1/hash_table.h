@@ -23,6 +23,10 @@
 * point to is owned by the caller, must outlive its mapping, and is never
 * freed by the table.
 *
+* The table grows automatically. When an insertion would make the number of
+* entries divided by the number of buckets exceed the table's load factor,
+* the bucket array is enlarged and every entry is rehashed.
+*
 */
 typedef struct entry entry_t;
 typedef struct hash_table ioopm_hash_table_t;
@@ -36,8 +40,19 @@ typedef struct hash_table ioopm_hash_table_t;
 ///      otherwise they may end up in different buckets and not be found
 /// @pre key_eq_fn and hash_fn must read the same field of the union as the keys
 ///      are stored in (e.g. .s for string keys, .i for int keys)
-/// @return A new empty hash table
+/// @return A new empty hash table with 17 buckets and load factor 0.75
 ioopm_hash_table_t *ioopm_hash_table_create(ioopm_hash_function *hash_fn, ioopm_eq_function *key_eq_fn);
+
+/// @brief Create a new hash table with a chosen initial capacity and load factor
+/// @param initial_capacity number of buckets the table starts with
+/// @param load_factor the table grows when size / capacity would exceed this value
+/// @param hash_fn function that computes a hash value for a key (see ioopm_hash_table_create)
+/// @param key_eq_fn function that returns true if two keys are equal (see ioopm_hash_table_create)
+/// @pre initial_capacity > 0
+/// @pre load_factor > 0
+/// @pre same requirements on hash_fn and key_eq_fn as for ioopm_hash_table_create
+/// @return A new empty hash table
+ioopm_hash_table_t *ioopm_hash_table_create_new(size_t initial_capacity, float load_factor, ioopm_hash_function *hash_fn, ioopm_eq_function *key_eq_fn);
 
 /// @brief Delete a hash table and free its memory (but not the memory of keys or values)
 /// @param ht a hash table to be deleted
