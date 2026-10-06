@@ -1,9 +1,6 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <string.h>
-#include <stdio.h>
-#include <assert.h>
 #include "linked_list.h"
 #include "list_iterator.h"
 #include "common.h"
@@ -14,6 +11,7 @@ struct link
     link_t *next;
 };
 
+// First and last gives us 0(1) append and prepend, same for saving size in the struct. 
 struct list
 {
     link_t *first;
@@ -21,6 +19,8 @@ struct list
     size_t size;
 };
  
+// The iterator saves previous because the list is single-linked. Without
+// previous we can not remove or add element where the iterator is pointing.
 struct list_iterator
 {
     ioopm_list_t *list;
@@ -28,10 +28,10 @@ struct list_iterator
     link_t *current;
 };
 
-static link_t *traverse_to_link(const ioopm_list_t *list, int steps)
+static link_t *traverse_to_link(const ioopm_list_t *list, size_t steps)
 {
     link_t *link = list->first;
-    for (int i = 0; i < steps; i++)
+    for (size_t i = 0; i < steps; i++)
     {
         link = link->next;
     }
@@ -127,6 +127,9 @@ elem_t ioopm_list_last(const ioopm_list_t *list)
     return list->last->value;
 }
 
+//Index == 0 or Index == last position sends for prepend/append, because 
+//first/last are only updated in one place. 
+//Size++ only in else-branch, already included in prepend/append functions. 
 bool ioopm_list_insert(ioopm_list_t *list, size_t index, elem_t value)
 {
     if (index > ioopm_list_size(list))
@@ -157,6 +160,8 @@ bool ioopm_list_insert(ioopm_list_t *list, size_t index, elem_t value)
     return true;
 }
 
+//Size-- is before every return statement, because the if-conditions 
+// use ioopm_list_size, we can not update size before.
 bool ioopm_list_remove(ioopm_list_t *list, size_t index, elem_t *result)
 {
     if (!valid_index(list, index))
@@ -166,6 +171,7 @@ bool ioopm_list_remove(ioopm_list_t *list, size_t index, elem_t *result)
 
     link_t *current = list->first;
 
+    //First element
     if (index == 0 && ioopm_list_size(list) != 1)
     {
         link_t *first = current->next;
@@ -175,7 +181,10 @@ bool ioopm_list_remove(ioopm_list_t *list, size_t index, elem_t *result)
         list->size--;
         return true;
     }
-    else if (index == 0 && ioopm_list_size(list) == 1)
+    // First AND only element
+    // Removed to reach 100% branch coverage: size must be 1 here, since
+    // lists with size > 1 were handled above (see README, Code coverage)
+    else if (index == 0 /* && ioopm_list_size(list) == 1*/)
     {
         *result = current->value;
         free(current);
@@ -189,7 +198,7 @@ bool ioopm_list_remove(ioopm_list_t *list, size_t index, elem_t *result)
         link_t *previous = traverse_to_link(list, index - 1);
         current = previous->next;
 
-        // remove last element in list
+        //Last element. Given its own case because we need to move last pointer.
         if (index == (ioopm_list_size(list) - 1))
         {
             *result = current->value;
@@ -199,7 +208,7 @@ bool ioopm_list_remove(ioopm_list_t *list, size_t index, elem_t *result)
             list->size--;
             return true;
         }
-
+        // element in the middle
         link_t *next = current->next;
         *result = current->value;
         free(current);
@@ -275,6 +284,8 @@ elem_t ioopm_list_iterator_current(const ioopm_list_iterator_t *iter)
     return iter->current->value;
 }
 
+//Changes the list directly with iter->list, that why it also needs to update
+//first, last and size.
 elem_t ioopm_list_iterator_remove(ioopm_list_iterator_t *iter)
 {
     link_t *removed = iter->current;
@@ -301,6 +312,8 @@ elem_t ioopm_list_iterator_remove(ioopm_list_iterator_t *iter)
     return result;
 }
 
+//Changes the list directly with iter->list, that why it also needs to update
+//first, last and size.
 void ioopm_list_iterator_insert(ioopm_list_iterator_t *iter, elem_t element)
 {
     link_t *new_link = create_new_link(element);

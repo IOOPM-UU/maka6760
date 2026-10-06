@@ -21,7 +21,7 @@ int clean_suite(void)
 	return 0;
 }
 
-// Hash- och likhetsfunktioner som skickas in till tabellen
+// Hash and equality functions passed to the hash table
 
 static size_t string_hash(elem_t key)
 {
@@ -48,7 +48,7 @@ static bool int_eq(elem_t a, elem_t b)
 	return a.i == b.i;
 }
 
-// Skickar alla nycklar till samma bucket, så att key_eq_fn måste skilja dem åt
+// Sends every key to the same bucket, so key_eq_fn alone must tell them apart
 static size_t constant_hash(elem_t key)
 {
 	(void)key;
@@ -290,7 +290,7 @@ void test_remove_nonexistent_nonempty_table()
 
 // Every test from this line on is AI-generated
 
-// 1. Tom tabell, nyckeln finns inte
+// 1. Empty table, key does not exist
 void test_has_key_empty_table()
 {
 	ioopm_hash_table_t *ht = ioopm_hash_table_create(string_hash, string_eq);
@@ -300,7 +300,7 @@ void test_has_key_empty_table()
 	ioopm_hash_table_destroy(ht);
 }
 
-// 2. En nyckel insatt: har den insatta, saknar en annan
+// 2. One key inserted: has that key, lacks another
 void test_has_key_single_insert()
 {
 	ioopm_hash_table_t *ht = ioopm_hash_table_create(string_hash, string_eq);
@@ -313,7 +313,7 @@ void test_has_key_single_insert()
 	ioopm_hash_table_destroy(ht);
 }
 
-// 3. Tre nycklar insatta: alla tre finns, en fjärde saknas
+// 3. Three keys inserted: all three exist, a fourth does not
 void test_has_key_multiple_inserts()
 {
 	ioopm_hash_table_t *ht = ioopm_hash_table_create(string_hash, string_eq);
@@ -330,7 +330,7 @@ void test_has_key_multiple_inserts()
 	ioopm_hash_table_destroy(ht);
 }
 
-// 4. Nyckel insatt och direkt borttagen: ska inte finnas längre
+// 4. Key inserted and immediately removed: should no longer exist
 void test_has_key_after_insert_and_remove()
 {
 	ioopm_hash_table_t *ht = ioopm_hash_table_create(string_hash, string_eq);
@@ -343,7 +343,7 @@ void test_has_key_after_insert_and_remove()
 	ioopm_hash_table_destroy(ht);
 }
 
-// 5. Tre nycklar insatta, en borttagen: de kvarvarande finns, den borttagna finns inte
+// 5. Three keys inserted, one removed: the remaining exist, the removed one does not
 void test_has_key_after_partial_remove()
 {
 	ioopm_hash_table_t *ht = ioopm_hash_table_create(string_hash, string_eq);
@@ -361,7 +361,7 @@ void test_has_key_after_partial_remove()
 	ioopm_hash_table_destroy(ht);
 }
 
-// Storlek på en tom tabell
+// Size of an empty table
 void test_size_empty_table()
 {
 	ioopm_hash_table_t *ht = ioopm_hash_table_create(string_hash, string_eq);
@@ -371,7 +371,7 @@ void test_size_empty_table()
 	ioopm_hash_table_destroy(ht);
 }
 
-// Storlek på en tabell med precis en mappning
+// Size of a table with exactly one mapping
 void test_size_singleton_table()
 {
 	ioopm_hash_table_t *ht = ioopm_hash_table_create(string_hash, string_eq);
@@ -383,7 +383,7 @@ void test_size_singleton_table()
 	ioopm_hash_table_destroy(ht);
 }
 
-// Storlek på en tabell med flera mappningar
+// Size of a table with several mappings
 void test_size_larger_table()
 {
 	ioopm_hash_table_t *ht = ioopm_hash_table_create(string_hash, string_eq);
@@ -398,7 +398,7 @@ void test_size_larger_table()
 	ioopm_hash_table_destroy(ht);
 }
 
-// Storlek efter att ett element tagits bort
+// Size after an element has been removed
 void test_size_after_remove()
 {
 	ioopm_hash_table_t *ht = ioopm_hash_table_create(string_hash, string_eq);
@@ -421,22 +421,36 @@ void test_size_after_removing_more_than_exists()
   ioopm_hash_table_insert(ht, string_elem("k1"), int_elem(1));
   ioopm_hash_table_insert(ht, string_elem("k2"), int_elem(2));
 
-  // ta bort båda nycklarna som faktiskt finns
+  // remove both keys that actually exist
   CU_ASSERT_TRUE(remove_key(ht, "k1"));
   CU_ASSERT_TRUE(remove_key(ht, "k2"));
 
-  // försök ta bort fler nycklar som ALDRIG funnits i tabellen
+  // try to remove more keys that have NEVER been in the table
   CU_ASSERT_FALSE(remove_key(ht, "k3"));
   CU_ASSERT_FALSE(remove_key(ht, "k4"));
 
-  // storleken ska vara 0, inte negativ eller felaktig på något sätt
+  // size should be 0, not negative or wrong in any way
   CU_ASSERT_EQUAL(ioopm_hash_table_size(ht), 0);
   CU_ASSERT_TRUE(ioopm_hash_table_is_empty(ht));
 
   ioopm_hash_table_destroy(ht);
 }
 
-// 1. Iterera över en TOM hashtabell
+void test_is_empty_on_non_empty_table()
+{
+  ioopm_hash_table_t *ht = ioopm_hash_table_create(string_hash, string_eq);
+
+  ioopm_hash_table_insert(ht, string_elem("k"), int_elem(1));
+  CU_ASSERT_FALSE(ioopm_hash_table_is_empty(ht));
+
+  // and back to empty once the only key is removed
+  CU_ASSERT_TRUE(remove_key(ht, "k"));
+  CU_ASSERT_TRUE(ioopm_hash_table_is_empty(ht));
+
+  ioopm_hash_table_destroy(ht);
+}
+
+// 1. Iterate over an EMPTY hash table
 void test_iterator_empty_table()
 {
   ioopm_hash_table_t *ht = ioopm_hash_table_create(string_hash, string_eq);
@@ -449,7 +463,7 @@ void test_iterator_empty_table()
   ioopm_hash_table_destroy(ht);
 }
 
-// 2. Iterera över en tabell med EN entry
+// 2. Iterate over a table with ONE entry
 void test_iterator_single_entry()
 {
   ioopm_hash_table_t *ht = ioopm_hash_table_create(string_hash, string_eq);
@@ -457,14 +471,14 @@ void test_iterator_single_entry()
 
   ioopm_hash_table_iterator_t *it = ioopm_hash_table_iterator_create(ht);
 
-  // iteratorn ska INTE vara vid slutet direkt, eftersom det finns en entry
+  // the iterator should NOT be at the end right away, since there is an entry
   CU_ASSERT_FALSE(ioopm_hash_table_iterator_at_end(it));
 
-  // rätt nyckel och värde ska returneras
+  // the correct key and value should be returned
   CU_ASSERT_STRING_EQUAL(ioopm_hash_table_iterator_current_key(it).s, "abc");
   CU_ASSERT_EQUAL(ioopm_hash_table_iterator_current_value(it).i, 42);
 
-  // efter att ha avancerat en gång ska iteratorn nu vara vid slutet
+  // after advancing once the iterator should be at the end
   ioopm_hash_table_iterator_advance(it);
   CU_ASSERT_TRUE(ioopm_hash_table_iterator_at_end(it));
 
@@ -472,7 +486,7 @@ void test_iterator_single_entry()
   ioopm_hash_table_destroy(ht);
 }
 
-// 3. Iterera över flera entries -- räkna antalet besök (ordning ej garanterad)
+// 3. Iterate over several entries -- count the visits (order not guaranteed)
 void test_iterator_several_entries()
 {
   char *keys[3] = {"abc", "qwe", "asd"};
@@ -499,8 +513,8 @@ void test_iterator_several_entries()
   CU_ASSERT_EQUAL(iteration_count, 3);
 }
 
-// 4. Se till att VARJE insatt nyckel-värde-par besöks EXAKT en gång,
-//    och att current_value stämmer med rätt nyckel under iterationen
+// 4. Make sure EVERY inserted key-value pair is visited EXACTLY once,
+//    and that current_value matches the correct key during iteration
 void test_iterator_visits_each_pair_exactly_once()
 {
   char *keys[3] = {"abc", "qwe", "asd"};
@@ -539,7 +553,7 @@ void test_iterator_visits_each_pair_exactly_once()
     }
     else
     {
-      // en okänd nyckel dök upp -- något är fel
+      // an unknown key showed up -- something is wrong
       CU_FAIL("Iterator visited an unexpected key");
     }
 
@@ -549,22 +563,21 @@ void test_iterator_visits_each_pair_exactly_once()
   ioopm_hash_table_iterator_destroy(it);
   ioopm_hash_table_destroy(ht);
 
-  // varje nyckel ska ha besökts EXAKT en gång -- inte 0, inte 2+
+  // each key should have been visited EXACTLY once -- not 0, not 2+
   CU_ASSERT_EQUAL(seen_abc, 1);
   CU_ASSERT_EQUAL(seen_qwe, 1);
   CU_ASSERT_EQUAL(seen_asd, 1);
 }
 
-// 5. Iterera över entries som GARANTERAT hamnar i SAMMA bucket,
-//    oavsett vilken hashfunktion som används
+// 5. Iterate over entries that are GUARANTEED to end up in the SAME bucket,
+//    regardless of which hash function is used
 void test_iterator_multiple_entries_same_bucket()
 {
-  // Vi kan inte lita på att specifika nycklar hamnar i samma bucket
-  // eftersom det beror på hashfunktionens implementation. Ett sätt att
-  // GARANTERA flera entries i samma bucket, oavsett hashfunktion, är att
-  // sätta in fler nycklar än det finns buckets (17 st, enligt DODGE-kommentaren
-  // i hash_table.c) -- då måste, enligt lådprincipen (pigeonhole principle),
-  // minst en bucket innehålla mer än en entry.
+  // We cannot rely on specific keys ending up in the same bucket, since
+  // that depends on the hash function. One way to GUARANTEE several entries
+  // in the same bucket, regardless of hash function, is to insert more keys
+  // than there are buckets (17, see No_Buckets in hash_table.c) -- then, by
+  // the pigeonhole principle, at least one bucket must hold more than one entry.
 
   ioopm_hash_table_t *ht = ioopm_hash_table_create(string_hash, string_eq);
 
@@ -604,7 +617,7 @@ void test_iterator_multiple_entries_same_bucket()
   CU_ASSERT_EQUAL(iteration_count, 20);
   for (int i = 0; i < 20; ++i)
   {
-    CU_ASSERT_EQUAL(seen[i], 1); // varje nyckel besökt exakt en gång
+    CU_ASSERT_EQUAL(seen[i], 1); // each key visited exactly once
   }
 }
 
@@ -633,7 +646,7 @@ void test_remove_same_key_twice()
 
   CU_ASSERT_TRUE(ioopm_hash_table_remove(ht, string_elem("abc"), &result));
   CU_ASSERT_EQUAL(result.i, 5);
-  CU_ASSERT_FALSE(ioopm_hash_table_remove(ht, string_elem("abc"), &result)); // redan borttagen
+  CU_ASSERT_FALSE(ioopm_hash_table_remove(ht, string_elem("abc"), &result)); // already removed
   CU_ASSERT_TRUE(ioopm_hash_table_is_empty(ht));
 
   ioopm_hash_table_destroy(ht);
@@ -641,7 +654,7 @@ void test_remove_same_key_twice()
 
 void test_remove_minus_one_value()
 {
-  // Förut returnerade remove -1 som felvärde, nu ska -1 vara ett vanligt värde
+  // remove used to return -1 as an error value, now -1 should be an ordinary value
   ioopm_hash_table_t *ht = ioopm_hash_table_create(string_hash, string_eq);
   elem_t result = int_elem(0);
   ioopm_hash_table_insert(ht, string_elem("neg"), int_elem(-1));
@@ -728,10 +741,10 @@ void test_elem_string_value()
 {
   ioopm_hash_table_t *ht = ioopm_hash_table_create(string_hash, string_eq);
   elem_t result = int_elem(0);
-  ioopm_hash_table_insert(ht, string_elem("greeting"), string_elem("hej"));
+  ioopm_hash_table_insert(ht, string_elem("greeting"), string_elem("hello"));
 
   CU_ASSERT_TRUE(ioopm_hash_table_lookup(ht, string_elem("greeting"), &result));
-  CU_ASSERT_STRING_EQUAL(result.s, "hej");
+  CU_ASSERT_STRING_EQUAL(result.s, "hello");
 
   ioopm_hash_table_destroy(ht);
 }
@@ -743,7 +756,7 @@ void test_elem_pointer_identity_preserved()
   elem_t result = int_elem(0);
   ioopm_hash_table_insert(ht, string_elem("ptr"), ptr_elem(&x));
 
-  // Tabellen lagrar pekaren, inte en kopia av det den pekar på
+  // The table stores the pointer, not a copy of what it points to
   CU_ASSERT_TRUE(ioopm_hash_table_lookup(ht, string_elem("ptr"), &result));
   CU_ASSERT_PTR_EQUAL(result.p, &x);
   x = 100;
@@ -758,7 +771,7 @@ void test_elem_null_pointer_value()
   elem_t result = int_elem(1);
   ioopm_hash_table_insert(ht, string_elem("null"), ptr_elem(NULL));
 
-  // NULL är ett giltigt värde - nyckeln ska finnas
+  // NULL is a valid value - the key should exist
   CU_ASSERT_TRUE(ioopm_hash_table_has_key(ht, string_elem("null")));
   CU_ASSERT_TRUE(ioopm_hash_table_lookup(ht, string_elem("null"), &result));
   CU_ASSERT_PTR_NULL(result.p);
@@ -771,18 +784,18 @@ void test_elem_update_changes_type_of_value()
   ioopm_hash_table_t *ht = ioopm_hash_table_create(string_hash, string_eq);
   elem_t result = int_elem(0);
   ioopm_hash_table_insert(ht, string_elem("k"), int_elem(7));
-  ioopm_hash_table_insert(ht, string_elem("k"), string_elem("sju"));
+  ioopm_hash_table_insert(ht, string_elem("k"), string_elem("seven"));
 
   CU_ASSERT_EQUAL(ioopm_hash_table_size(ht), 1);
   CU_ASSERT_TRUE(ioopm_hash_table_lookup(ht, string_elem("k"), &result));
-  CU_ASSERT_STRING_EQUAL(result.s, "sju");
+  CU_ASSERT_STRING_EQUAL(result.s, "seven");
 
   ioopm_hash_table_destroy(ht);
 }
 
 void test_elem_remove_returns_same_pointer()
 {
-  char *str = strdup("heap-sträng");
+  char *str = strdup("heap-string");
   ioopm_hash_table_t *ht = ioopm_hash_table_create(string_hash, string_eq);
   elem_t result = int_elem(0);
   ioopm_hash_table_insert(ht, string_elem("s"), string_elem(str));
@@ -791,20 +804,20 @@ void test_elem_remove_returns_same_pointer()
   CU_ASSERT_PTR_EQUAL(result.s, str);
 
   ioopm_hash_table_destroy(ht);
-  free(result.s); // anroparen äger fortfarande minnet
+  free(result.s); // the caller still owns the memory
 }
 
 void test_elem_destroy_does_not_free_keys_or_values()
 {
-  // Specen: destroy frigör varken nycklar eller värden - de ägs av anroparen
-  char *key = strdup("nyckel");
-  char *value = strdup("värde");
+  // Spec: destroy frees neither keys nor values - they are owned by the caller
+  char *key = strdup("key-string");
+  char *value = strdup("value-string");
   ioopm_hash_table_t *ht = ioopm_hash_table_create(string_hash, string_eq);
   ioopm_hash_table_insert(ht, string_elem(key), string_elem(value));
   ioopm_hash_table_destroy(ht);
 
-  CU_ASSERT_STRING_EQUAL(key, "nyckel");   // valgrind klagar om de redan är frigjorda
-  CU_ASSERT_STRING_EQUAL(value, "värde");
+  CU_ASSERT_STRING_EQUAL(key, "key-string");   // valgrind complains if they are already freed
+  CU_ASSERT_STRING_EQUAL(value, "value-string");
   free(key);
   free(value);
 }
@@ -812,7 +825,7 @@ void test_elem_destroy_does_not_free_keys_or_values()
 void test_elem_iterator_string_values()
 {
   char *keys[3] = {"a", "b", "c"};
-  char *values[3] = {"ett", "två", "tre"};
+  char *values[3] = {"one", "two", "three"};
 
   ioopm_hash_table_t *ht = ioopm_hash_table_create(string_hash, string_eq);
   for (int i = 0; i < 3; ++i)
@@ -830,7 +843,7 @@ void test_elem_iterator_string_values()
     {
       if (strcmp(key, keys[i]) == 0)
       {
-        CU_ASSERT_PTR_EQUAL(value, values[i]); // rätt värde hör ihop med rätt nyckel
+        CU_ASSERT_PTR_EQUAL(value, values[i]); // the correct value belongs to the correct key
         seen++;
       }
     }
@@ -843,21 +856,21 @@ void test_elem_iterator_string_values()
 }
 
 // ============================================================================
-// GENERISKA NYCKLAR (hash_fn + key_eq_fn)
+// GENERIC KEYS (hash_fn + key_eq_fn)
 // ============================================================================
 
 void test_key_equal_strings_different_pointers()
 {
-  // Två olika pekare till lika strängar ska räknas som SAMMA nyckel,
-  // eftersom tabellen jämför med key_eq_fn och inte bit för bit
-  char key1[] = "samma";
-  char key2[] = "samma";
+  // Two different pointers to equal strings should count as the SAME key,
+  // since the table compares with key_eq_fn and not bit by bit
+  char key1[] = "same";
+  char key2[] = "same";
   CU_ASSERT_PTR_NOT_EQUAL(key1, key2);
 
   ioopm_hash_table_t *ht = ioopm_hash_table_create(string_hash, string_eq);
   elem_t result = int_elem(0);
   ioopm_hash_table_insert(ht, string_elem(key1), int_elem(1));
-  ioopm_hash_table_insert(ht, string_elem(key2), int_elem(2)); // ska uppdatera, inte lägga till
+  ioopm_hash_table_insert(ht, string_elem(key2), int_elem(2)); // should update, not add
 
   CU_ASSERT_EQUAL(ioopm_hash_table_size(ht), 1);
   CU_ASSERT_TRUE(ioopm_hash_table_lookup(ht, string_elem(key1), &result));
@@ -870,13 +883,13 @@ void test_key_int_insert_and_lookup()
 {
   ioopm_hash_table_t *ht = ioopm_hash_table_create(int_hash, int_eq);
   elem_t result = int_elem(0);
-  ioopm_hash_table_insert(ht, int_elem(1), string_elem("ett"));
-  ioopm_hash_table_insert(ht, int_elem(2), string_elem("två"));
+  ioopm_hash_table_insert(ht, int_elem(1), string_elem("one"));
+  ioopm_hash_table_insert(ht, int_elem(2), string_elem("two"));
 
   CU_ASSERT_TRUE(ioopm_hash_table_lookup(ht, int_elem(1), &result));
-  CU_ASSERT_STRING_EQUAL(result.s, "ett");
+  CU_ASSERT_STRING_EQUAL(result.s, "one");
   CU_ASSERT_TRUE(ioopm_hash_table_lookup(ht, int_elem(2), &result));
-  CU_ASSERT_STRING_EQUAL(result.s, "två");
+  CU_ASSERT_STRING_EQUAL(result.s, "two");
   CU_ASSERT_FALSE(ioopm_hash_table_lookup(ht, int_elem(3), &result));
 
   ioopm_hash_table_destroy(ht);
@@ -884,7 +897,7 @@ void test_key_int_insert_and_lookup()
 
 void test_key_int_negative_and_zero()
 {
-  // Negativa int blir stora size_t i int_hash - tabellen ska ändå klara det
+  // Negative ints become large size_t values in int_hash - the table should still handle it
   ioopm_hash_table_t *ht = ioopm_hash_table_create(int_hash, int_eq);
   elem_t result = int_elem(0);
   ioopm_hash_table_insert(ht, int_elem(0), int_elem(10));
@@ -903,7 +916,7 @@ void test_key_int_negative_and_zero()
 
 void test_key_int_same_bucket()
 {
-  // 17 buckets: 1, 18 och 35 hamnar i samma bucket med int_hash
+  // 17 buckets: 1, 18 and 35 end up in the same bucket with int_hash
   ioopm_hash_table_t *ht = ioopm_hash_table_create(int_hash, int_eq);
   elem_t result = int_elem(0);
   ioopm_hash_table_insert(ht, int_elem(1), int_elem(100));
@@ -924,13 +937,13 @@ void test_key_int_same_bucket()
 
 void test_key_all_in_one_bucket_uses_eq_fn()
 {
-  // Med constant_hash hamnar allt i samma bucket - bara key_eq_fn kan skilja nycklarna åt
+  // With constant_hash everything ends up in the same bucket - only key_eq_fn can tell the keys apart
   ioopm_hash_table_t *ht = ioopm_hash_table_create(constant_hash, string_eq);
   elem_t result = int_elem(0);
   ioopm_hash_table_insert(ht, string_elem("a"), int_elem(1));
   ioopm_hash_table_insert(ht, string_elem("b"), int_elem(2));
   ioopm_hash_table_insert(ht, string_elem("c"), int_elem(3));
-  ioopm_hash_table_insert(ht, string_elem("b"), int_elem(22)); // uppdatering
+  ioopm_hash_table_insert(ht, string_elem("b"), int_elem(22)); // update
   CU_ASSERT_EQUAL(ioopm_hash_table_size(ht), 3);
 
   CU_ASSERT_TRUE(ioopm_hash_table_lookup(ht, string_elem("a"), &result));
@@ -940,8 +953,8 @@ void test_key_all_in_one_bucket_uses_eq_fn()
   CU_ASSERT_TRUE(ioopm_hash_table_lookup(ht, string_elem("c"), &result));
   CU_ASSERT_EQUAL(result.i, 3);
 
-  CU_ASSERT_TRUE(ioopm_hash_table_remove(ht, string_elem("a"), &result)); // första i kedjan
-  CU_ASSERT_TRUE(ioopm_hash_table_remove(ht, string_elem("c"), &result)); // sista i kedjan
+  CU_ASSERT_TRUE(ioopm_hash_table_remove(ht, string_elem("a"), &result)); // first in the chain
+  CU_ASSERT_TRUE(ioopm_hash_table_remove(ht, string_elem("c"), &result)); // last in the chain
   CU_ASSERT_EQUAL(ioopm_hash_table_size(ht), 1);
   CU_ASSERT_TRUE(ioopm_hash_table_has_key(ht, string_elem("b")));
 
@@ -950,17 +963,17 @@ void test_key_all_in_one_bucket_uses_eq_fn()
 
 void test_key_two_tables_different_key_types()
 {
-  // Varje tabell har sina egna funktioner, de får inte blandas ihop
+  // Each table has its own functions, they must not get mixed up
   ioopm_hash_table_t *by_int = ioopm_hash_table_create(int_hash, int_eq);
   ioopm_hash_table_t *by_str = ioopm_hash_table_create(string_hash, string_eq);
   elem_t result = int_elem(0);
 
-  ioopm_hash_table_insert(by_int, int_elem(7), string_elem("sju"));
-  ioopm_hash_table_insert(by_str, string_elem("sju"), int_elem(7));
+  ioopm_hash_table_insert(by_int, int_elem(7), string_elem("seven"));
+  ioopm_hash_table_insert(by_str, string_elem("seven"), int_elem(7));
 
   CU_ASSERT_TRUE(ioopm_hash_table_lookup(by_int, int_elem(7), &result));
-  CU_ASSERT_STRING_EQUAL(result.s, "sju");
-  CU_ASSERT_TRUE(ioopm_hash_table_lookup(by_str, string_elem("sju"), &result));
+  CU_ASSERT_STRING_EQUAL(result.s, "seven");
+  CU_ASSERT_TRUE(ioopm_hash_table_lookup(by_str, string_elem("seven"), &result));
   CU_ASSERT_EQUAL(result.i, 7);
 
   ioopm_hash_table_destroy(by_int);
@@ -1040,6 +1053,7 @@ int main()
 		CU_add_test(my_test_suite, "size of larger table", test_size_larger_table) == NULL ||
 		CU_add_test(my_test_suite, "size after remove", test_size_after_remove) == NULL ||
 		CU_add_test(my_test_suite, "size after removing more than exists", test_size_after_removing_more_than_exists) == NULL ||
+		CU_add_test(my_test_suite, "is_empty on non-empty table", test_is_empty_on_non_empty_table) == NULL ||
 		CU_add_test(my_test_suite, "iterator over empty table", test_iterator_empty_table) == NULL ||
     	CU_add_test(my_test_suite, "iterator over single entry", test_iterator_single_entry) == NULL ||
     	CU_add_test(my_test_suite, "iterator over several entries", test_iterator_several_entries) == NULL ||

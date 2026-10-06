@@ -31,14 +31,18 @@ void process_word(char *word, ioopm_hash_table_t *ht)
   
   if (ioopm_hash_table_lookup(ht, string_elem(word), &freq))
   {
+    // No string dupe if it already exists. Table keys old key, a copy
+    // would leak.
     ioopm_hash_table_insert(ht, string_elem(word) , int_elem(freq.i + 1));
   } else 
   {
+  //We dupe a new key because buf is freed after every row, and the table
+  //does not copy keys. 
   ioopm_hash_table_insert(ht, string_elem(strdup(word)), int_elem(1));
   }
 }
 
-/// @brief Process a single file, updating the frequencies oof its words
+/// @brief Process a single file, updating the frequencies of its words
 /// @param filename the name of the file to process
 /// @param ht a hash table containing the frequencies of the words found so far
 void process_file(char *filename, ioopm_hash_table_t *ht)
@@ -139,6 +143,8 @@ int main(int argc, char *argv[])
     printf("%s: %d\n", freq_words[i].word, freq_words[i].freq);
   }
 
+  // We have to iterate and free the keys before destroying the table, because
+  //the table does not own the keys. 
   ioopm_hash_table_iterator_t *it_clean = ioopm_hash_table_iterator_create(ht);
   while(!ioopm_hash_table_iterator_at_end(it_clean))
   {
