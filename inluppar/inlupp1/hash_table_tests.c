@@ -92,7 +92,6 @@ void test_insert_once()
 }
 
 
-//Every test from here is AI-generated.
 void test_insert_existing_key()
 {
 	// create new hash table
@@ -661,6 +660,7 @@ void test_remove_minus_one_value()
 
   CU_ASSERT_TRUE(ioopm_hash_table_lookup(ht, string_elem("neg"), &result));
   CU_ASSERT_EQUAL(result.i, -1);
+  result = int_elem(0);
   CU_ASSERT_TRUE(ioopm_hash_table_remove(ht, string_elem("neg"), &result));
   CU_ASSERT_EQUAL(result.i, -1);
 

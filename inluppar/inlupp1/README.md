@@ -146,7 +146,7 @@ again using gprof and *time*.
 Runtime (median): 
 - real: 0.0046s
 
-10k-words
+10k-words:
 1. string_eq: 26793
 2. find_previous_entry: 20242
 3. string_hash: 20242
@@ -154,7 +154,7 @@ Runtime (median):
 Runtime (median):
 - real: 0.008s
 
-16k-words
+16k-words:
 1. find_previous_entry: 42165
 2. string_hash: 42165
 3. string_eq: 41664
@@ -167,6 +167,52 @@ we now have a dynamic table size so we don't need to make as many searches throu
 Time-wise we can only see an improvement on the 16k words file, the others are actually slower.
 We think this is due to the fact that we are making a copy of the hash table when increasing the size, 
 instead of increasing the size of the existing table. 
+
+## Memory usage 
+Running freq_count with valgrinds memory profiling tool massif and cachegrind 
+for simple modelling of cache behaviour gives us the following data (we look at peak values):
+
+
+
+1k-long-words (no double pointer):
+| total(B)        | useful-heap(B)     | extra-heap(B)    | I refs    | D refs    | D1 misses/D1 miss rate | LLd misses |
+|-----------------|--------------------|------------------|-----------|-----------|------------------------|------------|
+| 23,976          | 23,390             | 686              | 3,871,767 | 1,865,242 | 2,078/0.1%             | 1,856      |
+
+1k-long-words (double pointer):
+| total(B)        | useful-heap(B)     | extra-heap(B)    | I refs    | D refs    | D1 misses/D1 miss rate | LLd misses |
+|-----------------|--------------------|------------------|-----------|-----------|------------------------|------------|
+| 23,728          | 22,899             | 829              | 3,919,491 | 1,888,744 | 2,073                  | 1,850      |
+
+Runtime (double pointer):
+- real: 0.003s (vs 0.0046s)
+
+
+10k-words (no double pointer);
+| total(B)        | useful-heap(B)     | extra-heap(B)    | I refs    | D refs    | D1 misses/D1 miss rate | LLd misses |
+|-----------------|--------------------|------------------|-----------|-----------|------------------------|------------|
+| 40,976          | 43,229             | 6,747            | 15,927,526| 8,050,859 | 2,479/0,0%             | 2,137      |
+
+10k-words (double pointer):
+| total(B)        | useful-heap(B)     | extra-heap(B)    | I refs    | D refs    | D1 misses/D1 miss rate | LLd misses |
+|-----------------|--------------------|------------------|-----------|-----------|------------------------|------------|
+| 38,576          | 31,965             | 6,611            | 16,122,541| 8,214,292 | 2,433/0,0%             | 2,107      |
+
+Runtime (double pointer):
+- real: 0.004s (0.008s)
+
+16k-words (no double pointer):
+| total(B)        | useful-heap(B)     | extra-heap(B)    | I refs    | D refs    | D1 misses/D1 miss rate | LLd misses |
+|-----------------|--------------------|------------------|-----------|-----------|------------------------|------------|
+| 581,368         | 452,024            | 129,344          | 52,160,350| 27,354,305| 120,698/0,4%           | 11,575     |
+
+16k-words (double pointer):
+| total(B)        | useful-heap(B)     | extra-heap(B)    | I refs    | D refs    | D1 misses/D1 miss rate | LLd misses |
+|-----------------|--------------------|------------------|-----------|-----------|------------------------|------------|
+| 434,032         | 296,195            | 137,837          | 45,541,760| 23,348,940| 88,605/0,4%            | 9,011      |
+
+Runtime (double pointer):
+- real: 0.016s (vs 0.034s)
 
 ## AI 
 We have used Claude Pro to improve readability in our already written text, like fixing grammar mistakes and using Markdown syntax to improve the layout of the document. 

@@ -1,0 +1,52 @@
+\doxysection{utils.\+h}
+\hypertarget{utils_8h_source}{}\label{utils_8h_source}\index{generic\_utils/utils.h@{generic\_utils/utils.h}}
+\mbox{\hyperlink{utils_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ \_\_UTILS\_H\_\_}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ \_\_UTILS\_H\_\_}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <ctype.h>}}
+\DoxyCodeLine{00010\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{utils_8h_a18f59995e71d037e1fcef19531f6b840}{strdup}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *);}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union\ }\{}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{unionanswer__t_aa8ec4a02684f8894d9a996497f5c4522}{int\_value}};}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{unionanswer__t_a4746ca4b821d32287c79da0e488933fa}{float\_value}};}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{unionanswer__t_a46bf31538724d946cb38462ef97eb0b4}{string\_value}};}
+\DoxyCodeLine{00021\ \}\ \mbox{\hyperlink{unionanswer__t}{answer\_t}};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{utils_8h_a2235909df03e3eb655e7a0627d8e2565}{check\_func}}(\textcolor{keywordtype}{char}\ *);}
+\DoxyCodeLine{00024\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{unionanswer__t}{answer\_t}}\ \mbox{\hyperlink{utils_8h_ac473788ca6748aada197469bac85aad8}{convert\_func}}(\textcolor{keywordtype}{char}\ *);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00030\ \mbox{\hyperlink{unionanswer__t}{answer\_t}}\ \mbox{\hyperlink{utils_8h_a636261e405649b23f631acaeff750895}{convert\_to\_string}}(\textcolor{keywordtype}{char}\ *str);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00036\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{utils_8h_ac1a1309d385acff44647a826db4d2f75}{read\_string}}(\textcolor{keywordtype}{char}\ *buf,\ \textcolor{keywordtype}{int}\ buf\_siz);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00039\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{utils_8h_a406defd61bbe2707306f1d68b6f3bb08}{clear\_input\_buffer}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00044\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{utils_8h_a2bceed4770a5d611aefe0b72936304f1}{string\_length}}(\textcolor{keywordtype}{char}\ *user\_string);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00049\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{utils_8h_ab4e92dab1b81326b0e6640361767936f}{print}}(\textcolor{keywordtype}{char}\ *str);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00054\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{utils_8h_a1925cdb42031999f3e4272c01cbdff3c}{println}}(\textcolor{keywordtype}{char}\ *str);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00059\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{utils_8h_acb036bd509f16309b2d3ee1201d006cd}{is\_number}}(\textcolor{keywordtype}{char}\ *str);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00064\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{utils_8h_a11e7ddc1e420c97fc11f830222914d55}{not\_empty}}(\textcolor{keywordtype}{char}\ *str);}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00071\ \mbox{\hyperlink{unionanswer__t}{answer\_t}}\ \mbox{\hyperlink{utils_8h_a01fa008446fa390b5703c7c09516fad1}{ask\_question}}(\textcolor{keywordtype}{char}\ *question,\ \mbox{\hyperlink{utils_8h_a2235909df03e3eb655e7a0627d8e2565}{check\_func}}\ *check,\ \mbox{\hyperlink{utils_8h_ac473788ca6748aada197469bac85aad8}{convert\_func}}\ *convert);}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00076\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{utils_8h_a968d3e8120a7d81ccac4e0ae50478446}{ask\_question\_int}}(\textcolor{keywordtype}{char}\ *question);}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00081\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{utils_8h_a7e5974e35756c854a37cfe581384651e}{ask\_question\_string}}(\textcolor{keywordtype}{char}\ *question);}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

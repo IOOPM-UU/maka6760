@@ -1,0 +1,191 @@
+\doxysection{generic\+\_\+data\+\_\+structures/list\+\_\+iterator.h File Reference}
+\hypertarget{list__iterator_8h}{}\label{list__iterator_8h}\index{generic\_data\_structures/list\_iterator.h@{generic\_data\_structures/list\_iterator.h}}
+
+
+Simple linked list iterator.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include "{}linked\+\_\+list.\+h"{}}\newline
+{\ttfamily \#include "{}common.\+h"{}}\newline
+Include dependency graph for list\+\_\+iterator.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structlist__iterator}{list\+\_\+iterator}} \mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list__iterator_8h_af9dba3c017288e3476cb3039c9010c63}{ioopm\+\_\+list\+\_\+iterator\+\_\+create}} (\mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*}l)
+\begin{DoxyCompactList}\small\item\em Create a new iterator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{list__iterator_8h_a20f42cef9506c2680f38131a4cca0b88}{ioopm\+\_\+list\+\_\+iterator\+\_\+destroy}} (\mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}iter)
+\begin{DoxyCompactList}\small\item\em Destroy the iterator and return its resources. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{list__iterator_8h_ad253f7783b895d2a66295073c643afee}{ioopm\+\_\+list\+\_\+iterator\+\_\+at\+\_\+end}} (const \mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}iter)
+\begin{DoxyCompactList}\small\item\em Checks if there are more elements to iterate over. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{list__iterator_8h_ae68cd4befeca5c2edb9cb66a2219b72d}{ioopm\+\_\+list\+\_\+iterator\+\_\+advance}} (\mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}iter)
+\begin{DoxyCompactList}\small\item\em Step the iterator forward one step. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} \mbox{\hyperlink{list__iterator_8h_a8c0b04210a397bdb486847224f460419}{ioopm\+\_\+list\+\_\+iterator\+\_\+current}} (const \mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}iter)
+\begin{DoxyCompactList}\small\item\em Return the current element from the underlying list. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} \mbox{\hyperlink{list__iterator_8h_a828c67489fc0e776be531c51e5a84f5f}{ioopm\+\_\+list\+\_\+iterator\+\_\+remove}} (\mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}iter)
+\begin{DoxyCompactList}\small\item\em Remove the current element from the underlying list. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{list__iterator_8h_afc08f6717414286159badd042291b756}{ioopm\+\_\+list\+\_\+iterator\+\_\+insert}} (\mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}iter, \mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} element)
+\begin{DoxyCompactList}\small\item\em Insert a new element into the underlying list making the current element it\textquotesingle{}s next. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Simple linked list iterator. 
+
+\begin{DoxyAuthor}{Author}
+Markus Karlsson \& Vilgot Lenninger 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+28 Sep 2026 
+\end{DoxyDate}
+Linked list iterators provide an interface to iterate through all elements in a linked list, in list order. An iterator is either positioned at an element, called the current element, or it is positioned at-\/the-\/end, if it has already iterated through all elements. If the underlying list of an iterator is modified using any non-\/iterator function, the iterator is invalidated and should not be used anymore. 
+
+\label{doc-typedef-members}
+\Hypertarget{list__iterator_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}\index{list\_iterator.h@{list\_iterator.h}!ioopm\_list\_iterator\_t@{ioopm\_list\_iterator\_t}}
+\index{ioopm\_list\_iterator\_t@{ioopm\_list\_iterator\_t}!list\_iterator.h@{list\_iterator.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_iterator\_t}{ioopm\_list\_iterator\_t}}
+{\footnotesize\ttfamily \label{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012} 
+typedef struct \mbox{\hyperlink{structlist__iterator}{list\+\_\+iterator}} \mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{list__iterator_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{list__iterator_8h_ae68cd4befeca5c2edb9cb66a2219b72d}\index{list\_iterator.h@{list\_iterator.h}!ioopm\_list\_iterator\_advance@{ioopm\_list\_iterator\_advance}}
+\index{ioopm\_list\_iterator\_advance@{ioopm\_list\_iterator\_advance}!list\_iterator.h@{list\_iterator.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_iterator\_advance()}{ioopm\_list\_iterator\_advance()}}
+{\footnotesize\ttfamily \label{list__iterator_8h_ae68cd4befeca5c2edb9cb66a2219b72d} 
+void ioopm\+\_\+list\+\_\+iterator\+\_\+advance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{iter}{}\end{DoxyParamCaption})}
+
+
+
+Step the iterator forward one step. 
+
+\begin{DoxyPrecond}{Precondition}
+iter is positioned at an element 
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em iter} & the iterator \\
+\hline
+\end{DoxyParams}
+\Hypertarget{list__iterator_8h_ad253f7783b895d2a66295073c643afee}\index{list\_iterator.h@{list\_iterator.h}!ioopm\_list\_iterator\_at\_end@{ioopm\_list\_iterator\_at\_end}}
+\index{ioopm\_list\_iterator\_at\_end@{ioopm\_list\_iterator\_at\_end}!list\_iterator.h@{list\_iterator.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_iterator\_at\_end()}{ioopm\_list\_iterator\_at\_end()}}
+{\footnotesize\ttfamily \label{list__iterator_8h_ad253f7783b895d2a66295073c643afee} 
+bool ioopm\+\_\+list\+\_\+iterator\+\_\+at\+\_\+end (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{iter}{}\end{DoxyParamCaption})}
+
+
+
+Checks if there are more elements to iterate over. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em iter} & the iterator \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the iterator reached the end 
+\end{DoxyReturn}
+\Hypertarget{list__iterator_8h_af9dba3c017288e3476cb3039c9010c63}\index{list\_iterator.h@{list\_iterator.h}!ioopm\_list\_iterator\_create@{ioopm\_list\_iterator\_create}}
+\index{ioopm\_list\_iterator\_create@{ioopm\_list\_iterator\_create}!list\_iterator.h@{list\_iterator.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_iterator\_create()}{ioopm\_list\_iterator\_create()}}
+{\footnotesize\ttfamily \label{list__iterator_8h_af9dba3c017288e3476cb3039c9010c63} 
+\mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*} ioopm\+\_\+list\+\_\+iterator\+\_\+create (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{l}{}\end{DoxyParamCaption})}
+
+
+
+Create a new iterator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l} & the list to iterate over \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a new iterator positioned at the first element if it exists, and positioned at-\/the-\/end if l is empty 
+\end{DoxyReturn}
+\Hypertarget{list__iterator_8h_a8c0b04210a397bdb486847224f460419}\index{list\_iterator.h@{list\_iterator.h}!ioopm\_list\_iterator\_current@{ioopm\_list\_iterator\_current}}
+\index{ioopm\_list\_iterator\_current@{ioopm\_list\_iterator\_current}!list\_iterator.h@{list\_iterator.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_iterator\_current()}{ioopm\_list\_iterator\_current()}}
+{\footnotesize\ttfamily \label{list__iterator_8h_a8c0b04210a397bdb486847224f460419} 
+\mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} ioopm\+\_\+list\+\_\+iterator\+\_\+current (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{iter}{}\end{DoxyParamCaption})}
+
+
+
+Return the current element from the underlying list. 
+
+\begin{DoxyPrecond}{Precondition}
+iter is positioned at an element 
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em iter} & the iterator \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the current element 
+\end{DoxyReturn}
+\Hypertarget{list__iterator_8h_a20f42cef9506c2680f38131a4cca0b88}\index{list\_iterator.h@{list\_iterator.h}!ioopm\_list\_iterator\_destroy@{ioopm\_list\_iterator\_destroy}}
+\index{ioopm\_list\_iterator\_destroy@{ioopm\_list\_iterator\_destroy}!list\_iterator.h@{list\_iterator.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_iterator\_destroy()}{ioopm\_list\_iterator\_destroy()}}
+{\footnotesize\ttfamily \label{list__iterator_8h_a20f42cef9506c2680f38131a4cca0b88} 
+void ioopm\+\_\+list\+\_\+iterator\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{iter}{}\end{DoxyParamCaption})}
+
+
+
+Destroy the iterator and return its resources. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em iter} & the iterator \\
+\hline
+\end{DoxyParams}
+\Hypertarget{list__iterator_8h_afc08f6717414286159badd042291b756}\index{list\_iterator.h@{list\_iterator.h}!ioopm\_list\_iterator\_insert@{ioopm\_list\_iterator\_insert}}
+\index{ioopm\_list\_iterator\_insert@{ioopm\_list\_iterator\_insert}!list\_iterator.h@{list\_iterator.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_iterator\_insert()}{ioopm\_list\_iterator\_insert()}}
+{\footnotesize\ttfamily \label{list__iterator_8h_afc08f6717414286159badd042291b756} 
+void ioopm\+\_\+list\+\_\+iterator\+\_\+insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{iter}{, }\item[{\mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}}}]{element}{}\end{DoxyParamCaption})}
+
+
+
+Insert a new element into the underlying list making the current element it\textquotesingle{}s next. 
+
+NOTE\+: INSERT IS OPTIONAL TO IMPLEMENT 
+\begin{DoxyParams}{Parameters}
+{\em iter} & the iterator \\
+\hline
+{\em element} & the element to be inserted \\
+\hline
+\end{DoxyParams}
+\Hypertarget{list__iterator_8h_a828c67489fc0e776be531c51e5a84f5f}\index{list\_iterator.h@{list\_iterator.h}!ioopm\_list\_iterator\_remove@{ioopm\_list\_iterator\_remove}}
+\index{ioopm\_list\_iterator\_remove@{ioopm\_list\_iterator\_remove}!list\_iterator.h@{list\_iterator.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_iterator\_remove()}{ioopm\_list\_iterator\_remove()}}
+{\footnotesize\ttfamily \label{list__iterator_8h_a828c67489fc0e776be531c51e5a84f5f} 
+\mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} ioopm\+\_\+list\+\_\+iterator\+\_\+remove (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{iter}{}\end{DoxyParamCaption})}
+
+
+
+Remove the current element from the underlying list. 
+
+NOTE\+: REMOVE IS OPTIONAL TO IMPLEMENT \begin{DoxyPrecond}{Precondition}
+iter is positioned at an element 
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em iter} & the iterator \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the removed element 
+\end{DoxyReturn}

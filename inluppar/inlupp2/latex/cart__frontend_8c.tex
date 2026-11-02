@@ -1,0 +1,117 @@
+\doxysection{interface/cart\+\_\+frontend.c File Reference}
+\hypertarget{cart__frontend_8c}{}\label{cart__frontend_8c}\index{interface/cart\_frontend.c@{interface/cart\_frontend.c}}
+{\ttfamily \#include "{}cart\+\_\+frontend.\+h"{}}\newline
+{\ttfamily \#include "{}cart.\+h"{}}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include "{}utils.\+h"{}}\newline
+{\ttfamily \#include "{}hash\+\_\+funcs.\+h"{}}\newline
+Include dependency graph for cart\+\_\+frontend.\+c\+:
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{cart__frontend_8c_a88d6e518ee4163728a3221f5372acf5c}{ioopm\+\_\+front\+\_\+cart\+\_\+add\+\_\+new}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store)
+\begin{DoxyCompactList}\small\item\em Menu action\+: create a new cart and print its number. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{cart__frontend_8c_a311936a68d3a387583181caceb601af7}{ioopm\+\_\+front\+\_\+cart\+\_\+remove}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store)
+\begin{DoxyCompactList}\small\item\em Menu action\+: ask for a cart number and, after confirmation (Y), remove that cart. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{cart__frontend_8c_a9df1ebc87843719aab01923ef7b55193}{ioopm\+\_\+front\+\_\+cart\+\_\+add\+\_\+item}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store)
+\begin{DoxyCompactList}\small\item\em Menu action\+: ask for a cart number, a merch name and an amount, and add that to the cart. Prints a message if the cart or merch does not exist or the stock is too small. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{cart__frontend_8c_a58848594a869a61939a2c0fe347a9362}{ioopm\+\_\+front\+\_\+cart\+\_\+remove\+\_\+item}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store)
+\begin{DoxyCompactList}\small\item\em Menu action\+: ask for a cart number, a merch name and an amount, and remove that from the cart. Prints a message if the cart does not hold that much of the merch. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{cart__frontend_8c_aa31a5423c5ea5f9135f8ceede93525b0}{ioopm\+\_\+front\+\_\+cart\+\_\+calculate\+\_\+cost}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store)
+\begin{DoxyCompactList}\small\item\em Menu action\+: ask for a cart number and print the total cost of the cart. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{cart__frontend_8c_a9fbc877d74ad5df91146680a5b34f2dd}{ioopm\+\_\+front\+\_\+cart\+\_\+checkout}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store)
+\begin{DoxyCompactList}\small\item\em Menu action\+: ask for a cart number and check it out, printing the total cost if the purchase succeeds, or a message if the stock is too small. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{cart__frontend_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{cart__frontend_8c_a9df1ebc87843719aab01923ef7b55193}\index{cart\_frontend.c@{cart\_frontend.c}!ioopm\_front\_cart\_add\_item@{ioopm\_front\_cart\_add\_item}}
+\index{ioopm\_front\_cart\_add\_item@{ioopm\_front\_cart\_add\_item}!cart\_frontend.c@{cart\_frontend.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_front\_cart\_add\_item()}{ioopm\_front\_cart\_add\_item()}}
+{\footnotesize\ttfamily \label{cart__frontend_8c_a9df1ebc87843719aab01923ef7b55193} 
+void ioopm\+\_\+front\+\_\+cart\+\_\+add\+\_\+item (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{}\end{DoxyParamCaption})}
+
+
+
+Menu action\+: ask for a cart number, a merch name and an amount, and add that to the cart. Prints a message if the cart or merch does not exist or the stock is too small. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store the cart belongs to \\
+\hline
+\end{DoxyParams}
+\Hypertarget{cart__frontend_8c_a88d6e518ee4163728a3221f5372acf5c}\index{cart\_frontend.c@{cart\_frontend.c}!ioopm\_front\_cart\_add\_new@{ioopm\_front\_cart\_add\_new}}
+\index{ioopm\_front\_cart\_add\_new@{ioopm\_front\_cart\_add\_new}!cart\_frontend.c@{cart\_frontend.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_front\_cart\_add\_new()}{ioopm\_front\_cart\_add\_new()}}
+{\footnotesize\ttfamily \label{cart__frontend_8c_a88d6e518ee4163728a3221f5372acf5c} 
+void ioopm\+\_\+front\+\_\+cart\+\_\+add\+\_\+new (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{}\end{DoxyParamCaption})}
+
+
+
+Menu action\+: create a new cart and print its number. 
+
+NOTE\+: Some of the comments for this module was created with Claude (Anthropic). It has been proofread and changed by us afterwards. \Hypertarget{cart__frontend_8c_aa31a5423c5ea5f9135f8ceede93525b0}\index{cart\_frontend.c@{cart\_frontend.c}!ioopm\_front\_cart\_calculate\_cost@{ioopm\_front\_cart\_calculate\_cost}}
+\index{ioopm\_front\_cart\_calculate\_cost@{ioopm\_front\_cart\_calculate\_cost}!cart\_frontend.c@{cart\_frontend.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_front\_cart\_calculate\_cost()}{ioopm\_front\_cart\_calculate\_cost()}}
+{\footnotesize\ttfamily \label{cart__frontend_8c_aa31a5423c5ea5f9135f8ceede93525b0} 
+void ioopm\+\_\+front\+\_\+cart\+\_\+calculate\+\_\+cost (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{}\end{DoxyParamCaption})}
+
+
+
+Menu action\+: ask for a cart number and print the total cost of the cart. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store the cart belongs to \\
+\hline
+\end{DoxyParams}
+\Hypertarget{cart__frontend_8c_a9fbc877d74ad5df91146680a5b34f2dd}\index{cart\_frontend.c@{cart\_frontend.c}!ioopm\_front\_cart\_checkout@{ioopm\_front\_cart\_checkout}}
+\index{ioopm\_front\_cart\_checkout@{ioopm\_front\_cart\_checkout}!cart\_frontend.c@{cart\_frontend.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_front\_cart\_checkout()}{ioopm\_front\_cart\_checkout()}}
+{\footnotesize\ttfamily \label{cart__frontend_8c_a9fbc877d74ad5df91146680a5b34f2dd} 
+void ioopm\+\_\+front\+\_\+cart\+\_\+checkout (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{}\end{DoxyParamCaption})}
+
+
+
+Menu action\+: ask for a cart number and check it out, printing the total cost if the purchase succeeds, or a message if the stock is too small. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store the cart belongs to \\
+\hline
+\end{DoxyParams}
+\Hypertarget{cart__frontend_8c_a311936a68d3a387583181caceb601af7}\index{cart\_frontend.c@{cart\_frontend.c}!ioopm\_front\_cart\_remove@{ioopm\_front\_cart\_remove}}
+\index{ioopm\_front\_cart\_remove@{ioopm\_front\_cart\_remove}!cart\_frontend.c@{cart\_frontend.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_front\_cart\_remove()}{ioopm\_front\_cart\_remove()}}
+{\footnotesize\ttfamily \label{cart__frontend_8c_a311936a68d3a387583181caceb601af7} 
+void ioopm\+\_\+front\+\_\+cart\+\_\+remove (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{}\end{DoxyParamCaption})}
+
+
+
+Menu action\+: ask for a cart number and, after confirmation (Y), remove that cart. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store the cart belongs to \\
+\hline
+\end{DoxyParams}
+\Hypertarget{cart__frontend_8c_a58848594a869a61939a2c0fe347a9362}\index{cart\_frontend.c@{cart\_frontend.c}!ioopm\_front\_cart\_remove\_item@{ioopm\_front\_cart\_remove\_item}}
+\index{ioopm\_front\_cart\_remove\_item@{ioopm\_front\_cart\_remove\_item}!cart\_frontend.c@{cart\_frontend.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_front\_cart\_remove\_item()}{ioopm\_front\_cart\_remove\_item()}}
+{\footnotesize\ttfamily \label{cart__frontend_8c_a58848594a869a61939a2c0fe347a9362} 
+void ioopm\+\_\+front\+\_\+cart\+\_\+remove\+\_\+item (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{}\end{DoxyParamCaption})}
+
+
+
+Menu action\+: ask for a cart number, a merch name and an amount, and remove that from the cart. Prints a message if the cart does not hold that much of the merch. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store the cart belongs to \\
+\hline
+\end{DoxyParams}

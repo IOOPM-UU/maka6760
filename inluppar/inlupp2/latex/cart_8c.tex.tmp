@@ -1,0 +1,173 @@
+\doxysection{logic/cart.c File Reference}
+\hypertarget{cart_8c}{}\label{cart_8c}\index{logic/cart.c@{logic/cart.c}}
+{\ttfamily \#include "{}cart.\+h"{}}\newline
+{\ttfamily \#include "{}webstore.\+h"{}}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+Include dependency graph for cart.\+c\+:
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{cart_8c_acba6699b58dc47a1dc061ae5c34ef93d}{ioopm\+\_\+cart\+\_\+add\+\_\+new}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store, \mbox{\hyperlink{common_8h_a1a54ba10b899b068bfc47c57d50fec62}{ioopm\+\_\+hash\+\_\+function}} \texorpdfstring{$\ast$}{*}hash\+\_\+fn, \mbox{\hyperlink{common_8h_afb1f6281cd1e403d010f433002b9d72f}{ioopm\+\_\+eq\+\_\+function}} \texorpdfstring{$\ast$}{*}key\+\_\+eq\+\_\+fn)
+\begin{DoxyCompactList}\small\item\em Add a new empty cart to the store. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{cart_8c_a67035b6fcf7fd9bf93c3933e78718e86}{ioopm\+\_\+cart\+\_\+destroy}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store, int cart\+\_\+num)
+\begin{DoxyCompactList}\small\item\em Remove a cart from the store and free it. The stock is not affected. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{cart_8c_a3ba1e37e0eeeea1a42e20acb5836ed51}{ioopm\+\_\+cart\+\_\+destroy\+\_\+all}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store)
+\begin{DoxyCompactList}\small\item\em Free every cart in the store (the carts and the merch names they own). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{cart_8c_ada769db91ae2ec0d63f60d0ff6bb961b}{ioopm\+\_\+cart\+\_\+add\+\_\+item}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store, int cart\+\_\+num, char \texorpdfstring{$\ast$}{*}name, int amount)
+\begin{DoxyCompactList}\small\item\em Add an amount of a merch to a cart. If the merch is already in the cart, the amount is increased. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{cart_8c_a3688bd1669c451d0527205e21bbb77ba}{ioopm\+\_\+cart\+\_\+remove\+\_\+item}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store, int cart\+\_\+num, char \texorpdfstring{$\ast$}{*}name, int amount)
+\begin{DoxyCompactList}\small\item\em Remove an amount of a merch from a cart. When the amount in the cart reaches 0 the merch is removed from the cart altogether. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{cart_8c_ad9fcaa2988493c3503a1579c5cf3c985}{ioopm\+\_\+cart\+\_\+calculate\+\_\+cost}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store, int cart\+\_\+num)
+\begin{DoxyCompactList}\small\item\em Calculate the total price of everything in a cart. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{cart_8c_a26a1db7cb538bae681f110bee4e3b7f0}{ioopm\+\_\+cart\+\_\+checkout}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store, int cart\+\_\+num)
+\begin{DoxyCompactList}\small\item\em Buy everything in a cart\+: decrease the stock of every merch in it by the amount in the cart, then remove the cart. Stock is taken from the merch\textquotesingle{}s shelves in the order they are listed, and a shelf that becomes empty is removed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{cart_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{cart_8c_ada769db91ae2ec0d63f60d0ff6bb961b}\index{cart.c@{cart.c}!ioopm\_cart\_add\_item@{ioopm\_cart\_add\_item}}
+\index{ioopm\_cart\_add\_item@{ioopm\_cart\_add\_item}!cart.c@{cart.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_cart\_add\_item()}{ioopm\_cart\_add\_item()}}
+{\footnotesize\ttfamily \label{cart_8c_ada769db91ae2ec0d63f60d0ff6bb961b} 
+bool ioopm\+\_\+cart\+\_\+add\+\_\+item (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{, }\item[{int}]{cart\+\_\+num}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{name}{, }\item[{int}]{amount}{}\end{DoxyParamCaption})}
+
+
+
+Add an amount of a merch to a cart. If the merch is already in the cart, the amount is increased. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store the cart belongs to \\
+\hline
+{\em cart\+\_\+num} & number of the cart \\
+\hline
+{\em name} & name of the merch to add \\
+\hline
+{\em amount} & how many to add \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if added. False, with the cart left unchanged, if the cart does not exist, amount is not positive, or the amount in all carts together would exceed the stock (which includes the merch not existing) 
+\end{DoxyReturn}
+\Hypertarget{cart_8c_acba6699b58dc47a1dc061ae5c34ef93d}\index{cart.c@{cart.c}!ioopm\_cart\_add\_new@{ioopm\_cart\_add\_new}}
+\index{ioopm\_cart\_add\_new@{ioopm\_cart\_add\_new}!cart.c@{cart.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_cart\_add\_new()}{ioopm\_cart\_add\_new()}}
+{\footnotesize\ttfamily \label{cart_8c_acba6699b58dc47a1dc061ae5c34ef93d} 
+int ioopm\+\_\+cart\+\_\+add\+\_\+new (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{, }\item[{\mbox{\hyperlink{common_8h_a1a54ba10b899b068bfc47c57d50fec62}{ioopm\+\_\+hash\+\_\+function}} \texorpdfstring{$\ast$}{*}}]{hash\+\_\+fn}{, }\item[{\mbox{\hyperlink{common_8h_afb1f6281cd1e403d010f433002b9d72f}{ioopm\+\_\+eq\+\_\+function}} \texorpdfstring{$\ast$}{*}}]{key\+\_\+eq\+\_\+fn}{}\end{DoxyParamCaption})}
+
+
+
+Add a new empty cart to the store. 
+
+NOTE\+: Some of the comments for this module was created with Claude (Anthropic). It has been proofread and changed by us afterwards. \Hypertarget{cart_8c_ad9fcaa2988493c3503a1579c5cf3c985}\index{cart.c@{cart.c}!ioopm\_cart\_calculate\_cost@{ioopm\_cart\_calculate\_cost}}
+\index{ioopm\_cart\_calculate\_cost@{ioopm\_cart\_calculate\_cost}!cart.c@{cart.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_cart\_calculate\_cost()}{ioopm\_cart\_calculate\_cost()}}
+{\footnotesize\ttfamily \label{cart_8c_ad9fcaa2988493c3503a1579c5cf3c985} 
+int ioopm\+\_\+cart\+\_\+calculate\+\_\+cost (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{, }\item[{int}]{cart\+\_\+number}{}\end{DoxyParamCaption})}
+
+
+
+Calculate the total price of everything in a cart. 
+
+\begin{DoxyPrecond}{Precondition}
+every merch in the cart still exists in the store (it is asserted) 
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store the cart belongs to \\
+\hline
+{\em cart\+\_\+number} & number of the cart \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the sum of price \texorpdfstring{$\ast$}{*} amount over the cart, or -\/1 if the cart does not exist 
+\end{DoxyReturn}
+\Hypertarget{cart_8c_a26a1db7cb538bae681f110bee4e3b7f0}\index{cart.c@{cart.c}!ioopm\_cart\_checkout@{ioopm\_cart\_checkout}}
+\index{ioopm\_cart\_checkout@{ioopm\_cart\_checkout}!cart.c@{cart.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_cart\_checkout()}{ioopm\_cart\_checkout()}}
+{\footnotesize\ttfamily \label{cart_8c_a26a1db7cb538bae681f110bee4e3b7f0} 
+bool ioopm\+\_\+cart\+\_\+checkout (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{, }\item[{int}]{cart\+\_\+num}{}\end{DoxyParamCaption})}
+
+
+
+Buy everything in a cart\+: decrease the stock of every merch in it by the amount in the cart, then remove the cart. Stock is taken from the merch\textquotesingle{}s shelves in the order they are listed, and a shelf that becomes empty is removed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store the cart belongs to \\
+\hline
+{\em cart\+\_\+num} & number of the cart \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the checkout succeeded. False, with nothing changed, if the cart does not exist or the stock of some merch in it is too small 
+\end{DoxyReturn}
+\Hypertarget{cart_8c_a67035b6fcf7fd9bf93c3933e78718e86}\index{cart.c@{cart.c}!ioopm\_cart\_destroy@{ioopm\_cart\_destroy}}
+\index{ioopm\_cart\_destroy@{ioopm\_cart\_destroy}!cart.c@{cart.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_cart\_destroy()}{ioopm\_cart\_destroy()}}
+{\footnotesize\ttfamily \label{cart_8c_a67035b6fcf7fd9bf93c3933e78718e86} 
+bool ioopm\+\_\+cart\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{, }\item[{int}]{cart\+\_\+num}{}\end{DoxyParamCaption})}
+
+
+
+Remove a cart from the store and free it. The stock is not affected. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store the cart belongs to \\
+\hline
+{\em cart\+\_\+num} & number of the cart to remove \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the cart existed and was removed, false otherwise 
+\end{DoxyReturn}
+\Hypertarget{cart_8c_a3ba1e37e0eeeea1a42e20acb5836ed51}\index{cart.c@{cart.c}!ioopm\_cart\_destroy\_all@{ioopm\_cart\_destroy\_all}}
+\index{ioopm\_cart\_destroy\_all@{ioopm\_cart\_destroy\_all}!cart.c@{cart.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_cart\_destroy\_all()}{ioopm\_cart\_destroy\_all()}}
+{\footnotesize\ttfamily \label{cart_8c_a3ba1e37e0eeeea1a42e20acb5836ed51} 
+void ioopm\+\_\+cart\+\_\+destroy\+\_\+all (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{}\end{DoxyParamCaption})}
+
+
+
+Free every cart in the store (the carts and the merch names they own). 
+
+\begin{DoxyNote}{Note}
+The entries in cart\+\_\+ht are not removed, so the dangling pointers must not be used. Call this only when shutting down, followed by ioopm\+\_\+webstore\+\_\+destroy 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store whose carts are freed \\
+\hline
+\end{DoxyParams}
+\Hypertarget{cart_8c_a3688bd1669c451d0527205e21bbb77ba}\index{cart.c@{cart.c}!ioopm\_cart\_remove\_item@{ioopm\_cart\_remove\_item}}
+\index{ioopm\_cart\_remove\_item@{ioopm\_cart\_remove\_item}!cart.c@{cart.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_cart\_remove\_item()}{ioopm\_cart\_remove\_item()}}
+{\footnotesize\ttfamily \label{cart_8c_a3688bd1669c451d0527205e21bbb77ba} 
+bool ioopm\+\_\+cart\+\_\+remove\+\_\+item (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{, }\item[{int}]{cart\+\_\+num}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{name}{, }\item[{int}]{amount}{}\end{DoxyParamCaption})}
+
+
+
+Remove an amount of a merch from a cart. When the amount in the cart reaches 0 the merch is removed from the cart altogether. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store the cart belongs to \\
+\hline
+{\em cart\+\_\+num} & number of the cart \\
+\hline
+{\em name} & name of the merch to remove \\
+\hline
+{\em amount} & how many to remove \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if removed. False, with the cart left unchanged, if the cart does not exist, amount is negative, the merch is not in the cart, or amount is larger than what is in the cart 
+\end{DoxyReturn}

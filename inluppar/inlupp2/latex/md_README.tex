@@ -1,0 +1,71 @@
+\chapter{Webstore }
+\hypertarget{md_README}{}\label{md_README}\index{Webstore@{Webstore}}
+\label{md_README_autotoc_md0}%
+\Hypertarget{md_README_autotoc_md0}%
+
+
+Authors\+: Alva Fällman Nilsson \& Markus Karlsson
+
+A terminal webstore backend and menu-\/driven frontend, written in C. It manages merchandise, the shelves it is stored on, and shopping carts.\hypertarget{md_README_autotoc_md1}{}\doxysection{\texorpdfstring{Build and test}{Build and test}}\label{md_README_autotoc_md1}
+Requirements\+: {\ttfamily gcc}, {\ttfamily make}, the \href{http://cunit.sourceforge.net/}{\texttt{CUnit}} library ({\ttfamily libcunit1-\/dev} on Debian/\+Ubuntu), and optionally {\ttfamily valgrind} and {\ttfamily gcov}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ test\ \ \ \ \ \ \ \#\ build\ and\ run\ all\ unit\ tests\ (cart\_tests,\ merch\_tests\ and\ webstore\_tests)}
+\DoxyCodeLine{make\ memtest\ \ \ \ \#\ the\ same\ tests\ under\ valgrind}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md2}{}\doxysubsection{\texorpdfstring{Code coverage}{Code coverage}}\label{md_README_autotoc_md2}
+Measured with {\ttfamily gcov} 15.\+2.\+0 (GCC 15.\+2.\+0). The tests were built with {\ttfamily -\/-\/coverage} and run with {\ttfamily make test}, then {\ttfamily gcov -\/b} was run on each {\ttfamily .c} file. "{}\+Branch"{} is the share of branches taken at least once.
+
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}File  &\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}Line coverage  &\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}Branch coverage  \\
+{\ttfamily \doxylink{cart_8c}{logic/cart.\+c}}  &\SetCell{r}91.\+5 \%  &\SetCell{r}88.\+5 \%  \\
+{\ttfamily \doxylink{merch_8c}{logic/merch.\+c}}  &\SetCell{r}92.\+0 \%  &\SetCell{r}79.\+7 \%  \\
+{\ttfamily \doxylink{webstore_8c}{logic/webstore.\+c}}  &\SetCell{r}100 \%  &\SetCell{r}(no branches)  \\
+{\ttfamily \doxylink{hash__table_8c}{generic\+\_\+data\+\_\+structures/hash\+\_\+table.\+c}}  &\SetCell{r}78.\+0 \%  &\SetCell{r}62.\+5 \%  \\
+{\ttfamily \doxylink{linked__list_8c}{generic\+\_\+data\+\_\+structures/linked\+\_\+list.\+c}}  &\SetCell{r}55.\+8 \%  &\SetCell{r}40.\+0 \%  \\
+{\ttfamily \doxylink{hash__funcs_8c}{generic\+\_\+utils/hash\+\_\+funcs.\+c}}  &\SetCell{r}100 \%  &\SetCell{r}100 \%  \\
+{\ttfamily \doxylink{utils_8c}{generic\+\_\+utils/utils.\+c}}  &\SetCell{r}0 \%  &\SetCell{r}0 \%  \\
+{\ttfamily interface/\texorpdfstring{$\ast$}{*}.c}  &\SetCell{r}0 \%  &\SetCell{r}0 \%  \\
+\end{DoxyTable}
+
+
+The tests cover the backend in {\ttfamily logic/}. The hash table and linked list are only tested indirectly through it, and {\ttfamily \doxylink{utils_8c}{utils.\+c}} and {\ttfamily interface/} read from the keyboard and have no unit tests.
+
+In {\ttfamily \doxylink{linked__list_8c_a25eab8fdda3585d1460d91e67349994e}{ioopm\+\_\+list\+\_\+remove}} ({\ttfamily \doxylink{linked__list_8c}{linked\+\_\+list.\+c}}) the redundant condition {\ttfamily ioopm\+\_\+list\+\_\+size(list) == 1} is commented out, since it can never be false there, and would otherwise leave a branch that cannot be taken.\hypertarget{md_README_autotoc_md3}{}\doxysection{\texorpdfstring{Run the program}{Run the program}}\label{md_README_autotoc_md3}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ ui}
+
+\end{DoxyCode}
+
+
+This builds {\ttfamily ui\+\_\+c} and starts it. It can also be started directly with {\ttfamily ./ui\+\_\+c} after {\ttfamily make ui\+\_\+c}. The program takes no arguments and needs no input files\+: the store starts empty and everything is entered through the menu. Nothing is saved when the program quits.
+
+
+\begin{DoxyTable}{2}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Key  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Action  \\
+{\ttfamily A}  &Add merchandise (name, description, price)  \\
+{\ttfamily L}  &List merchandise (20 at a time)  \\
+{\ttfamily D}  &Delete merchandise  \\
+{\ttfamily E}  &Edit merchandise  \\
+{\ttfamily S}  &Show the shelves and stock of a merchandise  \\
+{\ttfamily P}  &Replenish\+: add stock on a shelf. A shelf name is a capital letter and two digits, e.\+g. {\ttfamily A01}  \\
+{\ttfamily C}  &Create a cart (its number is printed)  \\
+{\ttfamily R}  &Remove a cart  \\
+{\ttfamily +}  &Add an item to a cart (cannot exceed the stock)  \\
+{\ttfamily -\/}  &Remove an item from a cart  \\
+{\ttfamily =}  &Calculate the cost of a cart  \\
+{\ttfamily O}  &Check out a cart\+: the stock is decreased and the cart is removed  \\
+{\ttfamily Q}  &Quit  \\
+\end{DoxyTable}
+
+
+The file {\ttfamily interface/webstoretest.\+txt} is an example of menu input that ends with a quit. Try it with {\ttfamily ./ui\+\_\+c \texorpdfstring{$<$}{<} interface/webstoretest.\+txt}.\hypertarget{md_README_autotoc_md4}{}\doxysection{\texorpdfstring{Ownership of generic data structures}{Ownership of generic data structures}}\label{md_README_autotoc_md4}
+The modules \doxylink{structhash__table}{hash\+\_\+table} and linked\+\_\+list were taken from Markus Karlssons sprint 1, and Utils were taken fron Alva Fällman Nilssons sprint 1.\hypertarget{md_README_autotoc_md5}{}\doxysection{\texorpdfstring{Documentation}{Documentation}}\label{md_README_autotoc_md5}
+The public functions are documented in the header files (Doxygen style)\+: {\ttfamily logic/} (the backend\+: {\ttfamily \doxylink{webstore_8h}{webstore.\+h}}, {\ttfamily \doxylink{merch_8h}{merch.\+h}}, {\ttfamily \doxylink{cart_8h}{cart.\+h}}), {\ttfamily interface/} (the menu frontend), {\ttfamily generic\+\_\+data\+\_\+structures/} (hash table and linked list) and {\ttfamily generic\+\_\+utils/} (input helpers and hash functions).
+
+Run {\ttfamily make clean} to remove built files.\hypertarget{md_README_autotoc_md6}{}\doxysection{\texorpdfstring{AI}{AI}}\label{md_README_autotoc_md6}
+AI (Claude Pro) was used to create 

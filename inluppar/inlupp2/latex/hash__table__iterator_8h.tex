@@ -1,0 +1,172 @@
+\doxysection{generic\+\_\+data\+\_\+structures/hash\+\_\+table\+\_\+iterator.h File Reference}
+\hypertarget{hash__table__iterator_8h}{}\label{hash__table__iterator_8h}\index{generic\_data\_structures/hash\_table\_iterator.h@{generic\_data\_structures/hash\_table\_iterator.h}}
+
+
+Simple hash table iterator.  
+
+
+{\ttfamily \#include "{}hash\+\_\+table.\+h"{}}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include "{}common.\+h"{}}\newline
+Include dependency graph for hash\+\_\+table\+\_\+iterator.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structhash__table__iterator}{hash\+\_\+table\+\_\+iterator}} \mbox{\hyperlink{hash__table__iterator_8h_a0204c7c4ec2910a2ec0d8d12ded1ec16}{ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{hash__table__iterator_8h_a0204c7c4ec2910a2ec0d8d12ded1ec16}{ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{hash__table__iterator_8h_a32f5f63d5f3b5b76fc635804bb39737e}{ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+create}} (\mbox{\hyperlink{hash__table_8h_af8a82080b75d55e9d276e35e9f1e01fe}{ioopm\+\_\+hash\+\_\+table\+\_\+t}} \texorpdfstring{$\ast$}{*}ht)
+\begin{DoxyCompactList}\small\item\em Create an iterator for a hash table. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{hash__table__iterator_8h_aaa0ecf384eb95d0b982f92f585c0129d}{ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+destroy}} (\mbox{\hyperlink{hash__table__iterator_8h_a0204c7c4ec2910a2ec0d8d12ded1ec16}{ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}it)
+\begin{DoxyCompactList}\small\item\em Destroy an iterator and free its memory. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{hash__table__iterator_8h_a3200ea44d23344387b0dd76d3404a4d7}{ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+at\+\_\+end}} (const \mbox{\hyperlink{hash__table__iterator_8h_a0204c7c4ec2910a2ec0d8d12ded1ec16}{ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}it)
+\begin{DoxyCompactList}\small\item\em Check if the current element exists, or equivalently, if it is positioned at an entry. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{hash__table__iterator_8h_a59c47702ee12e7bc0f14c7a3bf794d12}{ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+advance}} (\mbox{\hyperlink{hash__table__iterator_8h_a0204c7c4ec2910a2ec0d8d12ded1ec16}{ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}it)
+\begin{DoxyCompactList}\small\item\em Move the iterator forward to the next entry if it exists or to at-\/the-\/end if no more entries exist. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} \mbox{\hyperlink{hash__table__iterator_8h_a7ba0bae2d9f3e76a818de57c19805d28}{ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+current\+\_\+key}} (const \mbox{\hyperlink{hash__table__iterator_8h_a0204c7c4ec2910a2ec0d8d12ded1ec16}{ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}it)
+\begin{DoxyCompactList}\small\item\em Get the key of the current entry. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} \mbox{\hyperlink{hash__table__iterator_8h_abca0a5de6e0e958a419ce0d9554345ae}{ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+current\+\_\+value}} (const \mbox{\hyperlink{hash__table__iterator_8h_a0204c7c4ec2910a2ec0d8d12ded1ec16}{ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}it)
+\begin{DoxyCompactList}\small\item\em Get the value of the current entry. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Simple hash table iterator. 
+
+\begin{DoxyAuthor}{Author}
+Markus Karlsson \& Vilgot Lenninger 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Sep 2026 
+\end{DoxyDate}
+Hash table iterators provide an interface to iterate through all entries in a hash table. An iterator is either positioned at an entry, called the current entry, or it is positioned at-\/the-\/end, if it has already iterated through all entries. If the underlying hash table of an iterator is modified using any non-\/iterator function, the iterator is invalidated and should not be used anymore. 
+
+\label{doc-typedef-members}
+\Hypertarget{hash__table__iterator_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{hash__table__iterator_8h_a0204c7c4ec2910a2ec0d8d12ded1ec16}\index{hash\_table\_iterator.h@{hash\_table\_iterator.h}!ioopm\_hash\_table\_iterator\_t@{ioopm\_hash\_table\_iterator\_t}}
+\index{ioopm\_hash\_table\_iterator\_t@{ioopm\_hash\_table\_iterator\_t}!hash\_table\_iterator.h@{hash\_table\_iterator.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_hash\_table\_iterator\_t}{ioopm\_hash\_table\_iterator\_t}}
+{\footnotesize\ttfamily \label{hash__table__iterator_8h_a0204c7c4ec2910a2ec0d8d12ded1ec16} 
+typedef struct \mbox{\hyperlink{structhash__table__iterator}{hash\+\_\+table\+\_\+iterator}} \mbox{\hyperlink{hash__table__iterator_8h_a0204c7c4ec2910a2ec0d8d12ded1ec16}{ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+t}}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{hash__table__iterator_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{hash__table__iterator_8h_a59c47702ee12e7bc0f14c7a3bf794d12}\index{hash\_table\_iterator.h@{hash\_table\_iterator.h}!ioopm\_hash\_table\_iterator\_advance@{ioopm\_hash\_table\_iterator\_advance}}
+\index{ioopm\_hash\_table\_iterator\_advance@{ioopm\_hash\_table\_iterator\_advance}!hash\_table\_iterator.h@{hash\_table\_iterator.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_hash\_table\_iterator\_advance()}{ioopm\_hash\_table\_iterator\_advance()}}
+{\footnotesize\ttfamily \label{hash__table__iterator_8h_a59c47702ee12e7bc0f14c7a3bf794d12} 
+void ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+advance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{hash__table__iterator_8h_a0204c7c4ec2910a2ec0d8d12ded1ec16}{ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{it}{}\end{DoxyParamCaption})}
+
+
+
+Move the iterator forward to the next entry if it exists or to at-\/the-\/end if no more entries exist. 
+
+\begin{DoxyPrecond}{Precondition}
+it is positioned at an entry 
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em it} & iterator operated upon \\
+\hline
+\end{DoxyParams}
+\Hypertarget{hash__table__iterator_8h_a3200ea44d23344387b0dd76d3404a4d7}\index{hash\_table\_iterator.h@{hash\_table\_iterator.h}!ioopm\_hash\_table\_iterator\_at\_end@{ioopm\_hash\_table\_iterator\_at\_end}}
+\index{ioopm\_hash\_table\_iterator\_at\_end@{ioopm\_hash\_table\_iterator\_at\_end}!hash\_table\_iterator.h@{hash\_table\_iterator.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_hash\_table\_iterator\_at\_end()}{ioopm\_hash\_table\_iterator\_at\_end()}}
+{\footnotesize\ttfamily \label{hash__table__iterator_8h_a3200ea44d23344387b0dd76d3404a4d7} 
+bool ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+at\+\_\+end (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{hash__table__iterator_8h_a0204c7c4ec2910a2ec0d8d12ded1ec16}{ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{it}{}\end{DoxyParamCaption})}
+
+
+
+Check if the current element exists, or equivalently, if it is positioned at an entry. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em it} & iterator operated upon \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true iff the current element exists 
+\end{DoxyReturn}
+\Hypertarget{hash__table__iterator_8h_a32f5f63d5f3b5b76fc635804bb39737e}\index{hash\_table\_iterator.h@{hash\_table\_iterator.h}!ioopm\_hash\_table\_iterator\_create@{ioopm\_hash\_table\_iterator\_create}}
+\index{ioopm\_hash\_table\_iterator\_create@{ioopm\_hash\_table\_iterator\_create}!hash\_table\_iterator.h@{hash\_table\_iterator.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_hash\_table\_iterator\_create()}{ioopm\_hash\_table\_iterator\_create()}}
+{\footnotesize\ttfamily \label{hash__table__iterator_8h_a32f5f63d5f3b5b76fc635804bb39737e} 
+\mbox{\hyperlink{hash__table__iterator_8h_a0204c7c4ec2910a2ec0d8d12ded1ec16}{ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*} ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+create (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{hash__table_8h_af8a82080b75d55e9d276e35e9f1e01fe}{ioopm\+\_\+hash\+\_\+table\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ht}{}\end{DoxyParamCaption})}
+
+
+
+Create an iterator for a hash table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ht} & hash table to iterate over \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a new iterator positioned at the first entry if it exists, and positioned at-\/the-\/end if ht is empty 
+\end{DoxyReturn}
+\Hypertarget{hash__table__iterator_8h_a7ba0bae2d9f3e76a818de57c19805d28}\index{hash\_table\_iterator.h@{hash\_table\_iterator.h}!ioopm\_hash\_table\_iterator\_current\_key@{ioopm\_hash\_table\_iterator\_current\_key}}
+\index{ioopm\_hash\_table\_iterator\_current\_key@{ioopm\_hash\_table\_iterator\_current\_key}!hash\_table\_iterator.h@{hash\_table\_iterator.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_hash\_table\_iterator\_current\_key()}{ioopm\_hash\_table\_iterator\_current\_key()}}
+{\footnotesize\ttfamily \label{hash__table__iterator_8h_a7ba0bae2d9f3e76a818de57c19805d28} 
+\mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+current\+\_\+key (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{hash__table__iterator_8h_a0204c7c4ec2910a2ec0d8d12ded1ec16}{ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{it}{}\end{DoxyParamCaption})}
+
+
+
+Get the key of the current entry. 
+
+\begin{DoxyPrecond}{Precondition}
+it is positioned at an entry 
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em it} & iterator operated upon \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the key of the current entry 
+\end{DoxyReturn}
+\Hypertarget{hash__table__iterator_8h_abca0a5de6e0e958a419ce0d9554345ae}\index{hash\_table\_iterator.h@{hash\_table\_iterator.h}!ioopm\_hash\_table\_iterator\_current\_value@{ioopm\_hash\_table\_iterator\_current\_value}}
+\index{ioopm\_hash\_table\_iterator\_current\_value@{ioopm\_hash\_table\_iterator\_current\_value}!hash\_table\_iterator.h@{hash\_table\_iterator.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_hash\_table\_iterator\_current\_value()}{ioopm\_hash\_table\_iterator\_current\_value()}}
+{\footnotesize\ttfamily \label{hash__table__iterator_8h_abca0a5de6e0e958a419ce0d9554345ae} 
+\mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+current\+\_\+value (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{hash__table__iterator_8h_a0204c7c4ec2910a2ec0d8d12ded1ec16}{ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{it}{}\end{DoxyParamCaption})}
+
+
+
+Get the value of the current entry. 
+
+\begin{DoxyPrecond}{Precondition}
+it is positioned at an entry 
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em it} & iterator operated upon \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the value of the current entry 
+\end{DoxyReturn}
+\Hypertarget{hash__table__iterator_8h_aaa0ecf384eb95d0b982f92f585c0129d}\index{hash\_table\_iterator.h@{hash\_table\_iterator.h}!ioopm\_hash\_table\_iterator\_destroy@{ioopm\_hash\_table\_iterator\_destroy}}
+\index{ioopm\_hash\_table\_iterator\_destroy@{ioopm\_hash\_table\_iterator\_destroy}!hash\_table\_iterator.h@{hash\_table\_iterator.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_hash\_table\_iterator\_destroy()}{ioopm\_hash\_table\_iterator\_destroy()}}
+{\footnotesize\ttfamily \label{hash__table__iterator_8h_aaa0ecf384eb95d0b982f92f585c0129d} 
+void ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{hash__table__iterator_8h_a0204c7c4ec2910a2ec0d8d12ded1ec16}{ioopm\+\_\+hash\+\_\+table\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{it}{}\end{DoxyParamCaption})}
+
+
+
+Destroy an iterator and free its memory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em it} & iterator to destroy \\
+\hline
+\end{DoxyParams}

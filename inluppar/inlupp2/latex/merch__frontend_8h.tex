@@ -1,0 +1,133 @@
+\doxysection{interface/merch\+\_\+frontend.h File Reference}
+\hypertarget{merch__frontend_8h}{}\label{merch__frontend_8h}\index{interface/merch\_frontend.h@{interface/merch\_frontend.h}}
+
+
+The terminal user interface for merch and stock.  
+
+
+{\ttfamily \#include "{}merch.\+h"{}}\newline
+{\ttfamily \#include "{}utils.\+h"{}}\newline
+Include dependency graph for merch\+\_\+frontend.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{merch__frontend_8h_a3ff914d63657fe41aa41ac027144d5f5}{ioopm\+\_\+front\+\_\+merch\+\_\+add}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store)
+\begin{DoxyCompactList}\small\item\em Menu action\+: ask for a name, description and price (not negative) and add a new merch. Prints a message if a merch with that name already exists. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{merch__frontend_8h_a47d1dcca7e6445c79847cc9177d05b6c}{ioopm\+\_\+front\+\_\+merch\+\_\+list}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store)
+\begin{DoxyCompactList}\small\item\em Menu action\+: list the names of all merch, numbered, 20 at a time. After every 20 names the user is asked if the listing should continue (N stops it). The order is not sorted. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{merch__frontend_8h_abbe9376ede955d537d7ca7d47261833e}{ioopm\+\_\+front\+\_\+merch\+\_\+remove}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store)
+\begin{DoxyCompactList}\small\item\em Menu action\+: ask for the name of a merch and, after confirmation (Y), remove it. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{merch__frontend_8h_ab46966a6eb20c5f586c96d556cffcdda}{ioopm\+\_\+front\+\_\+merch\+\_\+edit}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store)
+\begin{DoxyCompactList}\small\item\em Menu action\+: ask for the name of an existing merch. Then ask for a new name, description and price and, after confirmation (Y), replace the old ones. The stock is kept. Prints a message if the merch does not exist or the new name is already taken. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{merch__frontend_8h_a2704f157b9a02dd1c5d4148d8f10993f}{ioopm\+\_\+front\+\_\+merch\+\_\+show\+\_\+stock}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store)
+\begin{DoxyCompactList}\small\item\em Menu action\+: ask for the name of a merch and print the shelves it is stored on, with the quantity on each. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{merch__frontend_8h_a6377d3ef072bc35458b7262e88668d33}{ioopm\+\_\+front\+\_\+merch\+\_\+replenish}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store)
+\begin{DoxyCompactList}\small\item\em Menu action\+: ask for a shelf (a capital letter and two digits), a merch name and an amount, and increase the stock of the merch on that shelf. Prints a message if the merch does not exist or the shelf holds another merch. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The terminal user interface for merch and stock. 
+
+NOTE\+: The draft of the documentation for this module was created with Claude (Anthropic). It has been proofread and changed by us afterwards.
+
+\begin{DoxyAuthor}{Author}
+Markus Karlsson and Alva Fällman Nilsson 
+\end{DoxyAuthor}
+Each function is one entry in the main menu of the program\+: it asks the user for what it needs on stdin, calls the matching backend function in \doxylink{merch_8h}{merch.\+h} and prints the result. The functions never fail; problems such as an unknown merch name are reported to the user as a message. 
+
+\label{doc-func-members}
+\Hypertarget{merch__frontend_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{merch__frontend_8h_a3ff914d63657fe41aa41ac027144d5f5}\index{merch\_frontend.h@{merch\_frontend.h}!ioopm\_front\_merch\_add@{ioopm\_front\_merch\_add}}
+\index{ioopm\_front\_merch\_add@{ioopm\_front\_merch\_add}!merch\_frontend.h@{merch\_frontend.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_front\_merch\_add()}{ioopm\_front\_merch\_add()}}
+{\footnotesize\ttfamily \label{merch__frontend_8h_a3ff914d63657fe41aa41ac027144d5f5} 
+void ioopm\+\_\+front\+\_\+merch\+\_\+add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{}\end{DoxyParamCaption})}
+
+
+
+Menu action\+: ask for a name, description and price (not negative) and add a new merch. Prints a message if a merch with that name already exists. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store to add the merch to \\
+\hline
+\end{DoxyParams}
+\Hypertarget{merch__frontend_8h_ab46966a6eb20c5f586c96d556cffcdda}\index{merch\_frontend.h@{merch\_frontend.h}!ioopm\_front\_merch\_edit@{ioopm\_front\_merch\_edit}}
+\index{ioopm\_front\_merch\_edit@{ioopm\_front\_merch\_edit}!merch\_frontend.h@{merch\_frontend.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_front\_merch\_edit()}{ioopm\_front\_merch\_edit()}}
+{\footnotesize\ttfamily \label{merch__frontend_8h_ab46966a6eb20c5f586c96d556cffcdda} 
+void ioopm\+\_\+front\+\_\+merch\+\_\+edit (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{}\end{DoxyParamCaption})}
+
+
+
+Menu action\+: ask for the name of an existing merch. Then ask for a new name, description and price and, after confirmation (Y), replace the old ones. The stock is kept. Prints a message if the merch does not exist or the new name is already taken. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store the merch belongs to \\
+\hline
+\end{DoxyParams}
+\Hypertarget{merch__frontend_8h_a47d1dcca7e6445c79847cc9177d05b6c}\index{merch\_frontend.h@{merch\_frontend.h}!ioopm\_front\_merch\_list@{ioopm\_front\_merch\_list}}
+\index{ioopm\_front\_merch\_list@{ioopm\_front\_merch\_list}!merch\_frontend.h@{merch\_frontend.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_front\_merch\_list()}{ioopm\_front\_merch\_list()}}
+{\footnotesize\ttfamily \label{merch__frontend_8h_a47d1dcca7e6445c79847cc9177d05b6c} 
+void ioopm\+\_\+front\+\_\+merch\+\_\+list (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{}\end{DoxyParamCaption})}
+
+
+
+Menu action\+: list the names of all merch, numbered, 20 at a time. After every 20 names the user is asked if the listing should continue (N stops it). The order is not sorted. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store to list \\
+\hline
+\end{DoxyParams}
+\Hypertarget{merch__frontend_8h_abbe9376ede955d537d7ca7d47261833e}\index{merch\_frontend.h@{merch\_frontend.h}!ioopm\_front\_merch\_remove@{ioopm\_front\_merch\_remove}}
+\index{ioopm\_front\_merch\_remove@{ioopm\_front\_merch\_remove}!merch\_frontend.h@{merch\_frontend.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_front\_merch\_remove()}{ioopm\_front\_merch\_remove()}}
+{\footnotesize\ttfamily \label{merch__frontend_8h_abbe9376ede955d537d7ca7d47261833e} 
+void ioopm\+\_\+front\+\_\+merch\+\_\+remove (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{}\end{DoxyParamCaption})}
+
+
+
+Menu action\+: ask for the name of a merch and, after confirmation (Y), remove it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store the merch belongs to \\
+\hline
+\end{DoxyParams}
+\Hypertarget{merch__frontend_8h_a6377d3ef072bc35458b7262e88668d33}\index{merch\_frontend.h@{merch\_frontend.h}!ioopm\_front\_merch\_replenish@{ioopm\_front\_merch\_replenish}}
+\index{ioopm\_front\_merch\_replenish@{ioopm\_front\_merch\_replenish}!merch\_frontend.h@{merch\_frontend.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_front\_merch\_replenish()}{ioopm\_front\_merch\_replenish()}}
+{\footnotesize\ttfamily \label{merch__frontend_8h_a6377d3ef072bc35458b7262e88668d33} 
+void ioopm\+\_\+front\+\_\+merch\+\_\+replenish (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{}\end{DoxyParamCaption})}
+
+
+
+Menu action\+: ask for a shelf (a capital letter and two digits), a merch name and an amount, and increase the stock of the merch on that shelf. Prints a message if the merch does not exist or the shelf holds another merch. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store the merch belongs to \\
+\hline
+\end{DoxyParams}
+\Hypertarget{merch__frontend_8h_a2704f157b9a02dd1c5d4148d8f10993f}\index{merch\_frontend.h@{merch\_frontend.h}!ioopm\_front\_merch\_show\_stock@{ioopm\_front\_merch\_show\_stock}}
+\index{ioopm\_front\_merch\_show\_stock@{ioopm\_front\_merch\_show\_stock}!merch\_frontend.h@{merch\_frontend.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_front\_merch\_show\_stock()}{ioopm\_front\_merch\_show\_stock()}}
+{\footnotesize\ttfamily \label{merch__frontend_8h_a2704f157b9a02dd1c5d4148d8f10993f} 
+void ioopm\+\_\+front\+\_\+merch\+\_\+show\+\_\+stock (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{}\end{DoxyParamCaption})}
+
+
+
+Menu action\+: ask for the name of a merch and print the shelves it is stored on, with the quantity on each. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store the merch belongs to \\
+\hline
+\end{DoxyParams}

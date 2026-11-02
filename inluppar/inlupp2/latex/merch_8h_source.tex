@@ -1,0 +1,57 @@
+\doxysection{merch.\+h}
+\hypertarget{merch_8h_source}{}\label{merch_8h_source}\index{logic/merch.h@{logic/merch.h}}
+\mbox{\hyperlink{merch_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{linked__list_8h}{linked\_list.h}}"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{list__iterator_8h}{list\_iterator.h}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{hash__table_8h}{hash\_table.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{hash__table__iterator_8h}{hash\_table\_iterator.h}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{webstore_8h}{webstore.h}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{utils_8h}{utils.h}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmerch}{merch}}\ \mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\_merch\_t}};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00039\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structshelf}{shelf}}\ \mbox{\hyperlink{merch_8h_a10644d2382a893363d1c78121a4be51b}{ioopm\_shelf\_t}};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00048\ \mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\_merch\_t}}\ *\mbox{\hyperlink{merch_8h_a921cbcfd6823ec0e254ed3ff59716ce4}{ioopm\_merch\_create}}(\textcolor{keywordtype}{char}\ *name,\ \textcolor{keywordtype}{char}\ *desc,\ \textcolor{keywordtype}{int}\ price);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00052\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{merch_8h_a962ec6ee2e9cc2580f36f657a5764d63}{ioopm\_merch\_destroy}}(\mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\_merch\_t}}\ *\mbox{\hyperlink{structmerch}{merch}});}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00058\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{merch_8h_a964a6231a0d0521e8cf7dcde8c26e594}{ioopm\_merch\_destroy\_all}}(\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\_webstore\_t}}\ *store);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00064\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{merch_8h_a52c115232d9f8bdee81b1666521bb23e}{ioopm\_merch\_get\_name}}(\mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\_merch\_t}}\ *\mbox{\hyperlink{structmerch}{merch}});}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00069\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{merch_8h_a477baf5a191c2b3d060d7c22a8be3ccd}{ioopm\_merch\_get\_description}}(\mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\_merch\_t}}\ *\mbox{\hyperlink{structmerch}{merch}});}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00074\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{merch_8h_ae540f54c39d63faa4ed9d25d84a758c9}{ioopm\_merch\_get\_price}}(\mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\_merch\_t}}\ *\mbox{\hyperlink{structmerch}{merch}});}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00080\ \mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\_list\_t}}\ *\mbox{\hyperlink{merch_8h_a9d654cc34aff15c730a65111f8623693}{ioopm\_merch\_get\_storage\_list}}(\mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\_merch\_t}}\ *\mbox{\hyperlink{structmerch}{merch}});}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00085\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{merch_8h_abce4a65b5ba5f7256b3cfe909958e796}{ioopm\_merch\_get\_shelf\_name}}(\mbox{\hyperlink{merch_8h_a10644d2382a893363d1c78121a4be51b}{ioopm\_shelf\_t}}\ *\mbox{\hyperlink{structshelf}{shelf}});}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00090\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{merch_8h_a3b8fed955bc8683f280dccbe5e0d8b33}{ioopm\_merch\_get\_shelf\_quantity}}(\mbox{\hyperlink{merch_8h_a10644d2382a893363d1c78121a4be51b}{ioopm\_shelf\_t}}\ *\mbox{\hyperlink{structshelf}{shelf}});}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00098\ \mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\_list\_t}}\ *\mbox{\hyperlink{merch_8h_a58c8a5de12307833a9e3cf2ba04cdc80}{ioopm\_merch\_get\_stock}}(\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\_webstore\_t}}\ *store,\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{structmerch}{merch}});}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00105\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{merch_8h_ab89b961ca7d4145e2f4ce1122ca1412f}{ioopm\_merch\_add}}(\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\_webstore\_t}}\ *store,\ \mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\_merch\_t}}\ *new\_merch);}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00115\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{merch_8h_acbb466ec67bb85ecc56b33fdb8bd4164}{ioopm\_merch\_remove}}(\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\_webstore\_t}}\ *store,\ \textcolor{keywordtype}{char}\ *merch\_remove,\ \mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\_t}}\ *result);}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00121\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{merch_8h_a29fd65288dfa60c5186761be64d55807}{ioopm\_merch\_get\_quantity}}(\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\_webstore\_t}}\ *store,\ \textcolor{keywordtype}{char}\ *name);}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00134\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{merch_8h_a60bbbc762228a8e841ef8dbd7f7e0ffb}{ioopm\_merch\_edit}}(\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\_webstore\_t}}\ *store,\ \textcolor{keywordtype}{char}\ *old\_merch,\ \mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\_merch\_t}}\ *new\_merch);}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00139\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{merch_8h_a3152725bef6c5f7e69244d30f2c89be6}{ioopm\_merch\_is\_shelf}}(\textcolor{keywordtype}{char}\ *\mbox{\hyperlink{structshelf}{shelf}});}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00150\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{merch_8h_aa307bedf0aaab06682a73c2d4792bf90}{ioopm\_merch\_replenish}}(\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\_webstore\_t}}\ *store,\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{structmerch}{merch}},\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{structshelf}{shelf}},\ \textcolor{keywordtype}{int}\ amount);}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00164\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{merch_8h_ab14994846800d5307a4ed6e486868cf9}{ioopm\_merch\_decrease\_stock}}(\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\_webstore\_t}}\ *store,\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{structmerch}{merch}},\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{structshelf}{shelf}},\ \textcolor{keywordtype}{int}\ amount);}
+
+\end{DoxyCode}

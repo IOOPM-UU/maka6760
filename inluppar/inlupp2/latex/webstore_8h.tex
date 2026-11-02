@@ -1,0 +1,145 @@
+\doxysection{logic/webstore.h File Reference}
+\hypertarget{webstore_8h}{}\label{webstore_8h}\index{logic/webstore.h@{logic/webstore.h}}
+
+
+The webstore\+: the single object that holds all backend state.  
+
+
+{\ttfamily \#include "{}hash\+\_\+table.\+h"{}}\newline
+{\ttfamily \#include "{}common.\+h"{}}\newline
+Include dependency graph for webstore.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structwebstore}{webstore}}
+\begin{DoxyCompactList}\small\item\em The state of a webstore. next\+\_\+cart\+\_\+num is the number the next cart will get, and is used as key in cart\+\_\+ht to keep track of individual carts. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef \mbox{\hyperlink{hash__table_8h_af8a82080b75d55e9d276e35e9f1e01fe}{ioopm\+\_\+hash\+\_\+table\+\_\+t}} \mbox{\hyperlink{webstore_8h_aec57cd1e1c9b50516a9072a6c05d8864}{ioopm\+\_\+all\+\_\+merch\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Represents the hash table of all merch in the store. \end{DoxyCompactList}\item 
+typedef \mbox{\hyperlink{hash__table_8h_af8a82080b75d55e9d276e35e9f1e01fe}{ioopm\+\_\+hash\+\_\+table\+\_\+t}} \mbox{\hyperlink{webstore_8h_aced8096a7d7310e306446ff78352d722}{ioopm\+\_\+all\+\_\+carts\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Represents the hash table of all carts in the store. \end{DoxyCompactList}\item 
+typedef \mbox{\hyperlink{hash__table_8h_af8a82080b75d55e9d276e35e9f1e01fe}{ioopm\+\_\+hash\+\_\+table\+\_\+t}} \mbox{\hyperlink{webstore_8h_a3cb2ca09fdeb7510dcabe1eace154938}{ioopm\+\_\+all\+\_\+shelves\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Represents the hash table of all shelves in the store. \end{DoxyCompactList}\item 
+typedef struct \mbox{\hyperlink{structwebstore}{webstore}} \mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em The state of a webstore. next\+\_\+cart\+\_\+num is the number the next cart will get, and is used as key in cart\+\_\+ht to keep track of individual carts. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \mbox{\hyperlink{webstore_8h_ace0da0b27d6b19227a9c7dbee0344d98}{ioopm\+\_\+webstore\+\_\+create}} (\mbox{\hyperlink{common_8h_a1a54ba10b899b068bfc47c57d50fec62}{ioopm\+\_\+hash\+\_\+function}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{hash__funcs_8c_ae886ca897dc818f3eb146350901b29ca}{string\+\_\+hash}}, \mbox{\hyperlink{common_8h_afb1f6281cd1e403d010f433002b9d72f}{ioopm\+\_\+eq\+\_\+function}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{hash__funcs_8c_a9f7c24e35a0ed6a2a6111e8c61fba40f}{string\+\_\+eq}}, \mbox{\hyperlink{common_8h_a1a54ba10b899b068bfc47c57d50fec62}{ioopm\+\_\+hash\+\_\+function}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{hash__funcs_8c_abf0c8c547c77d56c93740176fdb852de}{int\+\_\+hash}}, \mbox{\hyperlink{common_8h_afb1f6281cd1e403d010f433002b9d72f}{ioopm\+\_\+eq\+\_\+function}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{hash__funcs_8c_affac546882d32492858bee2a78dd4f00}{int\+\_\+eq}})
+\begin{DoxyCompactList}\small\item\em Create a webstore with three empty hash tables. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{webstore_8h_a131079828dc2eae8e671e5ac1cde1a00}{ioopm\+\_\+webstore\+\_\+destroy}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store)
+\begin{DoxyCompactList}\small\item\em Destroy the three hash tables of the store (but not what is stored in them). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The webstore\+: the single object that holds all backend state. 
+
+NOTE\+: The draft of the documentation for this module was created with Claude (Anthropic). It has been proofread and changed by us afterwards.
+
+\begin{DoxyAuthor}{Author}
+Markus Karlsson and Alva Fällman Nilsson 
+\end{DoxyAuthor}
+A webstore consists of three hash tables, which \doxylink{merch_8h}{merch.\+h} and \doxylink{cart_8h}{cart.\+h} operate on\+:
+\begin{DoxyItemize}
+\item merch\+\_\+ht\+: merch name (string) =\texorpdfstring{$>$}{>} \doxylink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\+\_\+merch\+\_\+t} \texorpdfstring{$\ast$}{*}
+\item cart\+\_\+ht\+: cart number (int) =\texorpdfstring{$>$}{>} \doxylink{cart_8h_ae72367f60488bfecb38a4cc93d809a62}{ioopm\+\_\+cart\+\_\+t} \texorpdfstring{$\ast$}{*}
+\item storage\+\_\+ht\+: shelf name (string) =\texorpdfstring{$>$}{>} name of the merch stored on that shelf (string)
+\end{DoxyItemize}
+
+Create the store with ioopm\+\_\+webstore\+\_\+create when the program starts and pass a pointer to it to every backend function. 
+
+\label{doc-typedef-members}
+\Hypertarget{webstore_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{webstore_8h_aced8096a7d7310e306446ff78352d722}\index{webstore.h@{webstore.h}!ioopm\_all\_carts\_t@{ioopm\_all\_carts\_t}}
+\index{ioopm\_all\_carts\_t@{ioopm\_all\_carts\_t}!webstore.h@{webstore.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_all\_carts\_t}{ioopm\_all\_carts\_t}}
+{\footnotesize\ttfamily \label{webstore_8h_aced8096a7d7310e306446ff78352d722} 
+typedef \mbox{\hyperlink{hash__table_8h_af8a82080b75d55e9d276e35e9f1e01fe}{ioopm\+\_\+hash\+\_\+table\+\_\+t}} \mbox{\hyperlink{webstore_8h_aced8096a7d7310e306446ff78352d722}{ioopm\+\_\+all\+\_\+carts\+\_\+t}}}
+
+
+
+Represents the hash table of all carts in the store. 
+
+\Hypertarget{webstore_8h_aec57cd1e1c9b50516a9072a6c05d8864}\index{webstore.h@{webstore.h}!ioopm\_all\_merch\_t@{ioopm\_all\_merch\_t}}
+\index{ioopm\_all\_merch\_t@{ioopm\_all\_merch\_t}!webstore.h@{webstore.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_all\_merch\_t}{ioopm\_all\_merch\_t}}
+{\footnotesize\ttfamily \label{webstore_8h_aec57cd1e1c9b50516a9072a6c05d8864} 
+typedef \mbox{\hyperlink{hash__table_8h_af8a82080b75d55e9d276e35e9f1e01fe}{ioopm\+\_\+hash\+\_\+table\+\_\+t}} \mbox{\hyperlink{webstore_8h_aec57cd1e1c9b50516a9072a6c05d8864}{ioopm\+\_\+all\+\_\+merch\+\_\+t}}}
+
+
+
+Represents the hash table of all merch in the store. 
+
+\Hypertarget{webstore_8h_a3cb2ca09fdeb7510dcabe1eace154938}\index{webstore.h@{webstore.h}!ioopm\_all\_shelves\_t@{ioopm\_all\_shelves\_t}}
+\index{ioopm\_all\_shelves\_t@{ioopm\_all\_shelves\_t}!webstore.h@{webstore.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_all\_shelves\_t}{ioopm\_all\_shelves\_t}}
+{\footnotesize\ttfamily \label{webstore_8h_a3cb2ca09fdeb7510dcabe1eace154938} 
+typedef \mbox{\hyperlink{hash__table_8h_af8a82080b75d55e9d276e35e9f1e01fe}{ioopm\+\_\+hash\+\_\+table\+\_\+t}} \mbox{\hyperlink{webstore_8h_a3cb2ca09fdeb7510dcabe1eace154938}{ioopm\+\_\+all\+\_\+shelves\+\_\+t}}}
+
+
+
+Represents the hash table of all shelves in the store. 
+
+\Hypertarget{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}\index{webstore.h@{webstore.h}!ioopm\_webstore\_t@{ioopm\_webstore\_t}}
+\index{ioopm\_webstore\_t@{ioopm\_webstore\_t}!webstore.h@{webstore.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_webstore\_t}{ioopm\_webstore\_t}}
+{\footnotesize\ttfamily \label{webstore_8h_ae9bcdc049693e26e11480d53211d6c44} 
+typedef struct \mbox{\hyperlink{structwebstore}{webstore}} \mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}}}
+
+
+
+The state of a webstore. next\+\_\+cart\+\_\+num is the number the next cart will get, and is used as key in cart\+\_\+ht to keep track of individual carts. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{webstore_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{webstore_8h_ace0da0b27d6b19227a9c7dbee0344d98}\index{webstore.h@{webstore.h}!ioopm\_webstore\_create@{ioopm\_webstore\_create}}
+\index{ioopm\_webstore\_create@{ioopm\_webstore\_create}!webstore.h@{webstore.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_webstore\_create()}{ioopm\_webstore\_create()}}
+{\footnotesize\ttfamily \label{webstore_8h_ace0da0b27d6b19227a9c7dbee0344d98} 
+\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} ioopm\+\_\+webstore\+\_\+create (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{common_8h_a1a54ba10b899b068bfc47c57d50fec62}{ioopm\+\_\+hash\+\_\+function}} \texorpdfstring{$\ast$}{*}}]{string\+\_\+hash}{, }\item[{\mbox{\hyperlink{common_8h_afb1f6281cd1e403d010f433002b9d72f}{ioopm\+\_\+eq\+\_\+function}} \texorpdfstring{$\ast$}{*}}]{string\+\_\+eq}{, }\item[{\mbox{\hyperlink{common_8h_a1a54ba10b899b068bfc47c57d50fec62}{ioopm\+\_\+hash\+\_\+function}} \texorpdfstring{$\ast$}{*}}]{int\+\_\+hash}{, }\item[{\mbox{\hyperlink{common_8h_afb1f6281cd1e403d010f433002b9d72f}{ioopm\+\_\+eq\+\_\+function}} \texorpdfstring{$\ast$}{*}}]{int\+\_\+eq}{}\end{DoxyParamCaption})}
+
+
+
+Create a webstore with three empty hash tables. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em string\+\_\+hash} & hash function for string keys (merch names and shelf names) \\
+\hline
+{\em string\+\_\+eq} & equality function for string keys \\
+\hline
+{\em int\+\_\+hash} & hash function for int keys (cart numbers) \\
+\hline
+{\em int\+\_\+eq} & equality function for int keys \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a new webstore with no merch and no carts. The first cart will get number 1 
+\end{DoxyReturn}
+\Hypertarget{webstore_8h_a131079828dc2eae8e671e5ac1cde1a00}\index{webstore.h@{webstore.h}!ioopm\_webstore\_destroy@{ioopm\_webstore\_destroy}}
+\index{ioopm\_webstore\_destroy@{ioopm\_webstore\_destroy}!webstore.h@{webstore.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_webstore\_destroy()}{ioopm\_webstore\_destroy()}}
+{\footnotesize\ttfamily \label{webstore_8h_a131079828dc2eae8e671e5ac1cde1a00} 
+void ioopm\+\_\+webstore\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{}\end{DoxyParamCaption})}
+
+
+
+Destroy the three hash tables of the store (but not what is stored in them). 
+
+\begin{DoxyPrecond}{Precondition}
+everything stored in the tables has already been freed, e.\+g. with ioopm\+\_\+merch\+\_\+destroy\+\_\+all and ioopm\+\_\+cart\+\_\+destroy\+\_\+all, otherwise it leaks 
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store to be destroyed. It must not be used afterwards \\
+\hline
+\end{DoxyParams}

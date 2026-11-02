@@ -1,0 +1,61 @@
+\doxysection{logic/webstore.c File Reference}
+\hypertarget{webstore_8c}{}\label{webstore_8c}\index{logic/webstore.c@{logic/webstore.c}}
+{\ttfamily \#include "{}webstore.\+h"{}}\newline
+{\ttfamily \#include "{}merch.\+h"{}}\newline
+{\ttfamily \#include "{}hash\+\_\+table\+\_\+iterator.\+h"{}}\newline
+Include dependency graph for webstore.\+c\+:
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \mbox{\hyperlink{webstore_8c_ace0da0b27d6b19227a9c7dbee0344d98}{ioopm\+\_\+webstore\+\_\+create}} (\mbox{\hyperlink{common_8h_a1a54ba10b899b068bfc47c57d50fec62}{ioopm\+\_\+hash\+\_\+function}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{hash__funcs_8c_ae886ca897dc818f3eb146350901b29ca}{string\+\_\+hash}}, \mbox{\hyperlink{common_8h_afb1f6281cd1e403d010f433002b9d72f}{ioopm\+\_\+eq\+\_\+function}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{hash__funcs_8c_a9f7c24e35a0ed6a2a6111e8c61fba40f}{string\+\_\+eq}}, \mbox{\hyperlink{common_8h_a1a54ba10b899b068bfc47c57d50fec62}{ioopm\+\_\+hash\+\_\+function}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{hash__funcs_8c_abf0c8c547c77d56c93740176fdb852de}{int\+\_\+hash}}, \mbox{\hyperlink{common_8h_afb1f6281cd1e403d010f433002b9d72f}{ioopm\+\_\+eq\+\_\+function}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{hash__funcs_8c_affac546882d32492858bee2a78dd4f00}{int\+\_\+eq}})
+\begin{DoxyCompactList}\small\item\em Create a webstore with three empty hash tables. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{webstore_8c_a131079828dc2eae8e671e5ac1cde1a00}{ioopm\+\_\+webstore\+\_\+destroy}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store)
+\begin{DoxyCompactList}\small\item\em Destroy the three hash tables of the store (but not what is stored in them). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{webstore_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{webstore_8c_ace0da0b27d6b19227a9c7dbee0344d98}\index{webstore.c@{webstore.c}!ioopm\_webstore\_create@{ioopm\_webstore\_create}}
+\index{ioopm\_webstore\_create@{ioopm\_webstore\_create}!webstore.c@{webstore.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_webstore\_create()}{ioopm\_webstore\_create()}}
+{\footnotesize\ttfamily \label{webstore_8c_ace0da0b27d6b19227a9c7dbee0344d98} 
+\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} ioopm\+\_\+webstore\+\_\+create (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{common_8h_a1a54ba10b899b068bfc47c57d50fec62}{ioopm\+\_\+hash\+\_\+function}} \texorpdfstring{$\ast$}{*}}]{string\+\_\+hash}{, }\item[{\mbox{\hyperlink{common_8h_afb1f6281cd1e403d010f433002b9d72f}{ioopm\+\_\+eq\+\_\+function}} \texorpdfstring{$\ast$}{*}}]{string\+\_\+eq}{, }\item[{\mbox{\hyperlink{common_8h_a1a54ba10b899b068bfc47c57d50fec62}{ioopm\+\_\+hash\+\_\+function}} \texorpdfstring{$\ast$}{*}}]{int\+\_\+hash}{, }\item[{\mbox{\hyperlink{common_8h_afb1f6281cd1e403d010f433002b9d72f}{ioopm\+\_\+eq\+\_\+function}} \texorpdfstring{$\ast$}{*}}]{int\+\_\+eq}{}\end{DoxyParamCaption})}
+
+
+
+Create a webstore with three empty hash tables. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em string\+\_\+hash} & hash function for string keys (merch names and shelf names) \\
+\hline
+{\em string\+\_\+eq} & equality function for string keys \\
+\hline
+{\em int\+\_\+hash} & hash function for int keys (cart numbers) \\
+\hline
+{\em int\+\_\+eq} & equality function for int keys \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a new webstore with no merch and no carts. The first cart will get number 1 
+\end{DoxyReturn}
+\Hypertarget{webstore_8c_a131079828dc2eae8e671e5ac1cde1a00}\index{webstore.c@{webstore.c}!ioopm\_webstore\_destroy@{ioopm\_webstore\_destroy}}
+\index{ioopm\_webstore\_destroy@{ioopm\_webstore\_destroy}!webstore.c@{webstore.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_webstore\_destroy()}{ioopm\_webstore\_destroy()}}
+{\footnotesize\ttfamily \label{webstore_8c_a131079828dc2eae8e671e5ac1cde1a00} 
+void ioopm\+\_\+webstore\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{}\end{DoxyParamCaption})}
+
+
+
+Destroy the three hash tables of the store (but not what is stored in them). 
+
+\begin{DoxyPrecond}{Precondition}
+everything stored in the tables has already been freed, e.\+g. with ioopm\+\_\+merch\+\_\+destroy\+\_\+all and ioopm\+\_\+cart\+\_\+destroy\+\_\+all, otherwise it leaks 
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store to be destroyed. It must not be used afterwards \\
+\hline
+\end{DoxyParams}

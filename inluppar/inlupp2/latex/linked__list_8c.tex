@@ -1,0 +1,391 @@
+\doxysection{generic\+\_\+data\+\_\+structures/linked\+\_\+list.c File Reference}
+\hypertarget{linked__list_8c}{}\label{linked__list_8c}\index{generic\_data\_structures/linked\_list.c@{generic\_data\_structures/linked\_list.c}}
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include "{}linked\+\_\+list.\+h"{}}\newline
+{\ttfamily \#include "{}list\+\_\+iterator.\+h"{}}\newline
+{\ttfamily \#include "{}common.\+h"{}}\newline
+Include dependency graph for linked\+\_\+list.\+c\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structlink}{link}}
+\item 
+struct \mbox{\hyperlink{structlist}{list}}
+\item 
+struct \mbox{\hyperlink{structlist__iterator}{list\+\_\+iterator}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{linked__list_8c_a375e87b2df26a840f74e6cba478e01c3}{ioopm\+\_\+list\+\_\+create}} (void)
+\begin{DoxyCompactList}\small\item\em Meta\+: struct definition goes in C file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{linked__list_8c_af8eb8d2ee1a35c99e083a0bd5662217f}{ioopm\+\_\+list\+\_\+destroy}} (\mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structlist}{list}})
+\begin{DoxyCompactList}\small\item\em Tear down the linked list and return all its memory (but not the memory of the elements). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{linked__list_8c_af484f69f73ada71a559b36663a6a2aee}{ioopm\+\_\+list\+\_\+append}} (\mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structlist}{list}}, \mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} value)
+\begin{DoxyCompactList}\small\item\em Insert at the end of a linked list in O(1) time. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{linked__list_8c_a9a6931f0b86841091ab056c2ca50012b}{ioopm\+\_\+list\+\_\+prepend}} (\mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structlist}{list}}, \mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} value)
+\begin{DoxyCompactList}\small\item\em Insert at the front of a linked list in O(1) time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} \mbox{\hyperlink{linked__list_8c_a61b82643a76a06c40de305d51c78e85d}{ioopm\+\_\+list\+\_\+head}} (const \mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structlist}{list}})
+\begin{DoxyCompactList}\small\item\em Return the first element of a linked list in O(1) time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} \mbox{\hyperlink{linked__list_8c_a169939c1645d6950ff5f94938c963133}{ioopm\+\_\+list\+\_\+last}} (const \mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structlist}{list}})
+\begin{DoxyCompactList}\small\item\em Return the last element of a linked list in O(1) time. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{linked__list_8c_ab2dd031078d206b89a2a9dfd964299e9}{ioopm\+\_\+list\+\_\+insert}} (\mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structlist}{list}}, size\+\_\+t index, \mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} value)
+\begin{DoxyCompactList}\small\item\em Insert an element into a linked list in O(n) time. The valid values of index are \mbox{[}0,n\mbox{]} for a list of n elements, where 0 means before the first element and n means after the last element. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{linked__list_8c_a25eab8fdda3585d1460d91e67349994e}{ioopm\+\_\+list\+\_\+remove}} (\mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structlist}{list}}, size\+\_\+t index, \mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} \texorpdfstring{$\ast$}{*}result)
+\begin{DoxyCompactList}\small\item\em Remove an element from a linked list in O(n) time. The valid values of index are \mbox{[}0,n-\/1\mbox{]} for a list of n elements, where 0 means the first element and n-\/1 means the last element. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{linked__list_8c_a24afa243c37a8782ce1e0d77ab898803}{ioopm\+\_\+list\+\_\+get}} (const \mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structlist}{list}}, size\+\_\+t index, \mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} \texorpdfstring{$\ast$}{*}result)
+\begin{DoxyCompactList}\small\item\em Retrieve an element from a linked list in O(n) time. The valid values of index are \mbox{[}0,n-\/1\mbox{]} for a list of n elements, where 0 means the first element and n-\/1 means the last element. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{linked__list_8c_aa3c50756556e13f8823d879c8442e020}{ioopm\+\_\+list\+\_\+size}} (const \mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structlist}{list}})
+\begin{DoxyCompactList}\small\item\em Lookup the number of elements in the linked list in O(1) time. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{linked__list_8c_a17b8eaf1bc5a066d13c404138431e078}{ioopm\+\_\+list\+\_\+is\+\_\+empty}} (const \mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structlist}{list}})
+\begin{DoxyCompactList}\small\item\em Test whether a list is empty or not. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{linked__list_8c_af9dba3c017288e3476cb3039c9010c63}{ioopm\+\_\+list\+\_\+iterator\+\_\+create}} (\mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*}l)
+\begin{DoxyCompactList}\small\item\em Create a new iterator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{linked__list_8c_a20f42cef9506c2680f38131a4cca0b88}{ioopm\+\_\+list\+\_\+iterator\+\_\+destroy}} (\mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}iter)
+\begin{DoxyCompactList}\small\item\em Destroy the iterator and return its resources. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{linked__list_8c_ad253f7783b895d2a66295073c643afee}{ioopm\+\_\+list\+\_\+iterator\+\_\+at\+\_\+end}} (const \mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}iter)
+\begin{DoxyCompactList}\small\item\em Checks if there are more elements to iterate over. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{linked__list_8c_ae68cd4befeca5c2edb9cb66a2219b72d}{ioopm\+\_\+list\+\_\+iterator\+\_\+advance}} (\mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}iter)
+\begin{DoxyCompactList}\small\item\em Step the iterator forward one step. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} \mbox{\hyperlink{linked__list_8c_a8c0b04210a397bdb486847224f460419}{ioopm\+\_\+list\+\_\+iterator\+\_\+current}} (const \mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}iter)
+\begin{DoxyCompactList}\small\item\em Return the current element from the underlying list. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} \mbox{\hyperlink{linked__list_8c_a828c67489fc0e776be531c51e5a84f5f}{ioopm\+\_\+list\+\_\+iterator\+\_\+remove}} (\mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}iter)
+\begin{DoxyCompactList}\small\item\em Remove the current element from the underlying list. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{linked__list_8c_afc08f6717414286159badd042291b756}{ioopm\+\_\+list\+\_\+iterator\+\_\+insert}} (\mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}iter, \mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} element)
+\begin{DoxyCompactList}\small\item\em Insert a new element into the underlying list making the current element it\textquotesingle{}s next. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{linked__list_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{linked__list_8c_af484f69f73ada71a559b36663a6a2aee}\index{linked\_list.c@{linked\_list.c}!ioopm\_list\_append@{ioopm\_list\_append}}
+\index{ioopm\_list\_append@{ioopm\_list\_append}!linked\_list.c@{linked\_list.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_append()}{ioopm\_list\_append()}}
+{\footnotesize\ttfamily \label{linked__list_8c_af484f69f73ada71a559b36663a6a2aee} 
+void ioopm\+\_\+list\+\_\+append (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{list}{, }\item[{\mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}}}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Insert at the end of a linked list in O(1) time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & the linked list that will be appended \\
+\hline
+{\em value} & the value to be appended \\
+\hline
+\end{DoxyParams}
+\Hypertarget{linked__list_8c_a375e87b2df26a840f74e6cba478e01c3}\index{linked\_list.c@{linked\_list.c}!ioopm\_list\_create@{ioopm\_list\_create}}
+\index{ioopm\_list\_create@{ioopm\_list\_create}!linked\_list.c@{linked\_list.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_create()}{ioopm\_list\_create()}}
+{\footnotesize\ttfamily \label{linked__list_8c_a375e87b2df26a840f74e6cba478e01c3} 
+\mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*} ioopm\+\_\+list\+\_\+create (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Meta\+: struct definition goes in C file. 
+
+Creates a new empty list \begin{DoxyReturn}{Returns}
+an empty linked list 
+\end{DoxyReturn}
+\Hypertarget{linked__list_8c_af8eb8d2ee1a35c99e083a0bd5662217f}\index{linked\_list.c@{linked\_list.c}!ioopm\_list\_destroy@{ioopm\_list\_destroy}}
+\index{ioopm\_list\_destroy@{ioopm\_list\_destroy}!linked\_list.c@{linked\_list.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_destroy()}{ioopm\_list\_destroy()}}
+{\footnotesize\ttfamily \label{linked__list_8c_af8eb8d2ee1a35c99e083a0bd5662217f} 
+void ioopm\+\_\+list\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{list}{}\end{DoxyParamCaption})}
+
+
+
+Tear down the linked list and return all its memory (but not the memory of the elements). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & the list to be destroyed \\
+\hline
+\end{DoxyParams}
+\Hypertarget{linked__list_8c_a24afa243c37a8782ce1e0d77ab898803}\index{linked\_list.c@{linked\_list.c}!ioopm\_list\_get@{ioopm\_list\_get}}
+\index{ioopm\_list\_get@{ioopm\_list\_get}!linked\_list.c@{linked\_list.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_get()}{ioopm\_list\_get()}}
+{\footnotesize\ttfamily \label{linked__list_8c_a24afa243c37a8782ce1e0d77ab898803} 
+bool ioopm\+\_\+list\+\_\+get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{list}{, }\item[{size\+\_\+t}]{index}{, }\item[{\mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{result}{}\end{DoxyParamCaption})}
+
+
+
+Retrieve an element from a linked list in O(n) time. The valid values of index are \mbox{[}0,n-\/1\mbox{]} for a list of n elements, where 0 means the first element and n-\/1 means the last element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & the linked list \\
+\hline
+{\em index} & the position in the list, valid range \mbox{[}0,n-\/1\mbox{]}. Unsigned, so it can never be negative (a negative argument wraps to a very large value and is rejected as out of range) \\
+\hline
+{\em result} & where the retrieved value is written, if index was valid. Left untouched otherwise \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if index was valid and result was written, false otherwise 
+\end{DoxyReturn}
+\Hypertarget{linked__list_8c_a61b82643a76a06c40de305d51c78e85d}\index{linked\_list.c@{linked\_list.c}!ioopm\_list\_head@{ioopm\_list\_head}}
+\index{ioopm\_list\_head@{ioopm\_list\_head}!linked\_list.c@{linked\_list.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_head()}{ioopm\_list\_head()}}
+{\footnotesize\ttfamily \label{linked__list_8c_a61b82643a76a06c40de305d51c78e85d} 
+\mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} ioopm\+\_\+list\+\_\+head (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{list}{}\end{DoxyParamCaption})}
+
+
+
+Return the first element of a linked list in O(1) time. 
+
+\begin{DoxyPrecond}{Precondition}
+the list is non-\/empty 
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em list} & the linked list to take the head of \\
+\hline
+\end{DoxyParams}
+\Hypertarget{linked__list_8c_ab2dd031078d206b89a2a9dfd964299e9}\index{linked\_list.c@{linked\_list.c}!ioopm\_list\_insert@{ioopm\_list\_insert}}
+\index{ioopm\_list\_insert@{ioopm\_list\_insert}!linked\_list.c@{linked\_list.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_insert()}{ioopm\_list\_insert()}}
+{\footnotesize\ttfamily \label{linked__list_8c_ab2dd031078d206b89a2a9dfd964299e9} 
+bool ioopm\+\_\+list\+\_\+insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{list}{, }\item[{size\+\_\+t}]{index}{, }\item[{\mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}}}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Insert an element into a linked list in O(n) time. The valid values of index are \mbox{[}0,n\mbox{]} for a list of n elements, where 0 means before the first element and n means after the last element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & the linked list that will be extended \\
+\hline
+{\em index} & the position in the list, valid range \mbox{[}0,n\mbox{]}. Unsigned, so it can never be negative (a negative argument wraps to a very large value and is rejected as out of range) \\
+\hline
+{\em value} & the value to be inserted \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if index was valid and the value was inserted, false otherwise 
+\end{DoxyReturn}
+\Hypertarget{linked__list_8c_a17b8eaf1bc5a066d13c404138431e078}\index{linked\_list.c@{linked\_list.c}!ioopm\_list\_is\_empty@{ioopm\_list\_is\_empty}}
+\index{ioopm\_list\_is\_empty@{ioopm\_list\_is\_empty}!linked\_list.c@{linked\_list.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_is\_empty()}{ioopm\_list\_is\_empty()}}
+{\footnotesize\ttfamily \label{linked__list_8c_a17b8eaf1bc5a066d13c404138431e078} 
+bool ioopm\+\_\+list\+\_\+is\+\_\+empty (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{list}{}\end{DoxyParamCaption})}
+
+
+
+Test whether a list is empty or not. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & the linked list \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the number of elements int the list is 0, else false 
+\end{DoxyReturn}
+\Hypertarget{linked__list_8c_ae68cd4befeca5c2edb9cb66a2219b72d}\index{linked\_list.c@{linked\_list.c}!ioopm\_list\_iterator\_advance@{ioopm\_list\_iterator\_advance}}
+\index{ioopm\_list\_iterator\_advance@{ioopm\_list\_iterator\_advance}!linked\_list.c@{linked\_list.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_iterator\_advance()}{ioopm\_list\_iterator\_advance()}}
+{\footnotesize\ttfamily \label{linked__list_8c_ae68cd4befeca5c2edb9cb66a2219b72d} 
+void ioopm\+\_\+list\+\_\+iterator\+\_\+advance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{iter}{}\end{DoxyParamCaption})}
+
+
+
+Step the iterator forward one step. 
+
+\begin{DoxyPrecond}{Precondition}
+iter is positioned at an element 
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em iter} & the iterator \\
+\hline
+\end{DoxyParams}
+\Hypertarget{linked__list_8c_ad253f7783b895d2a66295073c643afee}\index{linked\_list.c@{linked\_list.c}!ioopm\_list\_iterator\_at\_end@{ioopm\_list\_iterator\_at\_end}}
+\index{ioopm\_list\_iterator\_at\_end@{ioopm\_list\_iterator\_at\_end}!linked\_list.c@{linked\_list.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_iterator\_at\_end()}{ioopm\_list\_iterator\_at\_end()}}
+{\footnotesize\ttfamily \label{linked__list_8c_ad253f7783b895d2a66295073c643afee} 
+bool ioopm\+\_\+list\+\_\+iterator\+\_\+at\+\_\+end (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{iter}{}\end{DoxyParamCaption})}
+
+
+
+Checks if there are more elements to iterate over. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em iter} & the iterator \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the iterator reached the end 
+\end{DoxyReturn}
+\Hypertarget{linked__list_8c_af9dba3c017288e3476cb3039c9010c63}\index{linked\_list.c@{linked\_list.c}!ioopm\_list\_iterator\_create@{ioopm\_list\_iterator\_create}}
+\index{ioopm\_list\_iterator\_create@{ioopm\_list\_iterator\_create}!linked\_list.c@{linked\_list.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_iterator\_create()}{ioopm\_list\_iterator\_create()}}
+{\footnotesize\ttfamily \label{linked__list_8c_af9dba3c017288e3476cb3039c9010c63} 
+\mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*} ioopm\+\_\+list\+\_\+iterator\+\_\+create (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{l}{}\end{DoxyParamCaption})}
+
+
+
+Create a new iterator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l} & the list to iterate over \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a new iterator positioned at the first element if it exists, and positioned at-\/the-\/end if l is empty 
+\end{DoxyReturn}
+\Hypertarget{linked__list_8c_a8c0b04210a397bdb486847224f460419}\index{linked\_list.c@{linked\_list.c}!ioopm\_list\_iterator\_current@{ioopm\_list\_iterator\_current}}
+\index{ioopm\_list\_iterator\_current@{ioopm\_list\_iterator\_current}!linked\_list.c@{linked\_list.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_iterator\_current()}{ioopm\_list\_iterator\_current()}}
+{\footnotesize\ttfamily \label{linked__list_8c_a8c0b04210a397bdb486847224f460419} 
+\mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} ioopm\+\_\+list\+\_\+iterator\+\_\+current (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{iter}{}\end{DoxyParamCaption})}
+
+
+
+Return the current element from the underlying list. 
+
+\begin{DoxyPrecond}{Precondition}
+iter is positioned at an element 
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em iter} & the iterator \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the current element 
+\end{DoxyReturn}
+\Hypertarget{linked__list_8c_a20f42cef9506c2680f38131a4cca0b88}\index{linked\_list.c@{linked\_list.c}!ioopm\_list\_iterator\_destroy@{ioopm\_list\_iterator\_destroy}}
+\index{ioopm\_list\_iterator\_destroy@{ioopm\_list\_iterator\_destroy}!linked\_list.c@{linked\_list.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_iterator\_destroy()}{ioopm\_list\_iterator\_destroy()}}
+{\footnotesize\ttfamily \label{linked__list_8c_a20f42cef9506c2680f38131a4cca0b88} 
+void ioopm\+\_\+list\+\_\+iterator\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{iter}{}\end{DoxyParamCaption})}
+
+
+
+Destroy the iterator and return its resources. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em iter} & the iterator \\
+\hline
+\end{DoxyParams}
+\Hypertarget{linked__list_8c_afc08f6717414286159badd042291b756}\index{linked\_list.c@{linked\_list.c}!ioopm\_list\_iterator\_insert@{ioopm\_list\_iterator\_insert}}
+\index{ioopm\_list\_iterator\_insert@{ioopm\_list\_iterator\_insert}!linked\_list.c@{linked\_list.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_iterator\_insert()}{ioopm\_list\_iterator\_insert()}}
+{\footnotesize\ttfamily \label{linked__list_8c_afc08f6717414286159badd042291b756} 
+void ioopm\+\_\+list\+\_\+iterator\+\_\+insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{iter}{, }\item[{\mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}}}]{element}{}\end{DoxyParamCaption})}
+
+
+
+Insert a new element into the underlying list making the current element it\textquotesingle{}s next. 
+
+NOTE\+: INSERT IS OPTIONAL TO IMPLEMENT 
+\begin{DoxyParams}{Parameters}
+{\em iter} & the iterator \\
+\hline
+{\em element} & the element to be inserted \\
+\hline
+\end{DoxyParams}
+\Hypertarget{linked__list_8c_a828c67489fc0e776be531c51e5a84f5f}\index{linked\_list.c@{linked\_list.c}!ioopm\_list\_iterator\_remove@{ioopm\_list\_iterator\_remove}}
+\index{ioopm\_list\_iterator\_remove@{ioopm\_list\_iterator\_remove}!linked\_list.c@{linked\_list.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_iterator\_remove()}{ioopm\_list\_iterator\_remove()}}
+{\footnotesize\ttfamily \label{linked__list_8c_a828c67489fc0e776be531c51e5a84f5f} 
+\mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} ioopm\+\_\+list\+\_\+iterator\+\_\+remove (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\+\_\+list\+\_\+iterator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{iter}{}\end{DoxyParamCaption})}
+
+
+
+Remove the current element from the underlying list. 
+
+NOTE\+: REMOVE IS OPTIONAL TO IMPLEMENT \begin{DoxyPrecond}{Precondition}
+iter is positioned at an element 
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em iter} & the iterator \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the removed element 
+\end{DoxyReturn}
+\Hypertarget{linked__list_8c_a169939c1645d6950ff5f94938c963133}\index{linked\_list.c@{linked\_list.c}!ioopm\_list\_last@{ioopm\_list\_last}}
+\index{ioopm\_list\_last@{ioopm\_list\_last}!linked\_list.c@{linked\_list.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_last()}{ioopm\_list\_last()}}
+{\footnotesize\ttfamily \label{linked__list_8c_a169939c1645d6950ff5f94938c963133} 
+\mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} ioopm\+\_\+list\+\_\+last (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{list}{}\end{DoxyParamCaption})}
+
+
+
+Return the last element of a linked list in O(1) time. 
+
+\begin{DoxyPrecond}{Precondition}
+the list is non-\/empty 
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em list} & the linked list to take the last element of \\
+\hline
+\end{DoxyParams}
+\Hypertarget{linked__list_8c_a9a6931f0b86841091ab056c2ca50012b}\index{linked\_list.c@{linked\_list.c}!ioopm\_list\_prepend@{ioopm\_list\_prepend}}
+\index{ioopm\_list\_prepend@{ioopm\_list\_prepend}!linked\_list.c@{linked\_list.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_prepend()}{ioopm\_list\_prepend()}}
+{\footnotesize\ttfamily \label{linked__list_8c_a9a6931f0b86841091ab056c2ca50012b} 
+void ioopm\+\_\+list\+\_\+prepend (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{list}{, }\item[{\mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}}}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Insert at the front of a linked list in O(1) time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & the linked list that will be prepended to \\
+\hline
+{\em value} & the value to be prepended \\
+\hline
+\end{DoxyParams}
+\Hypertarget{linked__list_8c_a25eab8fdda3585d1460d91e67349994e}\index{linked\_list.c@{linked\_list.c}!ioopm\_list\_remove@{ioopm\_list\_remove}}
+\index{ioopm\_list\_remove@{ioopm\_list\_remove}!linked\_list.c@{linked\_list.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_remove()}{ioopm\_list\_remove()}}
+{\footnotesize\ttfamily \label{linked__list_8c_a25eab8fdda3585d1460d91e67349994e} 
+bool ioopm\+\_\+list\+\_\+remove (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{list}{, }\item[{size\+\_\+t}]{index}{, }\item[{\mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{result}{}\end{DoxyParamCaption})}
+
+
+
+Remove an element from a linked list in O(n) time. The valid values of index are \mbox{[}0,n-\/1\mbox{]} for a list of n elements, where 0 means the first element and n-\/1 means the last element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & the linked list \\
+\hline
+{\em index} & the position in the list, valid range \mbox{[}0,n-\/1\mbox{]}. Unsigned, so it can never be negative (a negative argument wraps to a very large value and is rejected as out of range) \\
+\hline
+{\em result} & where the removed value is written, if the index was valid. Left untouched otherwise \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if index was valid and result was written, false otherwise 
+\end{DoxyReturn}
+\Hypertarget{linked__list_8c_aa3c50756556e13f8823d879c8442e020}\index{linked\_list.c@{linked\_list.c}!ioopm\_list\_size@{ioopm\_list\_size}}
+\index{ioopm\_list\_size@{ioopm\_list\_size}!linked\_list.c@{linked\_list.c}}
+\doxysubsubsection{\texorpdfstring{ioopm\_list\_size()}{ioopm\_list\_size()}}
+{\footnotesize\ttfamily \label{linked__list_8c_aa3c50756556e13f8823d879c8442e020} 
+size\+\_\+t ioopm\+\_\+list\+\_\+size (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{list}{}\end{DoxyParamCaption})}
+
+
+
+Lookup the number of elements in the linked list in O(1) time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & the linked list \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of elements in the list, as a size\+\_\+t (never negative) 
+\end{DoxyReturn}

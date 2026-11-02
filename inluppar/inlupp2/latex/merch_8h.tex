@@ -1,0 +1,444 @@
+\doxysection{logic/merch.h File Reference}
+\hypertarget{merch_8h}{}\label{merch_8h}\index{logic/merch.h@{logic/merch.h}}
+
+
+Merchandise and its storage in the webstore.  
+
+
+{\ttfamily \#include "{}linked\+\_\+list.\+h"{}}\newline
+{\ttfamily \#include "{}list\+\_\+iterator.\+h"{}}\newline
+{\ttfamily \#include "{}hash\+\_\+table.\+h"{}}\newline
+{\ttfamily \#include "{}hash\+\_\+table\+\_\+iterator.\+h"{}}\newline
+{\ttfamily \#include "{}webstore.\+h"{}}\newline
+{\ttfamily \#include "{}utils.\+h"{}}\newline
+Include dependency graph for merch.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structmerch}{merch}} \mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\+\_\+merch\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Represents a merchandise item in the store. \end{DoxyCompactList}\item 
+typedef struct \mbox{\hyperlink{structshelf}{shelf}} \mbox{\hyperlink{merch_8h_a10644d2382a893363d1c78121a4be51b}{ioopm\+\_\+shelf\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Represents a shelf in the store\textquotesingle{}s storage system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\+\_\+merch\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{merch_8h_a921cbcfd6823ec0e254ed3ff59716ce4}{ioopm\+\_\+merch\+\_\+create}} (char \texorpdfstring{$\ast$}{*}name, char \texorpdfstring{$\ast$}{*}desc, int price)
+\begin{DoxyCompactList}\small\item\em Create a new merch with an empty storage list. It is not part of any store until it is added with ioopm\+\_\+merch\+\_\+add. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{merch_8h_a962ec6ee2e9cc2580f36f657a5764d63}{ioopm\+\_\+merch\+\_\+destroy}} (\mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\+\_\+merch\+\_\+t}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structmerch}{merch}})
+\begin{DoxyCompactList}\small\item\em Destroy a merch\+: free its name, description, shelves and storage list. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{merch_8h_a964a6231a0d0521e8cf7dcde8c26e594}{ioopm\+\_\+merch\+\_\+destroy\+\_\+all}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store)
+\begin{DoxyCompactList}\small\item\em Destroy every merch in the store, and free the merch names stored in storage\+\_\+ht. \end{DoxyCompactList}\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{merch_8h_a52c115232d9f8bdee81b1666521bb23e}{ioopm\+\_\+merch\+\_\+get\+\_\+name}} (\mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\+\_\+merch\+\_\+t}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structmerch}{merch}})
+\begin{DoxyCompactList}\small\item\em Get the name of a merch. \end{DoxyCompactList}\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{merch_8h_a477baf5a191c2b3d060d7c22a8be3ccd}{ioopm\+\_\+merch\+\_\+get\+\_\+description}} (\mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\+\_\+merch\+\_\+t}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structmerch}{merch}})
+\begin{DoxyCompactList}\small\item\em Get the description of a merch. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{merch_8h_ae540f54c39d63faa4ed9d25d84a758c9}{ioopm\+\_\+merch\+\_\+get\+\_\+price}} (\mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\+\_\+merch\+\_\+t}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structmerch}{merch}})
+\begin{DoxyCompactList}\small\item\em Get the price of a merch. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{merch_8h_a9d654cc34aff15c730a65111f8623693}{ioopm\+\_\+merch\+\_\+get\+\_\+storage\+\_\+list}} (\mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\+\_\+merch\+\_\+t}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structmerch}{merch}})
+\begin{DoxyCompactList}\small\item\em Get the storage list of a merch. \end{DoxyCompactList}\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{merch_8h_abce4a65b5ba5f7256b3cfe909958e796}{ioopm\+\_\+merch\+\_\+get\+\_\+shelf\+\_\+name}} (\mbox{\hyperlink{merch_8h_a10644d2382a893363d1c78121a4be51b}{ioopm\+\_\+shelf\+\_\+t}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structshelf}{shelf}})
+\begin{DoxyCompactList}\small\item\em Get the name of a shelf. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{merch_8h_a3b8fed955bc8683f280dccbe5e0d8b33}{ioopm\+\_\+merch\+\_\+get\+\_\+shelf\+\_\+quantity}} (\mbox{\hyperlink{merch_8h_a10644d2382a893363d1c78121a4be51b}{ioopm\+\_\+shelf\+\_\+t}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structshelf}{shelf}})
+\begin{DoxyCompactList}\small\item\em Get the quantity of merch on a shelf. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{merch_8h_a58c8a5de12307833a9e3cf2ba04cdc80}{ioopm\+\_\+merch\+\_\+get\+\_\+stock}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store, char \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structmerch}{merch}})
+\begin{DoxyCompactList}\small\item\em Get the shelves a merch is stored on. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{merch_8h_ab89b961ca7d4145e2f4ce1122ca1412f}{ioopm\+\_\+merch\+\_\+add}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store, \mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\+\_\+merch\+\_\+t}} \texorpdfstring{$\ast$}{*}new\+\_\+merch)
+\begin{DoxyCompactList}\small\item\em Add a merch to the store. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{merch_8h_acbb466ec67bb85ecc56b33fdb8bd4164}{ioopm\+\_\+merch\+\_\+remove}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store, char \texorpdfstring{$\ast$}{*}merch\+\_\+remove, \mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} \texorpdfstring{$\ast$}{*}result)
+\begin{DoxyCompactList}\small\item\em Remove a merch from the store, and free its shelves in storage\+\_\+ht so they become available to other merch. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{merch_8h_a29fd65288dfa60c5186761be64d55807}{ioopm\+\_\+merch\+\_\+get\+\_\+quantity}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store, char \texorpdfstring{$\ast$}{*}name)
+\begin{DoxyCompactList}\small\item\em Get the total quantity of a merch, summed over all its shelves. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{merch_8h_a60bbbc762228a8e841ef8dbd7f7e0ffb}{ioopm\+\_\+merch\+\_\+edit}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store, char \texorpdfstring{$\ast$}{*}old\+\_\+merch, \mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\+\_\+merch\+\_\+t}} \texorpdfstring{$\ast$}{*}new\+\_\+merch)
+\begin{DoxyCompactList}\small\item\em Replace the name, description and price of a merch. The shelves and stock are kept. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{merch_8h_a3152725bef6c5f7e69244d30f2c89be6}{ioopm\+\_\+merch\+\_\+is\+\_\+shelf}} (char \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structshelf}{shelf}})
+\begin{DoxyCompactList}\small\item\em Check if a string is a valid shelf name\+: one capital letter followed by two digits. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{merch_8h_aa307bedf0aaab06682a73c2d4792bf90}{ioopm\+\_\+merch\+\_\+replenish}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store, char \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structmerch}{merch}}, char \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structshelf}{shelf}}, int amount)
+\begin{DoxyCompactList}\small\item\em Increase the stock of a merch on a shelf. If the shelf is not used yet it is taken by the merch and is put into the storage hash table, otherwise the quantity on it is increased. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{merch_8h_ab14994846800d5307a4ed6e486868cf9}{ioopm\+\_\+merch\+\_\+decrease\+\_\+stock}} (\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}store, char \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structmerch}{merch}}, char \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structshelf}{shelf}}, int amount)
+\begin{DoxyCompactList}\small\item\em Decrease the stock of a merch on a shelf. If amount is as large as the quantity on the shelf (or larger), the shelf is emptied and removed from the merch and from storage\+\_\+ht. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Merchandise and its storage in the webstore. 
+
+NOTE\+: The draft of the documentation for this module was created with Claude (Anthropic). It has been proofread and changed by us afterwards.
+
+\begin{DoxyAuthor}{Author}
+Markus Karlsson and Alva Fällman Nilsson 
+\end{DoxyAuthor}
+A merch has a name (unique in the store), a description, a price and a list of the shelves it is stored on. A shelf has a name and a quantity. A shelf name is one capital letter followed by two digits, e.\+g. "{}\+A01"{} (see ioopm\+\_\+merch\+\_\+is\+\_\+shelf), and a shelf holds at most one kind of merch.
+
+The merch in a store is kept in store-\/\texorpdfstring{$>$}{>}merch\+\_\+ht, and which merch occupies which shelf is also kept in store-\/\texorpdfstring{$>$}{>}storage\+\_\+ht. The functions here keep the two consistent, so use them instead of changing the tables directly.
+
+Ownership\+: a merch owns its name and description, so these must be heap-\/allocated (e.\+g. with strdup) and are freed by ioopm\+\_\+merch\+\_\+destroy. Once a merch has been added to a store with ioopm\+\_\+merch\+\_\+add, it belongs to the store. 
+
+\label{doc-typedef-members}
+\Hypertarget{merch_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{merch_8h_a75fe011409c311da59f6fd00b869c668}\index{merch.h@{merch.h}!ioopm\_merch\_t@{ioopm\_merch\_t}}
+\index{ioopm\_merch\_t@{ioopm\_merch\_t}!merch.h@{merch.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_merch\_t}{ioopm\_merch\_t}}
+{\footnotesize\ttfamily \label{merch_8h_a75fe011409c311da59f6fd00b869c668} 
+typedef struct \mbox{\hyperlink{structmerch}{merch}} \mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\+\_\+merch\+\_\+t}}}
+
+
+
+Represents a merchandise item in the store. 
+
+\Hypertarget{merch_8h_a10644d2382a893363d1c78121a4be51b}\index{merch.h@{merch.h}!ioopm\_shelf\_t@{ioopm\_shelf\_t}}
+\index{ioopm\_shelf\_t@{ioopm\_shelf\_t}!merch.h@{merch.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_shelf\_t}{ioopm\_shelf\_t}}
+{\footnotesize\ttfamily \label{merch_8h_a10644d2382a893363d1c78121a4be51b} 
+typedef struct \mbox{\hyperlink{structshelf}{shelf}} \mbox{\hyperlink{merch_8h_a10644d2382a893363d1c78121a4be51b}{ioopm\+\_\+shelf\+\_\+t}}}
+
+
+
+Represents a shelf in the store\textquotesingle{}s storage system. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{merch_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{merch_8h_ab89b961ca7d4145e2f4ce1122ca1412f}\index{merch.h@{merch.h}!ioopm\_merch\_add@{ioopm\_merch\_add}}
+\index{ioopm\_merch\_add@{ioopm\_merch\_add}!merch.h@{merch.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_merch\_add()}{ioopm\_merch\_add()}}
+{\footnotesize\ttfamily \label{merch_8h_ab89b961ca7d4145e2f4ce1122ca1412f} 
+bool ioopm\+\_\+merch\+\_\+add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{, }\item[{\mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\+\_\+merch\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{new\+\_\+merch}{}\end{DoxyParamCaption})}
+
+
+
+Add a merch to the store. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store \\
+\hline
+{\em new\+\_\+merch} & the merch to add. If this succeeds the store owns it \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if added, false if a merch with the same name already exists (the caller then still owns new\+\_\+merch) 
+\end{DoxyReturn}
+\Hypertarget{merch_8h_a921cbcfd6823ec0e254ed3ff59716ce4}\index{merch.h@{merch.h}!ioopm\_merch\_create@{ioopm\_merch\_create}}
+\index{ioopm\_merch\_create@{ioopm\_merch\_create}!merch.h@{merch.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_merch\_create()}{ioopm\_merch\_create()}}
+{\footnotesize\ttfamily \label{merch_8h_a921cbcfd6823ec0e254ed3ff59716ce4} 
+\mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\+\_\+merch\+\_\+t}} \texorpdfstring{$\ast$}{*} ioopm\+\_\+merch\+\_\+create (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{name}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{desc}{, }\item[{int}]{price}{}\end{DoxyParamCaption})}
+
+
+
+Create a new merch with an empty storage list. It is not part of any store until it is added with ioopm\+\_\+merch\+\_\+add. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the merch. Not copied\+: the merch takes ownership, so it must be heap-\/allocated \\
+\hline
+{\em desc} & description of the merch. Not copied\+: the merch takes ownership, so it must be heap-\/allocated \\
+\hline
+{\em price} & price of the merch \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the new merch 
+\end{DoxyReturn}
+\Hypertarget{merch_8h_ab14994846800d5307a4ed6e486868cf9}\index{merch.h@{merch.h}!ioopm\_merch\_decrease\_stock@{ioopm\_merch\_decrease\_stock}}
+\index{ioopm\_merch\_decrease\_stock@{ioopm\_merch\_decrease\_stock}!merch.h@{merch.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_merch\_decrease\_stock()}{ioopm\_merch\_decrease\_stock()}}
+{\footnotesize\ttfamily \label{merch_8h_ab14994846800d5307a4ed6e486868cf9} 
+bool ioopm\+\_\+merch\+\_\+decrease\+\_\+stock (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{merch}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{shelf}{, }\item[{int}]{amount}{}\end{DoxyParamCaption})}
+
+
+
+Decrease the stock of a merch on a shelf. If amount is as large as the quantity on the shelf (or larger), the shelf is emptied and removed from the merch and from storage\+\_\+ht. 
+
+\begin{DoxyNote}{Note}
+Callers are expected to check that there is enough stock first. Amounts larger than the quantity on the shelf are not an error 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store \\
+\hline
+{\em merch} & name of the merch \\
+\hline
+{\em shelf} & name of the shelf \\
+\hline
+{\em amount} & how many to take \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the stock was decreased. False, with nothing changed, if amount is not positive or the shelf does not hold that merch (which includes the merch or the shelf not existing) 
+\end{DoxyReturn}
+\Hypertarget{merch_8h_a962ec6ee2e9cc2580f36f657a5764d63}\index{merch.h@{merch.h}!ioopm\_merch\_destroy@{ioopm\_merch\_destroy}}
+\index{ioopm\_merch\_destroy@{ioopm\_merch\_destroy}!merch.h@{merch.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_merch\_destroy()}{ioopm\_merch\_destroy()}}
+{\footnotesize\ttfamily \label{merch_8h_a962ec6ee2e9cc2580f36f657a5764d63} 
+void ioopm\+\_\+merch\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\+\_\+merch\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{merch}{}\end{DoxyParamCaption})}
+
+
+
+Destroy a merch\+: free its name, description, shelves and storage list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em merch} & the merch to destroy \\
+\hline
+\end{DoxyParams}
+\Hypertarget{merch_8h_a964a6231a0d0521e8cf7dcde8c26e594}\index{merch.h@{merch.h}!ioopm\_merch\_destroy\_all@{ioopm\_merch\_destroy\_all}}
+\index{ioopm\_merch\_destroy\_all@{ioopm\_merch\_destroy\_all}!merch.h@{merch.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_merch\_destroy\_all()}{ioopm\_merch\_destroy\_all()}}
+{\footnotesize\ttfamily \label{merch_8h_a964a6231a0d0521e8cf7dcde8c26e594} 
+void ioopm\+\_\+merch\+\_\+destroy\+\_\+all (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{}\end{DoxyParamCaption})}
+
+
+
+Destroy every merch in the store, and free the merch names stored in storage\+\_\+ht. 
+
+\begin{DoxyNote}{Note}
+The entries in the tables are not removed, so the dangling pointers must not be used. Call this only when shutting down, followed by ioopm\+\_\+webstore\+\_\+destroy 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store whose merch is destroyed \\
+\hline
+\end{DoxyParams}
+\Hypertarget{merch_8h_a60bbbc762228a8e841ef8dbd7f7e0ffb}\index{merch.h@{merch.h}!ioopm\_merch\_edit@{ioopm\_merch\_edit}}
+\index{ioopm\_merch\_edit@{ioopm\_merch\_edit}!merch.h@{merch.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_merch\_edit()}{ioopm\_merch\_edit()}}
+{\footnotesize\ttfamily \label{merch_8h_a60bbbc762228a8e841ef8dbd7f7e0ffb} 
+bool ioopm\+\_\+merch\+\_\+edit (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{old\+\_\+merch}{, }\item[{\mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\+\_\+merch\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{new\+\_\+merch}{}\end{DoxyParamCaption})}
+
+
+
+Replace the name, description and price of a merch. The shelves and stock are kept. 
+
+\begin{DoxyNote}{Note}
+Carts are not updated, so a cart that holds the merch under its old name keeps referring to that name 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store \\
+\hline
+{\em old\+\_\+merch} & name of the merch to edit \\
+\hline
+{\em new\+\_\+merch} & a merch holding the new name, description and price (it may keep the old name). Its storage list must be empty. If this succeeds the store owns it \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if edited. False if old\+\_\+merch does not exist or the new name belongs to another merch (the caller then still owns new\+\_\+merch) 
+\end{DoxyReturn}
+\Hypertarget{merch_8h_a477baf5a191c2b3d060d7c22a8be3ccd}\index{merch.h@{merch.h}!ioopm\_merch\_get\_description@{ioopm\_merch\_get\_description}}
+\index{ioopm\_merch\_get\_description@{ioopm\_merch\_get\_description}!merch.h@{merch.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_merch\_get\_description()}{ioopm\_merch\_get\_description()}}
+{\footnotesize\ttfamily \label{merch_8h_a477baf5a191c2b3d060d7c22a8be3ccd} 
+char \texorpdfstring{$\ast$}{*} ioopm\+\_\+merch\+\_\+get\+\_\+description (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\+\_\+merch\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{merch}{}\end{DoxyParamCaption})}
+
+
+
+Get the description of a merch. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em merch} & the merch \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the description, owned by the merch 
+\end{DoxyReturn}
+\Hypertarget{merch_8h_a52c115232d9f8bdee81b1666521bb23e}\index{merch.h@{merch.h}!ioopm\_merch\_get\_name@{ioopm\_merch\_get\_name}}
+\index{ioopm\_merch\_get\_name@{ioopm\_merch\_get\_name}!merch.h@{merch.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_merch\_get\_name()}{ioopm\_merch\_get\_name()}}
+{\footnotesize\ttfamily \label{merch_8h_a52c115232d9f8bdee81b1666521bb23e} 
+char \texorpdfstring{$\ast$}{*} ioopm\+\_\+merch\+\_\+get\+\_\+name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\+\_\+merch\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{merch}{}\end{DoxyParamCaption})}
+
+
+
+Get the name of a merch. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em merch} & the merch \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the name, owned by the merch 
+\end{DoxyReturn}
+\Hypertarget{merch_8h_ae540f54c39d63faa4ed9d25d84a758c9}\index{merch.h@{merch.h}!ioopm\_merch\_get\_price@{ioopm\_merch\_get\_price}}
+\index{ioopm\_merch\_get\_price@{ioopm\_merch\_get\_price}!merch.h@{merch.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_merch\_get\_price()}{ioopm\_merch\_get\_price()}}
+{\footnotesize\ttfamily \label{merch_8h_ae540f54c39d63faa4ed9d25d84a758c9} 
+size\+\_\+t ioopm\+\_\+merch\+\_\+get\+\_\+price (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\+\_\+merch\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{merch}{}\end{DoxyParamCaption})}
+
+
+
+Get the price of a merch. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em merch} & the merch \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the price 
+\end{DoxyReturn}
+\Hypertarget{merch_8h_a29fd65288dfa60c5186761be64d55807}\index{merch.h@{merch.h}!ioopm\_merch\_get\_quantity@{ioopm\_merch\_get\_quantity}}
+\index{ioopm\_merch\_get\_quantity@{ioopm\_merch\_get\_quantity}!merch.h@{merch.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_merch\_get\_quantity()}{ioopm\_merch\_get\_quantity()}}
+{\footnotesize\ttfamily \label{merch_8h_a29fd65288dfa60c5186761be64d55807} 
+size\+\_\+t ioopm\+\_\+merch\+\_\+get\+\_\+quantity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{name}{}\end{DoxyParamCaption})}
+
+
+
+Get the total quantity of a merch, summed over all its shelves. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store \\
+\hline
+{\em name} & name of the merch \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the quantity, or 0 if there is no merch with that name 
+\end{DoxyReturn}
+\Hypertarget{merch_8h_abce4a65b5ba5f7256b3cfe909958e796}\index{merch.h@{merch.h}!ioopm\_merch\_get\_shelf\_name@{ioopm\_merch\_get\_shelf\_name}}
+\index{ioopm\_merch\_get\_shelf\_name@{ioopm\_merch\_get\_shelf\_name}!merch.h@{merch.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_merch\_get\_shelf\_name()}{ioopm\_merch\_get\_shelf\_name()}}
+{\footnotesize\ttfamily \label{merch_8h_abce4a65b5ba5f7256b3cfe909958e796} 
+char \texorpdfstring{$\ast$}{*} ioopm\+\_\+merch\+\_\+get\+\_\+shelf\+\_\+name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{merch_8h_a10644d2382a893363d1c78121a4be51b}{ioopm\+\_\+shelf\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{shelf}{}\end{DoxyParamCaption})}
+
+
+
+Get the name of a shelf. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em shelf} & the shelf \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the name of the shelf, owned by the shelf 
+\end{DoxyReturn}
+\Hypertarget{merch_8h_a3b8fed955bc8683f280dccbe5e0d8b33}\index{merch.h@{merch.h}!ioopm\_merch\_get\_shelf\_quantity@{ioopm\_merch\_get\_shelf\_quantity}}
+\index{ioopm\_merch\_get\_shelf\_quantity@{ioopm\_merch\_get\_shelf\_quantity}!merch.h@{merch.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_merch\_get\_shelf\_quantity()}{ioopm\_merch\_get\_shelf\_quantity()}}
+{\footnotesize\ttfamily \label{merch_8h_a3b8fed955bc8683f280dccbe5e0d8b33} 
+size\+\_\+t ioopm\+\_\+merch\+\_\+get\+\_\+shelf\+\_\+quantity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{merch_8h_a10644d2382a893363d1c78121a4be51b}{ioopm\+\_\+shelf\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{shelf}{}\end{DoxyParamCaption})}
+
+
+
+Get the quantity of merch on a shelf. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em shelf} & the shelf \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of items on the shelf 
+\end{DoxyReturn}
+\Hypertarget{merch_8h_a58c8a5de12307833a9e3cf2ba04cdc80}\index{merch.h@{merch.h}!ioopm\_merch\_get\_stock@{ioopm\_merch\_get\_stock}}
+\index{ioopm\_merch\_get\_stock@{ioopm\_merch\_get\_stock}!merch.h@{merch.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_merch\_get\_stock()}{ioopm\_merch\_get\_stock()}}
+{\footnotesize\ttfamily \label{merch_8h_a58c8a5de12307833a9e3cf2ba04cdc80} 
+\mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*} ioopm\+\_\+merch\+\_\+get\+\_\+stock (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{merch}{}\end{DoxyParamCaption})}
+
+
+
+Get the shelves a merch is stored on. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store \\
+\hline
+{\em merch} & name of the merch \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the storage list of the merch (see ioopm\+\_\+merch\+\_\+get\+\_\+storage\+\_\+list), or NULL if there is no merch with that name 
+\end{DoxyReturn}
+\Hypertarget{merch_8h_a9d654cc34aff15c730a65111f8623693}\index{merch.h@{merch.h}!ioopm\_merch\_get\_storage\_list@{ioopm\_merch\_get\_storage\_list}}
+\index{ioopm\_merch\_get\_storage\_list@{ioopm\_merch\_get\_storage\_list}!merch.h@{merch.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_merch\_get\_storage\_list()}{ioopm\_merch\_get\_storage\_list()}}
+{\footnotesize\ttfamily \label{merch_8h_a9d654cc34aff15c730a65111f8623693} 
+\mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\+\_\+list\+\_\+t}} \texorpdfstring{$\ast$}{*} ioopm\+\_\+merch\+\_\+get\+\_\+storage\+\_\+list (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\+\_\+merch\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{merch}{}\end{DoxyParamCaption})}
+
+
+
+Get the storage list of a merch. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em merch} & the merch \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the list of its shelves (\doxylink{merch_8h_a10644d2382a893363d1c78121a4be51b}{ioopm\+\_\+shelf\+\_\+t} \texorpdfstring{$\ast$}{*}, stored in the .p field), owned by the merch. Do not modify or destroy it 
+\end{DoxyReturn}
+\Hypertarget{merch_8h_a3152725bef6c5f7e69244d30f2c89be6}\index{merch.h@{merch.h}!ioopm\_merch\_is\_shelf@{ioopm\_merch\_is\_shelf}}
+\index{ioopm\_merch\_is\_shelf@{ioopm\_merch\_is\_shelf}!merch.h@{merch.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_merch\_is\_shelf()}{ioopm\_merch\_is\_shelf()}}
+{\footnotesize\ttfamily \label{merch_8h_a3152725bef6c5f7e69244d30f2c89be6} 
+bool ioopm\+\_\+merch\+\_\+is\+\_\+shelf (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{shelf}{}\end{DoxyParamCaption})}
+
+
+
+Check if a string is a valid shelf name\+: one capital letter followed by two digits. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em shelf} & the string to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if it is a valid shelf name 
+\end{DoxyReturn}
+\Hypertarget{merch_8h_acbb466ec67bb85ecc56b33fdb8bd4164}\index{merch.h@{merch.h}!ioopm\_merch\_remove@{ioopm\_merch\_remove}}
+\index{ioopm\_merch\_remove@{ioopm\_merch\_remove}!merch.h@{merch.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_merch\_remove()}{ioopm\_merch\_remove()}}
+{\footnotesize\ttfamily \label{merch_8h_acbb466ec67bb85ecc56b33fdb8bd4164} 
+bool ioopm\+\_\+merch\+\_\+remove (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{merch\+\_\+remove}{, }\item[{\mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{result}{}\end{DoxyParamCaption})}
+
+
+
+Remove a merch from the store, and free its shelves in storage\+\_\+ht so they become available to other merch. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store \\
+\hline
+{\em merch\+\_\+remove} & name of the merch to remove \\
+\hline
+{\em result} & where the removed merch (\doxylink{merch_8h_a75fe011409c311da59f6fd00b869c668}{ioopm\+\_\+merch\+\_\+t} \texorpdfstring{$\ast$}{*}, in the .p field) is written, if it existed. The caller must destroy it with ioopm\+\_\+merch\+\_\+destroy. Left untouched otherwise \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the merch existed and was removed, false otherwise 
+\end{DoxyReturn}
+\Hypertarget{merch_8h_aa307bedf0aaab06682a73c2d4792bf90}\index{merch.h@{merch.h}!ioopm\_merch\_replenish@{ioopm\_merch\_replenish}}
+\index{ioopm\_merch\_replenish@{ioopm\_merch\_replenish}!merch.h@{merch.h}}
+\doxysubsubsection{\texorpdfstring{ioopm\_merch\_replenish()}{ioopm\_merch\_replenish()}}
+{\footnotesize\ttfamily \label{merch_8h_aa307bedf0aaab06682a73c2d4792bf90} 
+bool ioopm\+\_\+merch\+\_\+replenish (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\+\_\+webstore\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{store}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{merch}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{shelf}{, }\item[{int}]{amount}{}\end{DoxyParamCaption})}
+
+
+
+Increase the stock of a merch on a shelf. If the shelf is not used yet it is taken by the merch and is put into the storage hash table, otherwise the quantity on it is increased. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em store} & the store \\
+\hline
+{\em merch} & name of the merch \\
+\hline
+{\em shelf} & name of the shelf (the strings are copied) \\
+\hline
+{\em amount} & how many to add \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the stock was increased. False, with nothing changed, if amount is not positive, the merch does not exist, or the shelf holds another merch 
+\end{DoxyReturn}

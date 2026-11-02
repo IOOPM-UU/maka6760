@@ -1,0 +1,30 @@
+\doxysection{cart.\+h}
+\hypertarget{cart_8h_source}{}\label{cart_8h_source}\index{logic/cart.h@{logic/cart.h}}
+\mbox{\hyperlink{cart_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{linked__list_8h}{linked\_list.h}}"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{hash__table_8h}{hash\_table.h}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{hash__table__iterator_8h}{hash\_table\_iterator.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{merch_8h}{merch.h}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{hash__table_8h_af8a82080b75d55e9d276e35e9f1e01fe}{ioopm\_hash\_table\_t}}\ \mbox{\hyperlink{cart_8h_ae72367f60488bfecb38a4cc93d809a62}{ioopm\_cart\_t}};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00036\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{cart_8h_acba6699b58dc47a1dc061ae5c34ef93d}{ioopm\_cart\_add\_new}}(\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\_webstore\_t}}\ *store,\ \mbox{\hyperlink{common_8h_a1a54ba10b899b068bfc47c57d50fec62}{ioopm\_hash\_function}}\ *hash\_fn,}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{common_8h_afb1f6281cd1e403d010f433002b9d72f}{ioopm\_eq\_function}}\ *key\_eq\_fn);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00043\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{cart_8h_a67035b6fcf7fd9bf93c3933e78718e86}{ioopm\_cart\_destroy}}(\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\_webstore\_t}}\ *store,\ \textcolor{keywordtype}{int}\ cart\_num);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00054\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{cart_8h_ada769db91ae2ec0d63f60d0ff6bb961b}{ioopm\_cart\_add\_item}}(\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\_webstore\_t}}\ *store,\ \textcolor{keywordtype}{int}\ cart\_num,\ \textcolor{keywordtype}{char}\ *name,\ \textcolor{keywordtype}{int}\ amount);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00065\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{cart_8h_a3688bd1669c451d0527205e21bbb77ba}{ioopm\_cart\_remove\_item}}(\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\_webstore\_t}}\ *store,\ \textcolor{keywordtype}{int}\ cart\_num,\ \textcolor{keywordtype}{char}\ *name,\ \textcolor{keywordtype}{int}\ amount);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00071\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{cart_8h_a3ba1e37e0eeeea1a42e20acb5836ed51}{ioopm\_cart\_destroy\_all}}(\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\_webstore\_t}}\ *store);}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00078\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{cart_8h_a6fbfceca4c226b67686094e44146ac05}{ioopm\_cart\_calculate\_cost}}(\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\_webstore\_t}}\ *store,\ \textcolor{keywordtype}{int}\ cart\_number);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00088\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{cart_8h_a26a1db7cb538bae681f110bee4e3b7f0}{ioopm\_cart\_checkout}}(\mbox{\hyperlink{webstore_8h_ae9bcdc049693e26e11480d53211d6c44}{ioopm\_webstore\_t}}\ *store,\ \textcolor{keywordtype}{int}\ cart\_num);}
+
+\end{DoxyCode}

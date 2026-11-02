@@ -1,0 +1,27 @@
+\doxysection{list\+\_\+iterator.\+h}
+\hypertarget{list__iterator_8h_source}{}\label{list__iterator_8h_source}\index{generic\_data\_structures/list\_iterator.h@{generic\_data\_structures/list\_iterator.h}}
+\mbox{\hyperlink{list__iterator_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{linked__list_8h}{linked\_list.h}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{common.h}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlist__iterator}{list\_iterator}}\ \mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\_list\_iterator\_t}};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00023\ \mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\_list\_iterator\_t}}\ *\mbox{\hyperlink{list__iterator_8h_af9dba3c017288e3476cb3039c9010c63}{ioopm\_list\_iterator\_create}}(\mbox{\hyperlink{linked__list_8h_ab7191f856fbcc19e424f1c55c92551f6}{ioopm\_list\_t}}\ *l);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00027\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{list__iterator_8h_a20f42cef9506c2680f38131a4cca0b88}{ioopm\_list\_iterator\_destroy}}(\mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\_list\_iterator\_t}}\ *iter);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00032\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{list__iterator_8h_ad253f7783b895d2a66295073c643afee}{ioopm\_list\_iterator\_at\_end}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\_list\_iterator\_t}}\ *iter);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00037\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{list__iterator_8h_ae68cd4befeca5c2edb9cb66a2219b72d}{ioopm\_list\_iterator\_advance}}(\mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\_list\_iterator\_t}}\ *iter);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00043\ \mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\_t}}\ \mbox{\hyperlink{list__iterator_8h_a8c0b04210a397bdb486847224f460419}{ioopm\_list\_iterator\_current}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\_list\_iterator\_t}}\ *iter);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00050\ \mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\_t}}\ \mbox{\hyperlink{list__iterator_8h_a828c67489fc0e776be531c51e5a84f5f}{ioopm\_list\_iterator\_remove}}(\mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\_list\_iterator\_t}}\ *iter);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00056\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{list__iterator_8h_afc08f6717414286159badd042291b756}{ioopm\_list\_iterator\_insert}}(\mbox{\hyperlink{list__iterator_8h_ada683ee37cc0e82df36d6c7791516012}{ioopm\_list\_iterator\_t}}\ *iter,\ \mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\_t}}\ element);}
+
+\end{DoxyCode}

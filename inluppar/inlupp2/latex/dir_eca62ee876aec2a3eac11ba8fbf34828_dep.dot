@@ -1,0 +1,11 @@
+digraph "generic_utils"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  dir_eca62ee876aec2a3eac11ba8fbf34828 [label="generic_utils", fillcolor="#edf0f7", color="grey25", style="filled,bold", URL="dir_eca62ee876aec2a3eac11ba8fbf34828.html",tooltip=""];
+  dir_78a620935982b3530cb31333c2473d39 [label="generic_data_structures", fillcolor="#edf0f7", color="grey25", style="filled", URL="dir_78a620935982b3530cb31333c2473d39.html",tooltip=""];
+  dir_eca62ee876aec2a3eac11ba8fbf34828->dir_78a620935982b3530cb31333c2473d39 [headlabel="1", labeldistance=1.5 headhref="dir_000001_000000.html" href="dir_000001_000000.html" color="steelblue1" fontcolor="steelblue1"];
+}

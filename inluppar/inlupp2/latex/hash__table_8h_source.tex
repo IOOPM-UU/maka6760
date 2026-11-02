@@ -1,0 +1,31 @@
+\doxysection{hash\+\_\+table.\+h}
+\hypertarget{hash__table_8h_source}{}\label{hash__table_8h_source}\index{generic\_data\_structures/hash\_table.h@{generic\_data\_structures/hash\_table.h}}
+\mbox{\hyperlink{hash__table_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{common.h}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structentry}{entry}}\ \mbox{\hyperlink{hash__table_8h_a167a7ea47fbb39b436dc877f1a2a91b1}{entry\_t}};}
+\DoxyCodeLine{00032\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structhash__table}{hash\_table}}\ \mbox{\hyperlink{hash__table_8h_af8a82080b75d55e9d276e35e9f1e01fe}{ioopm\_hash\_table\_t}};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00044\ \mbox{\hyperlink{hash__table_8h_af8a82080b75d55e9d276e35e9f1e01fe}{ioopm\_hash\_table\_t}}\ *\mbox{\hyperlink{hash__table_8h_ad61376c20370dd49a25b87639011e367}{ioopm\_hash\_table\_create}}(\mbox{\hyperlink{common_8h_a1a54ba10b899b068bfc47c57d50fec62}{ioopm\_hash\_function}}\ *\mbox{\hyperlink{structhash__table_a080a73619f8f985343bca70c8f5a3ac8}{hash\_fn}},\ \mbox{\hyperlink{common_8h_afb1f6281cd1e403d010f433002b9d72f}{ioopm\_eq\_function}}\ *\mbox{\hyperlink{structhash__table_a67d6fa15214f69d53ebd46916345d6e5}{key\_eq\_fn}});}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00055\ \mbox{\hyperlink{hash__table_8h_af8a82080b75d55e9d276e35e9f1e01fe}{ioopm\_hash\_table\_t}}\ *\mbox{\hyperlink{hash__table_8h_a4107d104f77ee4edcea09488d7514577}{ioopm\_hash\_table\_create\_new}}(\textcolor{keywordtype}{size\_t}\ initial\_capacity,\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structhash__table_afe294e9bd739e1c58c6912c63f45059e}{load\_factor}},\ \mbox{\hyperlink{common_8h_a1a54ba10b899b068bfc47c57d50fec62}{ioopm\_hash\_function}}\ *\mbox{\hyperlink{structhash__table_a080a73619f8f985343bca70c8f5a3ac8}{hash\_fn}},\ \mbox{\hyperlink{common_8h_afb1f6281cd1e403d010f433002b9d72f}{ioopm\_eq\_function}}\ *\mbox{\hyperlink{structhash__table_a67d6fa15214f69d53ebd46916345d6e5}{key\_eq\_fn}});}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00059\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{hash__table_8h_abdad244dcf35551b8b421b2631931a15}{ioopm\_hash\_table\_destroy}}(\mbox{\hyperlink{hash__table_8h_af8a82080b75d55e9d276e35e9f1e01fe}{ioopm\_hash\_table\_t}}\ *ht);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00067\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{hash__table_8h_a37b9bafbded83c4f4f7f7897605d73f5}{ioopm\_hash\_table\_insert}}(\mbox{\hyperlink{hash__table_8h_af8a82080b75d55e9d276e35e9f1e01fe}{ioopm\_hash\_table\_t}}\ *ht,\ \mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\_t}}\ key,\ \mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\_t}}\ value);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00075\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{hash__table_8h_ad07a80de089c46f688e71ec168a42ed5}{ioopm\_hash\_table\_lookup}}(\mbox{\hyperlink{hash__table_8h_af8a82080b75d55e9d276e35e9f1e01fe}{ioopm\_hash\_table\_t}}\ *ht,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\_t}}\ key,\ \mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\_t}}\ *result);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00082\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{hash__table_8h_a583f84228e430875beddd53fa01f2a4c}{ioopm\_hash\_table\_remove}}(\mbox{\hyperlink{hash__table_8h_af8a82080b75d55e9d276e35e9f1e01fe}{ioopm\_hash\_table\_t}}\ *ht,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\_t}}\ key,\ \mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\_t}}\ *result);}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00088\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{hash__table_8h_a38fb7bc5eef752c4d6453b7e671074c7}{ioopm\_hash\_table\_has\_key}}(\mbox{\hyperlink{hash__table_8h_af8a82080b75d55e9d276e35e9f1e01fe}{ioopm\_hash\_table\_t}}\ *ht,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{common_8h_a833876c3875048ad46fcc53f1246835e}{elem\_t}}\ key);}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00093\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{hash__table_8h_a1acd43062c948048157f0e40ea64f1f7}{ioopm\_hash\_table\_is\_empty}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{hash__table_8h_af8a82080b75d55e9d276e35e9f1e01fe}{ioopm\_hash\_table\_t}}\ *ht);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00098\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{hash__table_8h_ae2bae914a2c038d4bd69117638229b50}{ioopm\_hash\_table\_size}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{hash__table_8h_af8a82080b75d55e9d276e35e9f1e01fe}{ioopm\_hash\_table\_t}}\ *ht);}
+
+\end{DoxyCode}
