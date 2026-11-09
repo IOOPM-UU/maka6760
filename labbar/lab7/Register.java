@@ -44,7 +44,7 @@ public class Register {
     }
 
     //är kunden som står längst fram i kön klar?
-    public boolean currentCustomerDone() {
+    public boolean currentCustomerIsDone() {
         if (this.queue.first().isDone()) {
             return true;
         } else {
@@ -92,11 +92,11 @@ public class Register {
         System.out.println("Kölängd 2: " + (r.getQueuelength() == 2));
         
         //Serva första kunden steg för steg
-        System.out.println("c1 inte klar: " + !r.currentCustomerDone());
+        System.out.println("c1 inte klar: " + !r.currentCustomerIsDone());
         r.step();
-        System.out.println("c1 inte klar efter ett steg: " + !r.currentCustomerDone());
+        System.out.println("c1 inte klar efter ett steg: " + !r.currentCustomerIsDone());
         r.step();
-        System.out.println("c1 klar efter ett 2 steg: " + r.currentCustomerDone());
+        System.out.println("c1 klar efter ett 2 steg: " + r.currentCustomerIsDone());
 
         //Ta bort den färdiga kunden och kontrollera om det är c1
         Customer removed = r.removeCurrentCustomer();
@@ -105,7 +105,7 @@ public class Register {
 
         //c2 borde vara först 
         r.step();
-        System.out.println("c2 klar efter ett steg: " + r.currentCustomerDone());
+        System.out.println("c2 klar efter ett steg: " + r.currentCustomerIsDone());
         r.removeCurrentCustomer();
 
         //Kön tom igen
