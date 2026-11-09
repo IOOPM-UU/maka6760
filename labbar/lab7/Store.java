@@ -70,6 +70,15 @@ public class Store {
         }
         return done;
     }
+
+    @Override 
+    public String toString() {
+        String result = "";
+        for (Register r: this.registers) {
+            result += r + "\n";
+        }
+        return result;
+    } 
     
     public static void main(String[] args) {
         //AI (Claude) gav ideerna till testerna

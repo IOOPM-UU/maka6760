@@ -9,6 +9,10 @@ public class Customer {
         this.groceries = groceries;     
     }
 
+    public int getBornTime() {
+        return this.bornTime;
+    }
+
     // registrera en av kundens varor (alltså minska på groceries)
     public void serve() { 
         this.groceries -= 1;
@@ -24,6 +28,10 @@ public class Customer {
     }
 
     public String toString() {
+        return "[" + this.groceries + "]";
+    }
+
+    public String debugString() {
         return "Customer " + this.bornTime + ": (groceries: " +  this.groceries + ")";
     }
 
