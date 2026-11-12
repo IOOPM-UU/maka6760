@@ -12,6 +12,7 @@ public class NameOrder {
         } else {
             System.out.println(name2 + ", " + name1);
         }
+        sc.close();
 
     }
 }

@@ -44,5 +44,6 @@ public class Die {
       Die d = new Die(sides);
       System.out.println(d);
       System.out.println("Alea iacta est: " + d.roll());
+      sc.close();
   }
 }

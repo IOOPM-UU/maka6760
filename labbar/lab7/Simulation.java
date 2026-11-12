@@ -1,5 +1,4 @@
 import java.util.Random; 
-import java.util.ArrayList;
 
 public class Simulation {
     private Store store; //varuhuset som simuleras
@@ -52,7 +51,6 @@ public class Simulation {
         }
     }
 
-    
     public int getDoneCustomers() {
         return this.doneCustomers;
     }
