@@ -67,6 +67,23 @@ public class Register {
         return this.queue.length();
     }
 
+     @Override 
+    public String toString() {
+        if (!this.open) {
+            return "X [ ]";
+        }
+
+        if (!this.hasCustomers()) {
+            return "[ ]";
+        }
+
+        String result = this.queue.first().toString();
+        for (int i = 1; i < this.queue.length(); i++) {
+            result += "@";
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         //AI (Claude) gav ideen till testerna, de är implementerade av mig själv.
         Register r = new Register();
